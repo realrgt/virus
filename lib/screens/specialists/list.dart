@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vogu/models/specialist.dart';
 
 class SpecialistList extends StatefulWidget {
   @override
@@ -23,6 +24,7 @@ class _SpecialistListState extends State<SpecialistList> {
               children: <Widget>[
                 Container(
                   width: 150,
+                  padding: EdgeInsets.only(bottom: 15.0),
                   child: Text(
                     'Especialistas sugeridos',
                     style: TextStyle(
@@ -33,104 +35,122 @@ class _SpecialistListState extends State<SpecialistList> {
                 ),
               ],
             ),
-            SizedBox(
-              height: 20.0,
-            ),
-            Stack(
-              children: <Widget>[
-                Container(
-                  height: 160.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20.0),
-                    color: Colors.purple,
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.only(top: 5),
-                          child: Text(
-                            'Luísa Silva',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 22.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: specialists.length,
+                itemBuilder: (context, index) {
+                  Specialist specialist = specialists[index];
+                  return Stack(
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: 10.0),
+                        height: 160.0,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.0),
+                          color: Colors.purple,
                         ),
-                        Row(
-                          children: <Widget>[
-                            Icon(
-                              Icons.location_on,
-                              color: Colors.white70,
-                            ),
-                            Text(
-                              'Matola, Mozambique',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                                color: Colors.white70,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.only(top: 5),
+                                child: Text(
+                                  specialist.name,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 22.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Icon(
-                              Icons.star,
-                              color: Colors.white70,
-                            ),
-                            Icon(
-                              Icons.star,
-                              color: Colors.white70,
-                            ),
-                            Icon(
-                              Icons.star,
-                              color: Colors.white70,
-                            ),
-                            Icon(
-                              Icons.star,
-                              color: Colors.white70,
-                            ),
-                            Icon(
-                              Icons.star_border,
-                              color: Colors.white70,
-                            ),
-                          ],
-                        ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(50.0),
-                          child: RaisedButton(
-                            onPressed: () {},
-                            color: Colors.purpleAccent,
-                            textColor: Colors.white,
-                            child: Text('Ver Mais'),
+                              Row(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.location_on,
+                                    color: Colors.white70,
+                                  ),
+                                  Text(
+                                    specialist.address,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12,
+                                      color: Colors.white70,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.white70,
+                                  ),
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.white70,
+                                  ),
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.white70,
+                                  ),
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.white70,
+                                  ),
+                                  Icon(
+                                    Icons.star_border,
+                                    color: Colors.white70,
+                                  ),
+                                ],
+                              ),
+//                              _buildRatingStars(specialist.rating),
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(50.0),
+                                child: RaisedButton(
+                                  onPressed: () {},
+                                  color: Colors.purpleAccent,
+                                  textColor: Colors.white,
+                                  child: Text('Ver Mais'),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-                Positioned(
-                  right: 0,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: Image.asset(
-                      'assets/images/woman.jpg',
-                      height: 160.0,
-                      width: 125.0,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ],
-            )
+                      ),
+                      Positioned(
+                        top: 10.0,
+                        right: 0,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: Image.asset(
+                            specialist.imgUrl,
+                            height: 160.0,
+                            width: 140.0,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
     );
   }
+
+  Text _buildRatingStars(double rating) {
+    String stars = '';
+    for (int i = 0; i < rating; i++) {
+      stars += '⭐ ';
+    }
+    stars.trim();
+    return Text(stars);
+  }
+
 }
