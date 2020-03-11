@@ -28,7 +28,7 @@ List<Specialist> specialists = [
     address: 'Matola, Mozambique',
   ),
   Specialist(
-    imgUrl: 'assets/images/woman.jpg',
+    imgUrl: 'assets/images/woman3.jpg',
     name: 'Antónia Stark',
     rating: 4,
     address: 'Maputo, Mozambique',

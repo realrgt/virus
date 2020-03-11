@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vogu/models/specialist.dart';
 
+import 'details.dart';
+
 class SpecialistList extends StatefulWidget {
   @override
   _SpecialistListState createState() => _SpecialistListState();
@@ -40,100 +42,121 @@ class _SpecialistListState extends State<SpecialistList> {
                 itemCount: specialists.length,
                 itemBuilder: (context, index) {
                   Specialist specialist = specialists[index];
-                  return Stack(
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.symmetric(vertical: 10.0),
-                        height: 160.0,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20.0),
-                          color: Colors.purple,
+                  return GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => SpecialistDetails(
+                          specialist: specialist,
                         ),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.only(top: 5),
-                                child: Text(
-                                  specialist.name,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 22.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              Row(
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.location_on,
-                                    color: Colors.white70,
-                                  ),
-                                  Text(
-                                    specialist.address,
+                      ),
+                    ),
+                    child: Stack(
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.symmetric(vertical: 10.0),
+                          height: 160.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.0),
+                            color: Colors.purple,
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 25.0, vertical: 15.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.only(top: 5),
+                                  child: Text(
+                                    specialist.name,
                                     style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 22.0,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 12,
-                                      color: Colors.white70,
                                     ),
                                   ),
-                                ],
-                              ),
-                              Row(
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.star,
-                                    color: Colors.white70,
-                                  ),
-                                  Icon(
-                                    Icons.star,
-                                    color: Colors.white70,
-                                  ),
-                                  Icon(
-                                    Icons.star,
-                                    color: Colors.white70,
-                                  ),
-                                  Icon(
-                                    Icons.star,
-                                    color: Colors.white70,
-                                  ),
-                                  Icon(
-                                    Icons.star_border,
-                                    color: Colors.white70,
-                                  ),
-                                ],
-                              ),
-//                              _buildRatingStars(specialist.rating),
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(50.0),
-                                child: RaisedButton(
-                                  onPressed: () {},
-                                  color: Colors.purpleAccent,
-                                  textColor: Colors.white,
-                                  child: Text('Ver Mais'),
                                 ),
+                                Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.location_on,
+                                      color: Colors.white70,
+                                    ),
+                                    Text(
+                                      specialist.address,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12,
+                                        color: Colors.white70,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.white70,
+                                    ),
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.white70,
+                                    ),
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.white70,
+                                    ),
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.white70,
+                                    ),
+                                    Icon(
+                                      Icons.star_border,
+                                      color: Colors.white70,
+                                    ),
+                                  ],
+                                ),
+//                              _buildRatingStars(specialist.rating),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                  child: RaisedButton(
+                                    onPressed: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => SpecialistDetails(
+                                          specialist: specialist,
+                                        ),
+                                      ),
+                                    ),
+                                    color: Colors.purpleAccent,
+                                    textColor: Colors.white,
+                                    child: Text('Ver Mais'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 10.0,
+                          right: 0,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20.0),
+                            child: Hero(
+                              tag: specialist.imgUrl,
+                              child: Image.asset(
+                                specialist.imgUrl,
+                                height: 160.0,
+                                width: 140.0,
+                                fit: BoxFit.cover,
                               ),
-                            ],
+                            ),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        top: 10.0,
-                        right: 0,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20.0),
-                          child: Image.asset(
-                            specialist.imgUrl,
-                            height: 160.0,
-                            width: 140.0,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   );
                 },
               ),
@@ -152,5 +175,4 @@ class _SpecialistListState extends State<SpecialistList> {
     stars.trim();
     return Text(stars);
   }
-
 }
