@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vogu/models/specialist.dart';
 import 'package:vogu/widgets/details-scroll.dart';
@@ -15,13 +14,6 @@ class SpecialistDetails extends StatefulWidget {
 }
 
 class _SpecialistDetailsState extends State<SpecialistDetails> {
-
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

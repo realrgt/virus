@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vogu/models/specialist.dart';
 
@@ -14,19 +13,16 @@ class _SpecialistListState extends State<SpecialistList> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
             // TODO: remove this (All about title)
-            SizedBox(
-              height: 40,
-            ),
+            SizedBox(height: 40.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  width: 150,
-                  padding: EdgeInsets.only(bottom: 15.0),
+                  padding: EdgeInsets.all(16.0),
+                  width: 195.0,
                   child: Text(
                     'Especialistas sugeridos',
                     style: TextStyle(
@@ -39,6 +35,7 @@ class _SpecialistListState extends State<SpecialistList> {
             ),
             Expanded(
               child: ListView.builder(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
                 itemCount: specialists.length,
                 itemBuilder: (context, index) {
                   Specialist specialist = specialists[index];
@@ -54,7 +51,7 @@ class _SpecialistListState extends State<SpecialistList> {
                     child: Stack(
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.symmetric(vertical: 10.0),
+                          margin: EdgeInsets.only(bottom: 20.0),
                           height: 160.0,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20.0),
@@ -62,7 +59,9 @@ class _SpecialistListState extends State<SpecialistList> {
                           ),
                           child: Padding(
                             padding: EdgeInsets.symmetric(
-                                horizontal: 25.0, vertical: 15.0),
+                              horizontal: 25.0,
+                              vertical: 15.0,
+                            ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,20 +119,26 @@ class _SpecialistListState extends State<SpecialistList> {
                                 ),
 //                              _buildRatingStars(specialist.rating),
                                 Container(
-                                  padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 40.0),
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: 5.0,
+                                    horizontal: 40.0,
+                                  ),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(12.0),
                                     color: Colors.purpleAccent,
                                   ),
-                                  child: Text('Ver Mais', style: TextStyle(color: Colors.white),),
+                                  child: Text(
+                                    'Ver Mais',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                 ),
                               ],
                             ),
                           ),
                         ),
                         Positioned(
-                          top: 10.0,
-                          right: 0,
+                          top: 0.0,
+                          right: 0.0,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),
                             child: Hero(

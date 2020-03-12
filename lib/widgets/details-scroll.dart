@@ -32,9 +32,6 @@ class _SpecialistDetailsScollState extends State<SpecialistDetailsScoll> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.red, width: 1.0)
-      ),
       height: 100.0,
       width: double.infinity,
       child: ListView(
