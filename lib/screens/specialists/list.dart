@@ -119,21 +119,13 @@ class _SpecialistListState extends State<SpecialistList> {
                                   ],
                                 ),
 //                              _buildRatingStars(specialist.rating),
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(50.0),
-                                  child: RaisedButton(
-                                    onPressed: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (_) => SpecialistDetails(
-                                          specialist: specialist,
-                                        ),
-                                      ),
-                                    ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 40.0),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12.0),
                                     color: Colors.purpleAccent,
-                                    textColor: Colors.white,
-                                    child: Text('Ver Mais'),
                                   ),
+                                  child: Text('Ver Mais', style: TextStyle(color: Colors.white),),
                                 ),
                               ],
                             ),

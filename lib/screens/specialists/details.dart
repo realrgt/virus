@@ -25,7 +25,7 @@ class _SpecialistDetailsState extends State<SpecialistDetails> {
           Hero(
             tag: widget.specialist.imgUrl,
             child: Image(
-              height: MediaQuery.of(context).size.height/2.5,
+              height: MediaQuery.of(context).size.height / 2.5,
               width: MediaQuery.of(context).size.width,
               image: AssetImage(widget.specialist.imgUrl),
               fit: BoxFit.cover,
@@ -72,8 +72,78 @@ class _SpecialistDetailsState extends State<SpecialistDetails> {
                 borderRadius: BorderRadius.vertical(top: Radius.circular(40.0)),
                 color: Colors.white,
               ),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 30.0), // TODO: Remove this
+                  Container(
+                      height: 150.0,
+                      width: double.infinity,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        padding: EdgeInsets.only(left: 50.0),
+                        children: <Widget>[
+                          imgItem(
+                              'assets/images/woman.jpg', Colors.purple, false),
+                          imgItem('assets/images/woman1.jpg',
+                              Colors.purpleAccent, true),
+                          imgItem('assets/images/woman3.jpg', Colors.deepPurple,
+                              false),
+                          imgItem('assets/images/woman1.jpg',
+                              Colors.purpleAccent, false),
+                          imgItem('assets/images/woman3.jpg', Colors.deepPurple,
+                              false),
+                        ],
+                      )),
+                ],
+              ),
             ),
           )
+        ],
+      ),
+    );
+  }
+
+  Widget imgItem(String imgPath, Color bgColor, bool present) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 5.0),
+      child: Column(
+        children: <Widget>[
+          Stack(
+            children: <Widget>[
+              Container(
+                height: 85.0,
+                width: 85.0,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50), color: bgColor),
+              ),
+              Positioned(
+                top: 5,
+                left: 5,
+                child: Container(
+                  height: 75.0,
+                  width: 75.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(37.5),
+                    image: DecorationImage(
+                      image: AssetImage(imgPath),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 5.0),
+          present
+              ? Container(
+                  height: 10.0,
+                  width: 10.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.0),
+                    color: bgColor,
+                  ),
+                )
+              : Container(),
         ],
       ),
     );
