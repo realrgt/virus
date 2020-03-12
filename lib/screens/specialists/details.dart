@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vogu/models/specialist.dart';
 import 'package:vogu/widgets/details-scroll.dart';
@@ -14,7 +15,6 @@ class SpecialistDetails extends StatefulWidget {
 }
 
 class _SpecialistDetailsState extends State<SpecialistDetails> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,6 +79,102 @@ class _SpecialistDetailsState extends State<SpecialistDetails> {
                 children: <Widget>[
                   SizedBox(height: 30.0), // TODO: Adjust this
                   SpecialistDetailsScoll(),
+                  // TODO: added padding for every widgets form here to bottom
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 32.0),
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          height: 200,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.red, width: 1)),
+                        ),
+                        SizedBox(height: 10.0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Container(
+                              width: 150.0,
+                              height: 37.0,
+                              padding: EdgeInsets.symmetric(horizontal: 20.0),
+                              decoration: BoxDecoration(
+                                  color: Colors.deepPurple,
+                                  borderRadius: BorderRadius.circular(12.0)),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: <Widget>[
+                                  Text(
+                                    '08/12/2020',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14.0,
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.calendar_today,
+                                    color: Colors.white,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: 150.0,
+                              height: 37.0,
+                              padding: EdgeInsets.symmetric(horizontal: 20.0),
+                              decoration: BoxDecoration(
+                                  color: Colors.deepPurple,
+                                  borderRadius: BorderRadius.circular(12.0)),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: <Widget>[
+                                  Text(
+                                    '10:45 AM',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14.0,
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.access_time,
+                                    color: Colors.white,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 20.0),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: <Widget>[
+                            Container(
+                              width: 145.0,
+                              height: 47.0,
+                              padding: EdgeInsets.symmetric(horizontal: 20.0),
+                              decoration: BoxDecoration(
+                                color: Colors.deepPurple,
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                    'Confirmar',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -87,5 +183,4 @@ class _SpecialistDetailsState extends State<SpecialistDetails> {
       ),
     );
   }
-
 }

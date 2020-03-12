@@ -8,7 +8,6 @@ class SpecialistDetailsScoll extends StatefulWidget {
 }
 
 class _SpecialistDetailsScollState extends State<SpecialistDetailsScoll> {
-
   int _selectedIndex = 0;
 
   _setColor() {
@@ -42,7 +41,7 @@ class _SpecialistDetailsScollState extends State<SpecialistDetailsScoll> {
             .entries
             .map(
               (MapEntry map) => _buildCircleImg(map.key),
-        )
+            )
             .toList(),
       ),
     );
@@ -76,7 +75,11 @@ class _SpecialistDetailsScollState extends State<SpecialistDetailsScoll> {
                   height: 85.0,
                   width: 85.0,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50), color: _color),
+                    borderRadius: BorderRadius.circular(50),
+                    color: _selectedIndex == index
+                        ? Colors.purple
+                        : Colors.deepPurple,
+                  ),
                 ),
                 Positioned(
                   top: 5,
@@ -98,18 +101,17 @@ class _SpecialistDetailsScollState extends State<SpecialistDetailsScoll> {
             SizedBox(height: 3.0),
             _selectedIndex == index
                 ? Container(
-              height: 10.0,
-              width: 10.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.0),
-                color: _color,
-              ),
-            )
+                    height: 10.0,
+                    width: 10.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.0),
+                      color: Colors.purple,
+                    ),
+                  )
                 : Container(),
           ],
         ),
       ),
     );
   }
-
 }
