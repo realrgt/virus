@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vogu/models/specialist.dart';
@@ -12,6 +14,23 @@ class SpecialistDetails extends StatefulWidget {
 }
 
 class _SpecialistDetailsState extends State<SpecialistDetails> {
+
+  _setColor() {
+
+    Color color;
+    int random = Random().nextInt(3);
+
+    switch (random) {
+      case 0: color = Colors.purple;
+      break;
+      case 1: color = Colors.purpleAccent;
+      break;
+      default: color = Colors.deepPurple;
+    }
+
+    return color;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,26 +93,23 @@ class _SpecialistDetailsState extends State<SpecialistDetails> {
               ),
               child: Column(
                 children: <Widget>[
-                  SizedBox(height: 30.0), // TODO: Remove this
+                  SizedBox(height: 30.0), // TODO: Adjust this
                   Container(
-                      height: 150.0,
-                      width: double.infinity,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        padding: EdgeInsets.only(left: 50.0),
-                        children: <Widget>[
-                          imgItem(
-                              'assets/images/woman.jpg', Colors.purple, false),
-                          imgItem('assets/images/woman1.jpg',
-                              Colors.purpleAccent, true),
-                          imgItem('assets/images/woman3.jpg', Colors.deepPurple,
-                              false),
-                          imgItem('assets/images/woman1.jpg',
-                              Colors.purpleAccent, false),
-                          imgItem('assets/images/woman3.jpg', Colors.deepPurple,
-                              false),
-                        ],
-                      )),
+                    height: 150.0,
+                    width: double.infinity,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      padding: EdgeInsets.only(left: 50.0),
+                      children: _imgUrls
+                          .asMap()
+                          .entries
+                          .map(
+                            (MapEntry map) =>
+                                _buildCircleImg(map.key, true),
+                          )
+                          .toList(),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -103,7 +119,18 @@ class _SpecialistDetailsState extends State<SpecialistDetails> {
     );
   }
 
-  Widget imgItem(String imgPath, Color bgColor, bool present) {
+  List<String> _imgUrls = [
+    'assets/images/woman.jpg',
+    'assets/images/woman1.jpg',
+    'assets/images/woman2.jpg',
+    'assets/images/woman3.jpg',
+    'assets/images/woman1.jpg',
+  ];
+
+  Widget _buildCircleImg(int index, bool present) {
+
+    Color _color = _setColor();
+
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 5.0),
       child: Column(
@@ -114,7 +141,7 @@ class _SpecialistDetailsState extends State<SpecialistDetails> {
                 height: 85.0,
                 width: 85.0,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50), color: bgColor),
+                    borderRadius: BorderRadius.circular(50), color: _color),
               ),
               Positioned(
                 top: 5,
@@ -125,7 +152,7 @@ class _SpecialistDetailsState extends State<SpecialistDetails> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(37.5),
                     image: DecorationImage(
-                      image: AssetImage(imgPath),
+                      image: AssetImage(_imgUrls[index]),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -140,7 +167,7 @@ class _SpecialistDetailsState extends State<SpecialistDetails> {
                   width: 10.0,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5.0),
-                    color: bgColor,
+                    color: _color,
                   ),
                 )
               : Container(),
