@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter/rendering.dart';
 import 'package:vogu/util/img_assets.dart';
-import 'package:vogu/util/svg_assets.dart';
 import 'package:vogu/widgets/radio-group.dart';
 
 class PaymentOptions extends StatefulWidget {
@@ -11,7 +10,6 @@ class PaymentOptions extends StatefulWidget {
 }
 
 class _PaymentOptionsState extends State<PaymentOptions> {
-
   double _totalAmount = 3025;
 
   @override
@@ -22,17 +20,17 @@ class _PaymentOptionsState extends State<PaymentOptions> {
         child: ListView(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
               child: Column(
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      GestureDetector(
-                        onTap: () => Navigator.of(context).pop(),
-                        child: Icon(
+                      IconButton(
+                        icon: Icon(
                           Icons.arrow_back_ios,
                           color: Colors.black26,
                         ),
+                        onPressed: () => Navigator.of(context).pop(),
                       ),
                     ],
                   ),
@@ -40,27 +38,39 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                     children: <Widget>[
                       Image(
                         image: AssetImage(IMG_SPINNER),
-                        height: 260.0,
+                        height: 240.0,
                       ),
                       Positioned(
-                        top: 100.0,
-                        left: 55.0,
+                        top: 90.0,
+                        left: 45.0,
                         child: Container(
                           child: Column(
                             children: <Widget>[
-                              Text('Preço Total:', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,),),
-                              Text('$_totalAmount MT', style: TextStyle(fontSize: 34.0, fontWeight: FontWeight.bold,),)
+                              Text(
+                                'Preço Total:',
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                '$_totalAmount MT',
+                                style: TextStyle(
+                                  fontSize: 34.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
                             ],
                           ),
                         ),
                       )
                     ],
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 17),
                   RadioGroupWidget(),
-                  SizedBox(height: 40),
+                  SizedBox(height: 30),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width - 85,
+                    width: MediaQuery.of(context).size.width - 90,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
@@ -70,23 +80,24 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                           color: Colors.deepPurple,
                           textColor: Colors.white,
                           child: Text('Pagar'),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0),),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
                         ),
                       ],
                     ),
                   ),
-                  Stack(
-                    children: <Widget>[
-                      SvgPicture.asset(SVG_FIRST, height: MediaQuery.of(context).size.height * 0.2,),
-                      SvgPicture.asset(SVG_SECOND, height: MediaQuery.of(context).size.height * 0.2,),
-                      SvgPicture.asset(SVG_THIRD, height: MediaQuery.of(context).size.height * 0.2,),
-                    ],
-                  )
                 ],
               ),
             ),
+            SizedBox(height: 25),
+            Image.asset(
+              IMG_BOTTOM,
+              height: MediaQuery.of(context).size.height * 0.229,
+              fit: BoxFit.cover,
+            )
           ],
-        )
+        ),
       ),
     );
   }
