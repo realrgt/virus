@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:vogu/util/img_assets.dart';
+import 'package:vogu/util/svg_assets.dart';
 import 'package:vogu/widgets/radio-group.dart';
 
 class PaymentOptions extends StatefulWidget {
@@ -36,7 +39,7 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                   Stack(
                     children: <Widget>[
                       Image(
-                        image: AssetImage('assets/images/spinner.png'),
+                        image: AssetImage(IMG_SPINNER),
                         height: 260.0,
                       ),
                       Positioned(
@@ -53,8 +56,32 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                       )
                     ],
                   ),
-                  SizedBox(height: 30),
+                  SizedBox(height: 20),
                   RadioGroupWidget(),
+                  SizedBox(height: 40),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width - 85,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        RaisedButton(
+                          padding: EdgeInsets.symmetric(vertical: 12.0),
+                          onPressed: () => print('Clicked Button'),
+                          color: Colors.deepPurple,
+                          textColor: Colors.white,
+                          child: Text('Pagar'),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0),),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Stack(
+                    children: <Widget>[
+                      SvgPicture.asset(SVG_FIRST, height: MediaQuery.of(context).size.height * 0.2,),
+                      SvgPicture.asset(SVG_SECOND, height: MediaQuery.of(context).size.height * 0.2,),
+                      SvgPicture.asset(SVG_THIRD, height: MediaQuery.of(context).size.height * 0.2,),
+                    ],
+                  )
                 ],
               ),
             ),

@@ -1,0 +1,1 @@
+const String IMG_SPINNER = 'assets/images/spinner.png';

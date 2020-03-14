@@ -16,6 +16,7 @@ class _RadioGroupWidgetState extends State<RadioGroupWidget> {
   @override
   void initState() {
     paymentTypes= PaymentType.getPaymentTypes();
+    selectedType = paymentTypes[0];
     super.initState();
   }
 
