@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:vogu/screens/auth/login.dart';
 import 'package:vogu/screens/auth/register.dart';
 
@@ -96,11 +95,11 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
                   style: TextStyle(color: Colors.white),
                 ),
                 IconButton(
-                  icon: FaIcon(FontAwesomeIcons.arrowDown),
+                  icon: Icon(Icons.add),
                   onPressed: () {},
                 ),
                 IconButton(
-                  icon: Icon(FontAwesomeIcons.facebook),
+                  icon: Icon(Icons.add),
                   onPressed: () {},
                 ),
               ],
