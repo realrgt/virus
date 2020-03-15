@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:vogu/screens/payment/result.dart';
 import 'package:vogu/util/img_assets.dart';
+import 'package:vogu/widgets/purple-wave.dart';
 import 'package:vogu/widgets/radio-group.dart';
 
 class PaymentOptions extends StatefulWidget {
@@ -96,11 +96,7 @@ class _PaymentOptionsState extends State<PaymentOptions> {
               ),
             ),
             SizedBox(height: 25),
-            Image.asset(
-              IMG_BOTTOM,
-              height: MediaQuery.of(context).size.height * 0.229,
-              fit: BoxFit.cover,
-            )
+            PurpleWave()
           ],
         ),
       ),

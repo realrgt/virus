@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vogu/util/img_assets.dart';
+import 'package:vogu/widgets/purple-wave.dart';
 
 class PaymentResult extends StatefulWidget {
   @override
@@ -72,10 +73,12 @@ class _PaymentResultState extends State<PaymentResult> {
                       ),
                     ),
                   ],
-                )
+                ),
+                SizedBox(height: 92.0),
               ],
             ),
-          )
+          ),
+          PurpleWave()
         ],
       ),
     );
