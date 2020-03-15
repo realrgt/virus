@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:vogu/screens/payment/result.dart';
 import 'package:vogu/util/img_assets.dart';
 import 'package:vogu/widgets/radio-group.dart';
 
@@ -76,7 +77,11 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                       children: <Widget>[
                         RaisedButton(
                           padding: EdgeInsets.symmetric(vertical: 12.0),
-                          onPressed: () => print('Clicked Button'),
+                          onPressed: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => PaymentResult(),
+                            ),
+                          ),
                           color: Colors.deepPurple,
                           textColor: Colors.white,
                           child: Text('Pagar'),
