@@ -25,6 +25,8 @@ dependencies:
   cupertino_icons: ^0.1.2
   flutter_rounded_date_picker: ^1.0.4
   flutter_svg: ^0.17.3+1
+  sleek_circular_slider: ^1.1.0
+
 
 dev_dependencies:
   flutter_test:

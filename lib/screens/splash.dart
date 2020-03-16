@@ -34,7 +34,6 @@ class _SplashState extends State<Splash> {
         Container(
           color: Color(0xff7a3b8c),
         ),
-//          Image.asset('assets/images/splash.jpg'),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

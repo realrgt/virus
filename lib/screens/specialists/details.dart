@@ -109,8 +109,7 @@ class _SpecialistDetailsState extends State<SpecialistDetails> {
                                   styleDatePicker:
                                       MaterialRoundedDatePickerStyle(
                                     paddingMonthHeader:
-                                        EdgeInsets.only(top: 15),
-                                    paddingDatePicker: EdgeInsets.all(0),
+                                        EdgeInsets.only(top: 15.0),
                                   ),
                                 );
                               },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:vogu/screens/payment/result.dart';
 import 'package:vogu/util/img_assets.dart';
 import 'package:vogu/widgets/purple-wave.dart';
@@ -11,6 +12,7 @@ class PaymentOptions extends StatefulWidget {
 }
 
 class _PaymentOptionsState extends State<PaymentOptions> {
+
   double _totalAmount = 3025;
 
   @override
@@ -35,11 +37,24 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                       ),
                     ],
                   ),
+
                   Stack(
                     children: <Widget>[
-                      Image(
-                        image: AssetImage(IMG_SPINNER),
-                        height: 240.0,
+                      SleekCircularSlider(
+                        appearance: CircularSliderAppearance(
+                            spinnerMode: true,
+                            spinnerDuration: 6000,
+                            size: 230,
+                            customWidths: CustomSliderWidths(
+                                handlerSize: 0,
+                                progressBarWidth: 10,
+                                trackWidth: 8
+                            ),
+                            customColors: CustomSliderColors(
+                              progressBarColors: [Colors.purpleAccent, Colors.purple],
+                              hideShadow: true,
+                            )
+                        ),
                       ),
                       Positioned(
                         top: 90.0,
@@ -67,6 +82,7 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                       )
                     ],
                   ),
+
                   SizedBox(height: 17),
                   RadioGroupWidget(),
                   SizedBox(height: 30),
