@@ -43,7 +43,7 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                       SleekCircularSlider(
                         appearance: CircularSliderAppearance(
                             spinnerMode: true,
-                            spinnerDuration: 6000,
+                            spinnerDuration: 2000,
                             size: 230,
                             customWidths: CustomSliderWidths(
                                 handlerSize: 0,

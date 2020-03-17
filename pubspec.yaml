@@ -26,7 +26,7 @@ dependencies:
   flutter_rounded_date_picker: ^1.0.4
   flutter_svg: ^0.17.3+1
   sleek_circular_slider: ^1.1.0
-
+  flare_flutter: ^2.0.1
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +51,7 @@ flutter:
   assets:
     - assets/images/
     - assets/svg/
+    - assets/flare/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
