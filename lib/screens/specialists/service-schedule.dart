@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/rounded_picker.dart';
+// ignore: implementation_imports
 import 'package:flutter_rounded_date_picker/src/material_rounded_date_picker_style.dart';
 import 'package:vogu/screens/specialists/list.dart';
 import 'package:vogu/widgets/details-scroll.dart';
+import 'package:vogu/widgets/service-chips.dart';
 
 class ServiceSchedule extends StatefulWidget {
   @override
@@ -29,6 +31,7 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 1),
                     ),
+                    child: ServiceChips(),  //TODO
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 32.0),
