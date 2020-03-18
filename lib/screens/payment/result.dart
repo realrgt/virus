@@ -106,7 +106,7 @@ class _PaymentResultState extends State<PaymentResult> {
                     ),
                   ],
                 ),
-                SizedBox(height: 102.0),
+                SizedBox(height: 91.0),
               ],
             ),
           ),

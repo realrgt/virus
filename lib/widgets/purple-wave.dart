@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:vogu/util/img_assets.dart';
+import 'package:wave/config.dart';
+import 'package:wave/wave.dart';
 
-class PurpleWave extends StatefulWidget {
-  @override
-  _PurpleWaveState createState() => _PurpleWaveState();
-}
-
-class _PurpleWaveState extends State<PurpleWave> {
+class PurpleWave extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      IMG_BOTTOM,
-      height: MediaQuery.of(context).size.height * 0.229,
-      fit: BoxFit.cover,
+    return Container(
+      child: WaveWidget(
+        config: CustomConfig(
+          gradients: [
+            [Colors.deepPurple.withOpacity(0.5), Colors.deepPurple.withOpacity(0.7)],
+            [Colors.deepPurple.withOpacity(0.5), Colors.deepPurple.withOpacity(0.7)],
+            [Colors.deepPurple.withOpacity(0.5), Colors.deepPurple.withOpacity(0.7)],
+          ],
+          durations: [17000, 15000, 24000],
+          heightPercentages: [0.25, 0.15, 0.20],
+          blur: MaskFilter.blur(BlurStyle.solid, 10),
+          gradientBegin: Alignment.topCenter,
+          gradientEnd: Alignment.bottomCenter,
+        ),
+        size: Size(MediaQuery.of(context).size.width, 178.5),
+      ),
     );
   }
 }

@@ -111,7 +111,7 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                 ],
               ),
             ),
-            SizedBox(height: 25),
+//            SizedBox(height: 25),
             PurpleWave()
           ],
         ),
