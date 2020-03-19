@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vogu/models/service-type.dart';
+import 'package:vogu/models/categories-services.dart';
 
 class ServiceChips extends StatefulWidget {
   @override
