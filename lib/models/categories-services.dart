@@ -31,7 +31,7 @@ class Service {
 
 var categories = <Category>[
   Category(
-    id: 1,
+    id: 0,
     categoryName: 'Unhas',
     imgUrl: NEILS,
     services: <Service>[
@@ -45,7 +45,7 @@ var categories = <Category>[
     ]
   ),
   Category(
-    id: 2,
+    id: 1,
     categoryName: 'Rosto',
     imgUrl: FACE,
     services: <Service>[
@@ -61,7 +61,7 @@ var categories = <Category>[
     ]
   ),
   Category(
-      id: 3,
+      id: 2,
       categoryName: 'MakeUp',
       imgUrl: MAKEUP,
       services: <Service>[
@@ -76,7 +76,7 @@ var categories = <Category>[
       ]
   ),
   Category(
-      id: 4,
+      id: 3,
       categoryName: 'Massagem',
       imgUrl: MASSAGE,
       services: <Service>[
@@ -89,7 +89,7 @@ var categories = <Category>[
       ]
   ),
   Category(
-      id: 5,
+      id: 4,
       categoryName: 'Depilação',
       imgUrl: HAIR_REMOVAL,
       services: <Service>[
@@ -102,7 +102,7 @@ var categories = <Category>[
       ]
   ),
   Category(
-      id: 6,
+      id: 5,
       categoryName: 'Cabelos',
       imgUrl: HAIR,
       services: <Service>[
