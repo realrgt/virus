@@ -51,6 +51,7 @@ flutter:
   #  - images/a_dot_ham.jpeg
   assets:
     - assets/images/
+    - assets/images/categories/
     - assets/svg/
     - assets/flare/
 

@@ -1,3 +1,5 @@
+import 'package:vogu/util/img_assets.dart';
+
 class Category {
   int id;
   String categoryName;
@@ -8,7 +10,7 @@ class Category {
 
   @override
   String toString() {
-    return 'Category{id: $id, categoryName: $categoryName, services: $services}';
+    return 'Category{id: $id, categoryName: $categoryName, imgUrl: $imgUrl, services: $services}';
   }
 
 }
@@ -31,6 +33,7 @@ var categories = <Category>[
   Category(
     id: 1,
     categoryName: 'Unhas',
+    imgUrl: NEILS,
     services: <Service>[
       Service(serviceId: 1, name: 'Manicure', price: 100.0),
       Service(serviceId: 2, name: 'Pedicure', price: 100.0),
@@ -44,6 +47,7 @@ var categories = <Category>[
   Category(
     id: 2,
     categoryName: 'Rosto',
+    imgUrl: FACE,
     services: <Service>[
       Service(serviceId: 1, name: 'Limpeza facial', price: 100.0),
       Service(serviceId: 2, name: 'Design sombracelhas', price: 100.0),
@@ -59,6 +63,7 @@ var categories = <Category>[
   Category(
       id: 3,
       categoryName: 'MakeUp',
+      imgUrl: MAKEUP,
       services: <Service>[
         Service(serviceId: 1, name: 'Simples', price: 100.0),
         Service(serviceId: 2, name: 'Para casamento', price: 100.0),
@@ -73,6 +78,7 @@ var categories = <Category>[
   Category(
       id: 4,
       categoryName: 'Massagem',
+      imgUrl: MASSAGE,
       services: <Service>[
         Service(serviceId: 1, name: 'Shiatsu', price: 100.0),
         Service(serviceId: 2, name: 'Drenagem', price: 100.0),
@@ -85,6 +91,7 @@ var categories = <Category>[
   Category(
       id: 5,
       categoryName: 'Depilação',
+      imgUrl: HAIR_REMOVAL,
       services: <Service>[
         Service(serviceId: 1, name: 'Axila', price: 100.0),
         Service(serviceId: 2, name: 'Verilha', price: 100.0),
@@ -97,6 +104,7 @@ var categories = <Category>[
   Category(
       id: 6,
       categoryName: 'Cabelos',
+      imgUrl: HAIR,
       services: <Service>[
         Service(serviceId: 6, name: 'Tranças', price: 100.0),
         Service(serviceId: 6, name: 'Próteses', price: 100.0),

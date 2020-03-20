@@ -3,7 +3,7 @@ import 'package:flutter_rounded_date_picker/rounded_picker.dart';
 import 'package:flutter_rounded_date_picker/src/material_rounded_date_picker_style.dart';
 import 'package:vogu/models/specialist.dart';
 import 'package:vogu/screens/payment/payment-options.dart';
-import 'package:vogu/widgets/details-scroll.dart';
+import 'package:vogu/widgets/categories-scroll.dart';
 
 class SpecialistDetails extends StatefulWidget {
   final Specialist specialist;
@@ -78,7 +78,7 @@ class _SpecialistDetailsState extends State<SpecialistDetails> {
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 30.0), // TODO: Adjust this
-                  SpecialistDetailsScoll(),
+                  CategoriesScroll(),
                   // TODO: added padding for every widgets form here to bottom
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 32.0),

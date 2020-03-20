@@ -2,20 +2,29 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:vogu/models/categories-services.dart';
+import 'package:vogu/screens/specialists/service-schedule.dart';
 
-class SpecialistDetailsScoll extends StatefulWidget {
+class CategoriesScroll extends StatefulWidget {
 
+  final int scrollItem;
+
+  const CategoriesScroll({Key key, this.scrollItem}) : super(key: key);
 
   @override
-  _SpecialistDetailsScollState createState() => _SpecialistDetailsScollState();
+  _CategoriesScrollState createState() => _CategoriesScrollState();
 }
 
-class _SpecialistDetailsScollState extends State<SpecialistDetailsScoll> {
+class _CategoriesScrollState extends State<CategoriesScroll> {
 
   // List of categoryImages
   List<String> _imgUrls = categories.map((c) => c.imgUrl).toList();
 
   int _selectedIndex = 0;
+
+  //////////////////////////////////////
+  List<Service> _list;
+  List<Service> selectedChoices = List();
+  int _currentCat = 1;
 
   _setColor() {
     Color color;
@@ -37,23 +46,50 @@ class _SpecialistDetailsScollState extends State<SpecialistDetailsScoll> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 100.0,
-      width: double.infinity,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.only(left: 50.0),
-        children: _imgUrls
-            .asMap()
-            .entries
-            .map(
-              (MapEntry map) => _buildCircleImg(map.key),
-            )
-            .toList(),
-      ),
+
+    _list = categories.where((c) => c.id == _currentCat).expand((c) => c.services).toList();
+
+    return Column(
+      children: <Widget>[
+        Container(
+          height: 100.0,
+          width: double.infinity,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            padding: EdgeInsets.only(left: 50.0),
+            children: _imgUrls
+                .asMap()
+                .entries
+                .map(
+                  (MapEntry map) {
+                    return _buildCircleImg(map.key);
+                  },
+                )
+                .toList(),
+          ),
+        ),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Container(
+            height: 200,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.red, width: 1)
+            ),
+            child: SingleChildScrollView(
+              child: Wrap(
+                spacing: 5.0,
+                runSpacing: 2.0,
+                children: _buildChipsList(),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
+  var temp2;
   Widget _buildCircleImg(int index) {
     Color _color = _setColor();
 
@@ -61,6 +97,7 @@ class _SpecialistDetailsScollState extends State<SpecialistDetailsScoll> {
       onTap: () {
         setState(() {
           _selectedIndex = index;
+          _currentCat = index + 1;
         });
         print('Selected index: $_selectedIndex');
       },
@@ -113,4 +150,44 @@ class _SpecialistDetailsScollState extends State<SpecialistDetailsScoll> {
       ),
     );
   }
+
+  //TODO//////////////////////////////////////
+
+  _buildChipsList() {
+    List<Widget> chips = List();
+
+    _list.forEach((item) {
+      chips.add(Container(
+        padding: EdgeInsets.all(2.0),
+        child: FilterChip(
+          avatar: CircleAvatar(
+            backgroundColor: Colors.grey.shade50,
+          ),
+          label: Text(item.name),
+          checkmarkColor: Color(0xff6200ee),
+          labelStyle: TextStyle(
+            color: Color(0xff6200ee),
+            fontSize: 16.0,
+            fontWeight: FontWeight.bold,
+          ),
+          selected: selectedChoices.contains(item),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+          backgroundColor: Color(0xffededed),
+          onSelected: (isSelected) {
+            setState(() {
+              selectedChoices.contains(item)
+                  ? selectedChoices.remove(item)
+                  : selectedChoices.add(item);
+            });
+          },
+          selectedColor: Color(0xffeadffd),
+        ),
+      ));
+    });
+
+    return chips;
+  }
+
 }
