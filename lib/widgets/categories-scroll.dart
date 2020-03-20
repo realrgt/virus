@@ -1,13 +1,20 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:vogu/models/categories-services.dart';
 
 class SpecialistDetailsScoll extends StatefulWidget {
+
+
   @override
   _SpecialistDetailsScollState createState() => _SpecialistDetailsScollState();
 }
 
 class _SpecialistDetailsScollState extends State<SpecialistDetailsScoll> {
+
+  // List of categoryImages
+  List<String> _imgUrls = categories.map((c) => c.imgUrl).toList();
+
   int _selectedIndex = 0;
 
   _setColor() {
@@ -46,14 +53,6 @@ class _SpecialistDetailsScollState extends State<SpecialistDetailsScoll> {
       ),
     );
   }
-
-  List<String> _imgUrls = [
-    'assets/images/woman.jpg',
-    'assets/images/woman1.jpg',
-    'assets/images/woman2.jpg',
-    'assets/images/woman3.jpg',
-    'assets/images/woman1.jpg',
-  ];
 
   Widget _buildCircleImg(int index) {
     Color _color = _setColor();
