@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vogu/models/payment-type.dart';
+import 'package:vogu/util/default_colors.dart';
 
 class RadioGroupWidget extends StatefulWidget {
   @override
@@ -38,7 +39,7 @@ class _RadioGroupWidgetState extends State<RadioGroupWidget> {
             setSelectedType(currentType);
           },
           selected: selectedType == paymentType,
-          activeColor: Colors.deepPurple,
+          activeColor: PURPLE_DEEP,
         ),
       ));
     }

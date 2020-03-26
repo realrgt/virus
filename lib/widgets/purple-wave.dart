@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vogu/util/default_colors.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 
@@ -10,16 +11,16 @@ class PurpleWave extends StatelessWidget {
         config: CustomConfig(
           gradients: [
             [
-              Colors.deepPurple.withOpacity(0.5),
-              Colors.deepPurple.withOpacity(0.7)
+              PURPLE_DEEP.withOpacity(0.5),
+              PURPLE_DEEP.withOpacity(0.7)
             ],
             [
-              Colors.deepPurple.withOpacity(0.5),
-              Colors.deepPurple.withOpacity(0.7)
+              PURPLE_DEEP.withOpacity(0.5),
+              PURPLE_DEEP.withOpacity(0.7)
             ],
             [
-              Colors.deepPurple.withOpacity(0.5),
-              Colors.deepPurple.withOpacity(0.7)
+              PURPLE_DEEP.withOpacity(0.5),
+              PURPLE_DEEP.withOpacity(0.7)
             ],
           ],
           durations: [17000, 15000, 24000],

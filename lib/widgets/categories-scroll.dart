@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:vogu/models/categories-services.dart';
+import 'package:vogu/util/default_colors.dart';
 
 class CategoriesScroll extends StatefulWidget {
   final int scrollItem;
@@ -110,8 +111,8 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
                     color: _selectedIndex == index
-                        ? Colors.purple
-                        : Colors.deepPurple,
+                        ? PINK
+                        : PURPLE_DEEP,
                   ),
                 ),
                 Positioned(
@@ -140,7 +141,7 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
                         width: 10.0,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5.0),
-                          color: Colors.purple,
+                          color: PINK,
                         ),
                       ),
                       SizedBox(height: 20),
@@ -166,13 +167,13 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
           backgroundColor: Colors.grey.shade50,
         ),
         label: Text(item.name),
-        checkmarkColor: Colors.deepPurple,
+        checkmarkColor: Colors.white,
         labelStyle: TextStyle(
           color: Colors.white,
           fontSize: 12.5,
         ),
         selected: selectedChoices.contains(item),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: PURPLE_DEEP,
         onSelected: (isSelected) {
           setState(() {
             selectedChoices.contains(item)
@@ -180,7 +181,7 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
                 : selectedChoices.add(item);
           });
         },
-        selectedColor: Colors.deepPurple,
+        selectedColor: PINK,
       ));
     });
 

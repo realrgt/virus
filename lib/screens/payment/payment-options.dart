@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:vogu/screens/payment/result.dart';
+import 'package:vogu/util/default_colors.dart';
 import 'package:vogu/util/img_assets.dart';
 import 'package:vogu/widgets/purple-wave.dart';
 import 'package:vogu/widgets/radio-group.dart';
@@ -49,8 +50,8 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                                 trackWidth: 8),
                             customColors: CustomSliderColors(
                               progressBarColors: [
-                                Colors.purpleAccent,
-                                Colors.purple
+                                PURPLE_ACCENT,
+                                PURPLE_DEEP
                               ],
                               hideShadow: true,
                             )),
@@ -96,7 +97,7 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                               builder: (_) => PaymentResult(),
                             ),
                           ),
-                          color: Colors.deepPurple,
+                          color: PURPLE_DEEP,
                           textColor: Colors.white,
                           child: Text('Pagar'),
                           shape: RoundedRectangleBorder(

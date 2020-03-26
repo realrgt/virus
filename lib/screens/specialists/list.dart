@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vogu/models/specialist.dart';
+import 'package:vogu/util/default_colors.dart';
 
 import 'details.dart';
 
@@ -48,7 +49,7 @@ class _SpecialistListState extends State<SpecialistList> {
                         height: 160.0,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.0),
-                          color: Colors.purple,
+                          color: PURPLE_DEEP,
                         ),
                         child: Padding(
                           padding: EdgeInsets.symmetric(
@@ -118,7 +119,7 @@ class _SpecialistListState extends State<SpecialistList> {
                                 ),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(12.0),
-                                  color: Colors.purpleAccent,
+                                  color: PURPLE_ACCENT,
                                 ),
                                 child: Text(
                                   'Ver Mais',

@@ -3,6 +3,7 @@ import 'package:flutter_rounded_date_picker/rounded_picker.dart';
 // ignore: implementation_imports
 import 'package:flutter_rounded_date_picker/src/material_rounded_date_picker_style.dart';
 import 'package:vogu/screens/specialists/list.dart';
+import 'package:vogu/util/default_colors.dart';
 import 'package:vogu/widgets/categories-scroll.dart';
 import 'package:vogu/widgets/service-chips.dart';
 
@@ -63,7 +64,7 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
                                 height: 37.0,
                                 padding: EdgeInsets.symmetric(horizontal: 20.0),
                                 decoration: BoxDecoration(
-                                  color: Colors.deepPurple,
+                                  color: PURPLE_DEEP,
                                   borderRadius: BorderRadius.circular(12.0),
                                 ),
                                 child: Row(
@@ -99,7 +100,7 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
                                 height: 37.0,
                                 padding: EdgeInsets.symmetric(horizontal: 20.0),
                                 decoration: BoxDecoration(
-                                  color: Colors.deepPurple,
+                                  color: PURPLE_DEEP,
                                   borderRadius: BorderRadius.circular(12.0),
                                 ),
                                 child: Row(
@@ -138,7 +139,7 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
                                 height: 47.0,
                                 padding: EdgeInsets.symmetric(horizontal: 20.0),
                                 decoration: BoxDecoration(
-                                  color: Colors.deepPurple,
+                                  color: PURPLE_DEEP,
                                   borderRadius: BorderRadius.circular(15.0),
                                 ),
                                 child: Row(

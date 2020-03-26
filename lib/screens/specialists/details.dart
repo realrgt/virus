@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rounded_date_picker/rounded_picker.dart';
-import 'package:flutter_rounded_date_picker/src/material_rounded_date_picker_style.dart';
 import 'package:vogu/models/specialist.dart';
 import 'package:vogu/screens/payment/payment-options.dart';
+import 'package:vogu/util/default_colors.dart';
 import 'package:vogu/widgets/categories-scroll.dart';
 
 class SpecialistDetails extends StatefulWidget {
@@ -90,95 +89,6 @@ class _SpecialistDetailsState extends State<SpecialistDetails> {
                               border: Border.all(color: Colors.red, width: 1)),
                         ),
                         SizedBox(height: 10.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            GestureDetector(
-                              onTap: () async {
-                                final datePicked = await showRoundedDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime.now().subtract(
-                                    Duration(days: 1),
-                                  ),
-                                  lastDate: DateTime.now().add(
-                                    Duration(days: 15),
-                                  ),
-                                  theme: ThemeData(
-                                      primarySwatch: Colors.deepPurple),
-                                  styleDatePicker:
-                                      MaterialRoundedDatePickerStyle(
-                                    paddingMonthHeader:
-                                        EdgeInsets.only(top: 15.0),
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                width: 150.0,
-                                height: 37.0,
-                                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                                decoration: BoxDecoration(
-                                  color: Colors.deepPurple,
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: <Widget>[
-                                    Text(
-                                      '08/12/2020',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 14.0,
-                                      ),
-                                    ),
-                                    Icon(
-                                      Icons.date_range,
-                                      color: Colors.white,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () async {
-                                final timePicked = await showRoundedTimePicker(
-                                  context: context,
-                                  initialTime: TimeOfDay.now(),
-                                  theme: ThemeData(
-                                      primarySwatch: Colors.deepPurple),
-                                );
-                              },
-                              child: Container(
-                                width: 150.0,
-                                height: 37.0,
-                                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                                decoration: BoxDecoration(
-                                  color: Colors.deepPurple,
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: <Widget>[
-                                    Text(
-                                      '10:45 AM',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 14.0,
-                                      ),
-                                    ),
-                                    Icon(
-                                      Icons.access_time,
-                                      color: Colors.white,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 20.0),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: <Widget>[
@@ -193,7 +103,7 @@ class _SpecialistDetailsState extends State<SpecialistDetails> {
                                 height: 47.0,
                                 padding: EdgeInsets.symmetric(horizontal: 20.0),
                                 decoration: BoxDecoration(
-                                  color: Colors.deepPurple,
+                                  color: PURPLE_DEEP,
                                   borderRadius: BorderRadius.circular(15.0),
                                 ),
                                 child: Row(

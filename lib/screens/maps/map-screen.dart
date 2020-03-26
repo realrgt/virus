@@ -25,28 +25,57 @@ class _MapScreenState extends State<MapScreen> {
       body: ListView(
         children: <Widget>[
           Container(
-              height: (MediaQuery.of(context).size.height / 2) + 100,
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.vertical(
-                  bottom: Radius.circular(30.0),
-                ),
+            height: (MediaQuery.of(context).size.height / 2) + 100,
+            decoration: BoxDecoration(
+              color: Colors.grey,
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(30.0),
               ),
-              child: Stack(
-                children: <Widget>[
-                  ClipRRect(
-                    borderRadius: BorderRadius.vertical(
-                      bottom: Radius.circular(30.0),
-                    ),
-                    child: GoogleMap(
-                      // TODO --visible
-                      onMapCreated: _onMapCreated,
-                      initialCameraPosition:
-                          CameraPosition(target: _center, zoom: 11.0),
+            ),
+            child: Stack(
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.vertical(
+                    bottom: Radius.circular(30.0),
+                  ),
+                  child: GoogleMap(
+                    onMapCreated: _onMapCreated,
+                    initialCameraPosition:
+                        CameraPosition(target: _center, zoom: 11.0),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 32.0, vertical: 40.0),
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: Container(
+                      height: 45.0,
+                      padding: EdgeInsets.only(left: 20, bottom: 2, right: 5.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white30,
+                        borderRadius: BorderRadius.circular(30.0),
+                        border: Border.all(color: PURPLE_DEEP, width: 2)
+                      ),
+                      child: TextField(
+                        style: TextStyle(color: PURPLE_DEEP, fontSize: 18.0),
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Enviar para...',
+                          hintStyle: TextStyle(color: PURPLE_DEEP),
+                          suffixIcon: Icon(
+                            Icons.search,
+                            color: PURPLE_DEEP,
+                            size: 28.0,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                ],
-              )),
+                )
+              ],
+            ),
+          ),
           SizedBox(height: 15.0),
           Column(
             children: <Widget>[
@@ -55,28 +84,28 @@ class _MapScreenState extends State<MapScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    Container(
-                      height: 45.0,
-                      padding: EdgeInsets.only(left: 20, right: 5.0),
-                      decoration: BoxDecoration(
-                        color: PURPLE_ACCENT,
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      child: TextField(
-                        style: TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Enviar para...',
-                          hintStyle: TextStyle(color: Colors.white),
-                          suffixIcon: Icon(
-                            Icons.search,
-                            color: Colors.white,
-                            size: 28.0,
-                          ),
-                          labelStyle: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
+//                    Container(
+//                      height: 45.0,
+//                      padding: EdgeInsets.only(left: 20, right: 5.0),
+//                      decoration: BoxDecoration(
+//                        color: PURPLE_ACCENT,
+//                        borderRadius: BorderRadius.circular(30.0),
+//                      ),
+//                      child: TextField(
+//                        style: TextStyle(color: Colors.white),
+//                        decoration: InputDecoration(
+//                          border: InputBorder.none,
+//                          hintText: 'Enviar para...',
+//                          hintStyle: TextStyle(color: Colors.white),
+//                          suffixIcon: Icon(
+//                            Icons.search,
+//                            color: Colors.white,
+//                            size: 28.0,
+//                          ),
+//                          labelStyle: TextStyle(color: Colors.white),
+//                        ),
+//                      ),
+//                    ),
                     SizedBox(height: 8.0),
                     RaisedButton(
                       padding: EdgeInsets.all(15.0),
@@ -96,7 +125,8 @@ class _MapScreenState extends State<MapScreen> {
               )
             ],
           ),
-          SizedBox(height: 125, child: WhiteWave())
+//          SizedBox(height: 125, child: WhiteWave()),
+          WhiteWave()
         ],
       ),
     );

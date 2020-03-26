@@ -2,6 +2,7 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+import 'package:vogu/util/default_colors.dart';
 import 'package:vogu/util/img_assets.dart';
 import 'package:vogu/widgets/purple-wave.dart';
 
@@ -50,9 +51,9 @@ class _PaymentResultState extends State<PaymentResult> {
                               progressBarWidth: 10,
                               trackWidth: 10),
                           customColors: CustomSliderColors(
-                              progressBarColor: Colors.purple,
+                              progressBarColor: PURPLE_ACCENT,
                               hideShadow: true,
-                              trackColor: Colors.purple)),
+                              trackColor: PURPLE_ACCENT)),
                     ),
                     Positioned(
                       top: 40.0,
@@ -78,7 +79,7 @@ class _PaymentResultState extends State<PaymentResult> {
                         onPressed: () {},
                         icon: Icon(Icons.question_answer),
                         label: Text("Ir ao chat"),
-                        color: Colors.deepPurple,
+                        color: PURPLE_DEEP,
                         textColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16.0),
@@ -92,7 +93,7 @@ class _PaymentResultState extends State<PaymentResult> {
                         onPressed: () {},
                         icon: Icon(Icons.phone_in_talk),
                         label: Text("Ligar"),
-                        color: Colors.deepPurple,
+                        color: PURPLE_DEEP,
                         textColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16.0),
