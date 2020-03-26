@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:vogu/models/categories-services.dart';
 
 class CategoriesScroll extends StatefulWidget {
-
   final int scrollItem;
 
   const CategoriesScroll({Key key, this.scrollItem}) : super(key: key);
@@ -14,7 +13,6 @@ class CategoriesScroll extends StatefulWidget {
 }
 
 class _CategoriesScrollState extends State<CategoriesScroll> {
-
   // List of categoryImages
   List<String> _imgUrls = categories.map((c) => c.imgUrl).toList();
 
@@ -46,10 +44,14 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
 
   @override
   Widget build(BuildContext context) {
-
-
-    _serviceList = categories.where((c) => c.id == _selectedIndex).expand((c) => c.services).toList();
-    _categoryList = categories.where((c) => c.id == _selectedIndex).map((c) => c.categoryName).toList();
+    _serviceList = categories
+        .where((c) => c.id == _selectedIndex)
+        .expand((c) => c.services)
+        .toList();
+    _categoryList = categories
+        .where((c) => c.id == _selectedIndex)
+        .map((c) => c.categoryName)
+        .toList();
 
     _categoryList.forEach(print);
 
@@ -61,15 +63,11 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
           child: ListView(
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.only(left: 50.0),
-            children: _imgUrls
-                .asMap()
-                .entries
-                .map(
-                  (MapEntry map) {
-                    return _buildCircleImg(map.key);
-                  },
-                )
-                .toList(),
+            children: _imgUrls.asMap().entries.map(
+              (MapEntry map) {
+                return _buildCircleImg(map.key);
+              },
+            ).toList(),
           ),
         ),
         Container(
@@ -87,7 +85,6 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
         ),
       ],
     );
-
   }
 
   var temp2;
@@ -137,8 +134,8 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
             SizedBox(height: 3.0),
             _selectedIndex == index
                 ? Column(
-                  children: <Widget>[
-                    Container(
+                    children: <Widget>[
+                      Container(
                         height: 10.0,
                         width: 10.0,
                         decoration: BoxDecoration(
@@ -146,16 +143,14 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
                           color: Colors.purple,
                         ),
                       ),
-                    SizedBox(height: 20),
-                    Text(
-                      '${_categoryList[0]}',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.0
-                      ),
-                    )
-                  ],
-                )
+                      SizedBox(height: 20),
+                      Text(
+                        '${_categoryList[0]}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16.0),
+                      )
+                    ],
+                  )
                 : Container(),
           ],
         ),
@@ -191,5 +186,4 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
 
     return chips;
   }
-
 }

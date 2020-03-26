@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vogu/screens/specialists/list.dart';
-import 'package:vogu/screens/specialists/service-schedule.dart';
+import 'package:vogu/screens/maps/map-screen.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -16,12 +15,13 @@ class _SplashState extends State<Splash> {
     super.initState();
 
     Timer(
-      Duration(seconds: 3),
+      Duration(seconds: 1),
       () => Navigator.push(
         context,
         MaterialPageRoute(
 //          builder: (context) => SpecialistList(),
-          builder: (context) => ServiceSchedule(),
+//          builder: (context) => ServiceSchedule(),
+          builder: (context) => MapScreen(),
         ),
       ),
     );

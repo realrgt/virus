@@ -12,7 +12,6 @@ class PaymentOptions extends StatefulWidget {
 }
 
 class _PaymentOptionsState extends State<PaymentOptions> {
-
   double _totalAmount = 3025;
 
   @override
@@ -37,7 +36,6 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                       ),
                     ],
                   ),
-
                   Stack(
                     children: <Widget>[
                       SleekCircularSlider(
@@ -48,13 +46,14 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                             customWidths: CustomSliderWidths(
                                 handlerSize: 0,
                                 progressBarWidth: 10,
-                                trackWidth: 8
-                            ),
+                                trackWidth: 8),
                             customColors: CustomSliderColors(
-                              progressBarColors: [Colors.purpleAccent, Colors.purple],
+                              progressBarColors: [
+                                Colors.purpleAccent,
+                                Colors.purple
+                              ],
                               hideShadow: true,
-                            )
-                        ),
+                            )),
                       ),
                       Positioned(
                         top: 90.0,
@@ -82,7 +81,6 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                       )
                     ],
                   ),
-
                   SizedBox(height: 17),
                   RadioGroupWidget(),
                   SizedBox(height: 30),

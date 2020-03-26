@@ -7,7 +7,6 @@ import 'package:vogu/widgets/categories-scroll.dart';
 import 'package:vogu/widgets/service-chips.dart';
 
 class ServiceSchedule extends StatefulWidget {
-
   final int temp;
 
   const ServiceSchedule({Key key, this.temp}) : super(key: key);

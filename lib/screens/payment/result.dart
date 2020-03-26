@@ -38,7 +38,6 @@ class _PaymentResultState extends State<PaymentResult> {
                   ],
                 ),
                 SizedBox(height: 40.0),
-
                 Stack(
                   children: <Widget>[
                     SleekCircularSlider(
@@ -49,14 +48,11 @@ class _PaymentResultState extends State<PaymentResult> {
                           customWidths: CustomSliderWidths(
                               handlerSize: 0,
                               progressBarWidth: 10,
-                              trackWidth: 10
-                          ),
+                              trackWidth: 10),
                           customColors: CustomSliderColors(
-                            progressBarColor: Colors.purple,
-                            hideShadow: true,
-                            trackColor: Colors.purple
-                          )
-                      ),
+                              progressBarColor: Colors.purple,
+                              hideShadow: true,
+                              trackColor: Colors.purple)),
                     ),
                     Positioned(
                       top: 40.0,
@@ -70,7 +66,6 @@ class _PaymentResultState extends State<PaymentResult> {
                     )
                   ],
                 ),
-
                 SizedBox(height: 17.0),
                 Text('Serviço Pago'),
                 SizedBox(height: 40.0),

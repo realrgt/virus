@@ -28,8 +28,14 @@ dependencies:
   sleek_circular_slider: ^1.1.0
   flare_flutter: ^2.0.1
   wave: ^0.0.8
+  google_maps_flutter: ^0.5.25+1
+  http: ^0.12.0+1
+  json_serializable: ^2.0.2
 
 dev_dependencies:
+  pedantic: ^1.4.0
+  build_runner: ^1.2.7
+
   flutter_test:
     sdk: flutter
 

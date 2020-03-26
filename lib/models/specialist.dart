@@ -5,7 +5,6 @@ class Specialist {
   String imgUrl;
 
   Specialist({this.name, this.address, this.rating, this.imgUrl});
-
 }
 
 List<Specialist> specialists = [
