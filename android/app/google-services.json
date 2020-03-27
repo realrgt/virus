@@ -1,79 +1,34 @@
 {
   "project_info": {
-    "project_number": "1076562575637",
-    "firebase_url": "https://vogu-abe65.firebaseio.com",
-    "project_id": "vogu-abe65",
-    "storage_bucket": "vogu-abe65.appspot.com"
+    "project_number": "882126386443",
+    "firebase_url": "https://vogu-app.firebaseio.com",
+    "project_id": "vogu-app",
+    "storage_bucket": "vogu-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1076562575637:android:4c2051153e7c2ca725e91c",
-        "android_client_info": {
-          "package_name": "com.example.vogu"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "1076562575637-hk861eia3lppp0tfik0m7vd1l008156v.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.vogu",
-            "certificate_hash": "c67a2418f743550b835458747ff66f2ae72a4113"
-          }
-        },
-        {
-          "client_id": "1076562575637-gl026vphighudqfghn5ahmndrcu4qltc.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyD6FOzvSw8GsKIHVmA2Fzt2A0mKKmErAvQ"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1076562575637-gl026vphighudqfghn5ahmndrcu4qltc.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:1076562575637:android:e46982115f58115125e91c",
+        "mobilesdk_app_id": "1:882126386443:android:c5840cb142485d3bd9de0e",
         "android_client_info": {
           "package_name": "com.leeva.vogu"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1076562575637-eemhnr4ifnu3ppou5ml937k8j9ttj65s.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.leeva.vogu",
-            "certificate_hash": "4432f2fc29c706a27a8a7e449bdb4a7ae004e6ab"
-          }
-        },
-        {
-          "client_id": "1076562575637-gl026vphighudqfghn5ahmndrcu4qltc.apps.googleusercontent.com",
+          "client_id": "882126386443-jkoi765c4al99aqavbge28t9tkmjt1eg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD6FOzvSw8GsKIHVmA2Fzt2A0mKKmErAvQ"
+          "current_key": "AIzaSyAtRAQT13uzPiWMrwKlRugbR-HCPXPDyl8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1076562575637-gl026vphighudqfghn5ahmndrcu4qltc.apps.googleusercontent.com",
+              "client_id": "882126386443-jkoi765c4al99aqavbge28t9tkmjt1eg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

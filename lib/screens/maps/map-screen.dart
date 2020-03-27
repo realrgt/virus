@@ -1,8 +1,11 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:vogu/util/default_colors.dart';
+import 'package:vogu/util/img_assets.dart';
 import 'package:vogu/widgets/white-wave.dart';
 
 class MapScreen extends StatefulWidget {
@@ -11,13 +14,161 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  GoogleMapController mapController;
-  final LatLng _center = const LatLng(45.521563, -122.677433);
 
-  void _onMapCreated(GoogleMapController controller) {
-    setState(() {
-      mapController = controller;
+
+  TextEditingController _controllerDestino = TextEditingController(text: "av. paulista, 807" );
+
+  Completer<GoogleMapController> _controller = Completer();
+
+  CameraPosition _cameraPosition = CameraPosition(
+    target: LatLng(-25.962503, 32.584142),
+  );
+
+  Set<Marker> _markers = {};
+
+  _onMapCreated( GoogleMapController controller ){
+    _controller.complete( controller );
+  }
+
+  _addLocationListener() {
+    var geolocator = Geolocator();
+    var locationOptions = LocationOptions(
+      accuracy: LocationAccuracy.high,
+      distanceFilter: 10
+    );
+
+    geolocator.getPositionStream(locationOptions).listen((Position position) {
+
+      _showClientMarker(position);
+
+      _cameraPosition = CameraPosition(
+        target: LatLng(position.latitude, position.longitude),
+        zoom: 15,
+      );
+
+      _moveCamera(_cameraPosition);
     });
+
+  }
+
+  _getLastKnownPosition() async {
+    Position position = await Geolocator().getLastKnownPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
+
+    setState(() {
+      if (position != null) {
+
+        _showClientMarker(position);
+
+        _cameraPosition = CameraPosition(
+          target: LatLng(position.latitude, position.longitude),
+          zoom: 15,
+        );
+
+        _moveCamera(_cameraPosition);
+
+      }
+    });
+  }
+
+  _moveCamera(CameraPosition cameraPosition) async {
+    GoogleMapController googleMapController = await _controller.future;
+    googleMapController.animateCamera(
+      CameraUpdate.newCameraPosition(cameraPosition)
+    );
+  }
+
+  _showClientMarker(Position position) async {
+
+    double pixelRatio = MediaQuery.of(context).devicePixelRatio;
+
+    BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(devicePixelRatio: pixelRatio), LOCATION_ON
+    ).then((BitmapDescriptor iconAsset) {
+      Marker clientMarker = Marker(
+          markerId: MarkerId('client-marker'),
+          position: LatLng(position.latitude, position.longitude),
+          infoWindow: InfoWindow(
+              title: "Client's Position"  //TODO: replace it by user's name
+          ),
+          icon: iconAsset
+      );
+
+      setState(() {
+        _markers.add(clientMarker);
+      });
+
+    });
+  }
+
+  _chamarUber() async {
+
+    String enderecoDestino = _controllerDestino.text;
+
+    if( enderecoDestino.isNotEmpty ){
+
+      List<Placemark> listaEnderecos = await Geolocator()
+          .placemarkFromAddress( enderecoDestino );
+
+      if( listaEnderecos != null && listaEnderecos.length > 0 ){
+
+        Placemark endereco = listaEnderecos[0];
+        Destino destino = Destino();
+        destino.cidade = endereco.administrativeArea;
+        destino.cep = endereco.postalCode;
+        destino.bairro = endereco.subLocality;
+        destino.rua = endereco.thoroughfare;
+        destino.numero = endereco.subThoroughfare;
+
+        destino.latitude = endereco.position.latitude;
+        destino.longitude = endereco.position.longitude;
+
+        String enderecoConfirmacao;
+        enderecoConfirmacao = "\n Cidade: " + destino.cidade;
+        enderecoConfirmacao += "\n Rua: " + destino.rua + ", " + destino.numero ;
+        enderecoConfirmacao += "\n Bairro: " + destino.bairro ;
+        enderecoConfirmacao += "\n Cep: " + destino.cep ;
+
+        showDialog(
+            context: context,
+            builder: (contex){
+              return AlertDialog(
+                title: Text("Confirmação do endereço"),
+                content: Text(enderecoConfirmacao),
+                contentPadding: EdgeInsets.all(16),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text("Cancelar", style: TextStyle(color: Colors.red),),
+                    onPressed: () => Navigator.pop(contex),
+                  ),
+                  FlatButton(
+                    child: Text("Confirmar", style: TextStyle(color: Colors.green),),
+                    onPressed: (){
+
+                      //salvar requisicao
+                      //_salvarRequisicao();
+
+                      Navigator.pop(contex);
+
+                    },
+                  )
+                ],
+              );
+            }
+        );
+
+      }
+
+    }
+
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getLastKnownPosition();
+    _addLocationListener();
   }
 
   @override
@@ -41,10 +192,12 @@ class _MapScreenState extends State<MapScreen> {
                     bottom: Radius.circular(30.0),
                   ),
                   child: GoogleMap(
+                    mapType: MapType.normal,
                     onMapCreated: _onMapCreated,
-                    myLocationButtonEnabled: true,
-                    initialCameraPosition:
-                        CameraPosition(target: _center, zoom: 11.0),
+                    initialCameraPosition: _cameraPosition,
+//                    myLocationEnabled: true,
+                    myLocationButtonEnabled: false,
+                    markers: _markers,
                   ),
                 ),
                 Padding(
@@ -56,12 +209,15 @@ class _MapScreenState extends State<MapScreen> {
                       height: 45.0,
                       padding: EdgeInsets.only(left: 20, right: 5.0),
                       decoration: BoxDecoration(
-                        color: Colors.white38,
-                        borderRadius: BorderRadius.circular(30.0),
-                        border: Border.all(color: PURPLE_DEEP, width: 2.5)
-                      ),
+                          color: Colors.white38,
+                          borderRadius: BorderRadius.circular(30.0),
+                          border: Border.all(color: PURPLE_ACCENT, width: 2.5)),
                       child: TextField(
-                        style: TextStyle(color: PURPLE_DEEP, fontSize: 20.0, fontWeight: FontWeight.bold,),
+                        style: TextStyle(
+                          color: PINK,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Onde vai ser atendido...',

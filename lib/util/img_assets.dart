@@ -9,3 +9,7 @@ const String HAIR_REMOVAL = 'assets/images/categories/hair-removal.jpg';
 const String MAKEUP = 'assets/images/categories/makeup.jpg';
 const String MASSAGE = 'assets/images/categories/massage.jpg';
 const String NEILS = 'assets/images/categories/neils.jpg';
+
+// Maps assets
+const String LOCATION_ON = 'assets/images/location_on.png';
+
