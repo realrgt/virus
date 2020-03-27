@@ -15,7 +15,9 @@ class _MapScreenState extends State<MapScreen> {
   final LatLng _center = const LatLng(45.521563, -122.677433);
 
   void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
+    setState(() {
+      mapController = controller;
+    });
   }
 
   @override
@@ -40,6 +42,7 @@ class _MapScreenState extends State<MapScreen> {
                   ),
                   child: GoogleMap(
                     onMapCreated: _onMapCreated,
+                    myLocationButtonEnabled: true,
                     initialCameraPosition:
                         CameraPosition(target: _center, zoom: 11.0),
                   ),
@@ -51,17 +54,17 @@ class _MapScreenState extends State<MapScreen> {
                     alignment: Alignment.topCenter,
                     child: Container(
                       height: 45.0,
-                      padding: EdgeInsets.only(left: 20, bottom: 2, right: 5.0),
+                      padding: EdgeInsets.only(left: 20, right: 5.0),
                       decoration: BoxDecoration(
-                        color: Colors.white30,
+                        color: Colors.white38,
                         borderRadius: BorderRadius.circular(30.0),
-                        border: Border.all(color: PURPLE_DEEP, width: 2)
+                        border: Border.all(color: PURPLE_DEEP, width: 2.5)
                       ),
                       child: TextField(
-                        style: TextStyle(color: PURPLE_DEEP, fontSize: 18.0),
+                        style: TextStyle(color: PURPLE_DEEP, fontSize: 20.0, fontWeight: FontWeight.bold,),
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: 'Enviar para...',
+                          hintText: 'Onde vai ser atendido...',
                           hintStyle: TextStyle(color: PURPLE_DEEP),
                           suffixIcon: Icon(
                             Icons.search,
@@ -77,53 +80,27 @@ class _MapScreenState extends State<MapScreen> {
             ),
           ),
           SizedBox(height: 15.0),
-          Column(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 32.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-//                    Container(
-//                      height: 45.0,
-//                      padding: EdgeInsets.only(left: 20, right: 5.0),
-//                      decoration: BoxDecoration(
-//                        color: PURPLE_ACCENT,
-//                        borderRadius: BorderRadius.circular(30.0),
-//                      ),
-//                      child: TextField(
-//                        style: TextStyle(color: Colors.white),
-//                        decoration: InputDecoration(
-//                          border: InputBorder.none,
-//                          hintText: 'Enviar para...',
-//                          hintStyle: TextStyle(color: Colors.white),
-//                          suffixIcon: Icon(
-//                            Icons.search,
-//                            color: Colors.white,
-//                            size: 28.0,
-//                          ),
-//                          labelStyle: TextStyle(color: Colors.white),
-//                        ),
-//                      ),
-//                    ),
-                    SizedBox(height: 8.0),
-                    RaisedButton(
-                      padding: EdgeInsets.all(15.0),
-                      onPressed: () {},
-                      child: Text(
-                        'Confirmar',
-                        style: TextStyle(letterSpacing: 0.5),
-                      ),
-                      color: PURPLE_ACCENT,
-                      textColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                    ),
-                  ],
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 32.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                SizedBox(height: 8.0),
+                RaisedButton(
+                  padding: EdgeInsets.all(15.0),
+                  onPressed: () {},
+                  child: Text(
+                    'Confirmar',
+                    style: TextStyle(letterSpacing: 0.5),
+                  ),
+                  color: PURPLE_ACCENT,
+                  textColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
                 ),
-              )
-            ],
+              ],
+            ),
           ),
 //          SizedBox(height: 125, child: WhiteWave()),
           WhiteWave()

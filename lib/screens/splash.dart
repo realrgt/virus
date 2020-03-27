@@ -21,8 +21,8 @@ class _SplashState extends State<Splash> {
         context,
         MaterialPageRoute(
 //          builder: (context) => SpecialistList(),
-          builder: (context) => ServiceSchedule(),
-//          builder: (context) => MapScreen(),
+//          builder: (context) => ServiceSchedule(),
+          builder: (context) => MapScreen(),
         ),
       ),
     );
