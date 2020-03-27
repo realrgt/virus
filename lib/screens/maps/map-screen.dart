@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:vogu/models/booking-spot.dart';
+import 'package:vogu/screens/maps/custom-search-delegate.dart';
 import 'package:vogu/util/default_colors.dart';
 import 'package:vogu/util/img_assets.dart';
 import 'package:vogu/widgets/white-wave.dart';
@@ -14,9 +16,8 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-
-
-  TextEditingController _controllerDestino = TextEditingController(text: "av. paulista, 807" );
+  TextEditingController _txtController =
+      TextEditingController(text: "av. paulista, 807");
 
   Completer<GoogleMapController> _controller = Completer();
 
@@ -26,19 +27,16 @@ class _MapScreenState extends State<MapScreen> {
 
   Set<Marker> _markers = {};
 
-  _onMapCreated( GoogleMapController controller ){
-    _controller.complete( controller );
+  _onMapCreated(GoogleMapController controller) {
+    _controller.complete(controller);
   }
 
   _addLocationListener() {
     var geolocator = Geolocator();
-    var locationOptions = LocationOptions(
-      accuracy: LocationAccuracy.high,
-      distanceFilter: 10
-    );
+    var locationOptions =
+        LocationOptions(accuracy: LocationAccuracy.high, distanceFilter: 10);
 
     geolocator.getPositionStream(locationOptions).listen((Position position) {
-
       _showClientMarker(position);
 
       _cameraPosition = CameraPosition(
@@ -48,7 +46,6 @@ class _MapScreenState extends State<MapScreen> {
 
       _moveCamera(_cameraPosition);
     });
-
   }
 
   _getLastKnownPosition() async {
@@ -58,7 +55,6 @@ class _MapScreenState extends State<MapScreen> {
 
     setState(() {
       if (position != null) {
-
         _showClientMarker(position);
 
         _cameraPosition = CameraPosition(
@@ -67,101 +63,93 @@ class _MapScreenState extends State<MapScreen> {
         );
 
         _moveCamera(_cameraPosition);
-
       }
     });
   }
 
   _moveCamera(CameraPosition cameraPosition) async {
     GoogleMapController googleMapController = await _controller.future;
-    googleMapController.animateCamera(
-      CameraUpdate.newCameraPosition(cameraPosition)
-    );
+    googleMapController
+        .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
   }
 
   _showClientMarker(Position position) async {
-
     double pixelRatio = MediaQuery.of(context).devicePixelRatio;
 
     BitmapDescriptor.fromAssetImage(
-        ImageConfiguration(devicePixelRatio: pixelRatio), LOCATION_ON
-    ).then((BitmapDescriptor iconAsset) {
+            ImageConfiguration(devicePixelRatio: pixelRatio), LOCATION_ON)
+        .then((BitmapDescriptor iconAsset) {
       Marker clientMarker = Marker(
           markerId: MarkerId('client-marker'),
           position: LatLng(position.latitude, position.longitude),
           infoWindow: InfoWindow(
-              title: "Client's Position"  //TODO: replace it by user's name
-          ),
-          icon: iconAsset
-      );
+              title: "Client's Position" //TODO: replace it by user's name
+              ),
+          icon: iconAsset);
 
       setState(() {
         _markers.add(clientMarker);
       });
-
     });
   }
 
-  _chamarUber() async {
+  _confirmBookinSpot() async {
+    String bookingSpot = _txtController.text;
 
-    String enderecoDestino = _controllerDestino.text;
+    if (bookingSpot.isNotEmpty) {
+      List<Placemark> adressList =
+          await Geolocator().placemarkFromAddress(bookingSpot);
 
-    if( enderecoDestino.isNotEmpty ){
+      if (adressList != null && adressList.length > 0) {
+        Placemark placeMark = adressList[0];
+        BookingSpot spot = BookingSpot();
+        spot.city = placeMark.administrativeArea;
+        spot.postalCode = placeMark.postalCode;
+        spot.neighbourhood = placeMark.subLocality;
+        spot.road = placeMark.thoroughfare;
+        spot.number = placeMark.subThoroughfare;
 
-      List<Placemark> listaEnderecos = await Geolocator()
-          .placemarkFromAddress( enderecoDestino );
+        spot.latitude = placeMark.position.latitude;
+        spot.longitude = placeMark.position.longitude;
 
-      if( listaEnderecos != null && listaEnderecos.length > 0 ){
-
-        Placemark endereco = listaEnderecos[0];
-        Destino destino = Destino();
-        destino.cidade = endereco.administrativeArea;
-        destino.cep = endereco.postalCode;
-        destino.bairro = endereco.subLocality;
-        destino.rua = endereco.thoroughfare;
-        destino.numero = endereco.subThoroughfare;
-
-        destino.latitude = endereco.position.latitude;
-        destino.longitude = endereco.position.longitude;
-
-        String enderecoConfirmacao;
-        enderecoConfirmacao = "\n Cidade: " + destino.cidade;
-        enderecoConfirmacao += "\n Rua: " + destino.rua + ", " + destino.numero ;
-        enderecoConfirmacao += "\n Bairro: " + destino.bairro ;
-        enderecoConfirmacao += "\n Cep: " + destino.cep ;
+        String addressConfirm;
+        addressConfirm = "\n Cidade: " + spot.city;
+        addressConfirm += "\n Rua: " + spot.road + ", " + spot.number;
+        addressConfirm += "\n Bairro: " + spot.number;
+        addressConfirm += "\n Código Postal: " + spot.postalCode;
 
         showDialog(
             context: context,
-            builder: (contex){
+            builder: (contex) {
               return AlertDialog(
                 title: Text("Confirmação do endereço"),
-                content: Text(enderecoConfirmacao),
+                content: Text(addressConfirm),
                 contentPadding: EdgeInsets.all(16),
                 actions: <Widget>[
                   FlatButton(
-                    child: Text("Cancelar", style: TextStyle(color: Colors.red),),
+                    child: Text(
+                      "Cancelar",
+                      style: TextStyle(color: Colors.red),
+                    ),
                     onPressed: () => Navigator.pop(contex),
                   ),
                   FlatButton(
-                    child: Text("Confirmar", style: TextStyle(color: Colors.green),),
-                    onPressed: (){
-
+                    child: Text(
+                      "Confirmar",
+                      style: TextStyle(color: Colors.green),
+                    ),
+                    onPressed: () {
                       //salvar requisicao
                       //_salvarRequisicao();
 
                       Navigator.pop(contex);
-
                     },
                   )
                 ],
               );
-            }
-        );
-
+            });
       }
-
     }
-
   }
 
   @override
@@ -213,6 +201,7 @@ class _MapScreenState extends State<MapScreen> {
                           borderRadius: BorderRadius.circular(30.0),
                           border: Border.all(color: PURPLE_ACCENT, width: 2.5)),
                       child: TextField(
+                        controller: _txtController,
                         style: TextStyle(
                           color: PINK,
                           fontSize: 20.0,
@@ -222,10 +211,17 @@ class _MapScreenState extends State<MapScreen> {
                           border: InputBorder.none,
                           hintText: 'Onde vai ser atendido...',
                           hintStyle: TextStyle(color: PURPLE_DEEP),
-                          suffixIcon: Icon(
-                            Icons.search,
-                            color: PURPLE_DEEP,
-                            size: 28.0,
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              Icons.search,
+                              color: PURPLE_DEEP,
+                              size: 28.0,
+                            ),
+                            onPressed: () async {
+                              String res = await showSearch(context: context, delegate: CustomSearchDelegate());
+                              print("resultado: digitado " + res );
+                              print('YOU CLICKED ME');
+                            },
                           ),
                         ),
                       ),
@@ -244,7 +240,7 @@ class _MapScreenState extends State<MapScreen> {
                 SizedBox(height: 8.0),
                 RaisedButton(
                   padding: EdgeInsets.all(15.0),
-                  onPressed: () {},
+                  onPressed: _confirmBookinSpot,
                   child: Text(
                     'Confirmar',
                     style: TextStyle(letterSpacing: 0.5),
