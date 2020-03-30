@@ -1,6 +1,12 @@
 # Assets
 /assets/
 
+# Keys
+/lib/util/credentials.dart
+
+# plugins
+/google_maps_place_picker-0.9.0
+
 # Miscellaneous
 *.class
 *.log

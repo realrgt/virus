@@ -23,6 +23,7 @@ class _SplashState extends State<Splash> {
 //          builder: (context) => SpecialistList(),
 //          builder: (context) => ServiceSchedule(),
           builder: (context) => MapScreen(),
+//          builder: (context) => Test(),
         ),
       ),
     );
