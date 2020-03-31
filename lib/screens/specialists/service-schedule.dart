@@ -6,6 +6,7 @@ import 'package:flutter_rounded_date_picker/src/material_rounded_date_picker_sty
 import 'package:vogu/screens/specialists/list.dart';
 import 'package:vogu/util/default_colors.dart';
 import 'package:vogu/widgets/categories-scroll.dart';
+import 'package:vogu/widgets/icon_close.dart';
 
 class ServiceSchedule extends StatefulWidget {
   final int temp;
@@ -29,19 +30,9 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(height: 30.0),
-            Align(
-              alignment: Alignment.topRight,
-              child: IconButton(
-                padding: EdgeInsets.only(right: 30),
-                icon: Icon(
-                  Icons.close,
-                  size: 32.0,
-                  color: Colors.white,
-                ),
-                onPressed: () => print('You clicked me!!!'),
-              ),
-            ),
+            SizedBox(height: 40.0),
+            CrossIcon(paddingRight: 20.0),
+            SizedBox(height: 20),
             Padding(
               padding: EdgeInsets.only(left: 32.0),
               child: Text(
@@ -77,7 +68,8 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
                               children: <Widget>[
                                 GestureDetector(
                                   onTap: () async {
-                                    final datePicked = await showRoundedDatePicker(
+                                    final datePicked =
+                                        await showRoundedDatePicker(
                                       context: context,
                                       initialDate: DateTime.now(),
                                       firstDate: DateTime.now().subtract(
@@ -89,23 +81,24 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
                                       theme: ThemeData(
                                           primarySwatch: Colors.deepPurple),
                                       styleDatePicker:
-                                      MaterialRoundedDatePickerStyle(
+                                          MaterialRoundedDatePickerStyle(
                                         paddingMonthHeader:
-                                        EdgeInsets.only(top: 15.0),
+                                            EdgeInsets.only(top: 15.0),
                                       ),
                                     );
                                   },
                                   child: Container(
                                     width: 150.0,
                                     height: 37.0,
-                                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 20.0),
                                     decoration: BoxDecoration(
                                       color: PURPLE_DEEP,
                                       borderRadius: BorderRadius.circular(12.0),
                                     ),
                                     child: Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
+                                          MainAxisAlignment.spaceAround,
                                       children: <Widget>[
                                         Text(
                                           '08/12/2020',
@@ -124,7 +117,8 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
                                 ),
                                 GestureDetector(
                                   onTap: () async {
-                                    final timePicked = await showRoundedTimePicker(
+                                    final timePicked =
+                                        await showRoundedTimePicker(
                                       context: context,
                                       initialTime: TimeOfDay.now(),
                                       theme: ThemeData(
@@ -134,14 +128,15 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
                                   child: Container(
                                     width: 150.0,
                                     height: 37.0,
-                                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 20.0),
                                     decoration: BoxDecoration(
                                       color: PURPLE_DEEP,
                                       borderRadius: BorderRadius.circular(12.0),
                                     ),
                                     child: Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
+                                          MainAxisAlignment.spaceAround,
                                       children: <Widget>[
                                         Text(
                                           '10:45 AM',
@@ -173,13 +168,15 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
                                   child: Container(
                                     width: 145.0,
                                     height: 47.0,
-                                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 20.0),
                                     decoration: BoxDecoration(
                                       color: PURPLE_DEEP,
                                       borderRadius: BorderRadius.circular(15.0),
                                     ),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: <Widget>[
                                         Text(
                                           'Confirmar',
