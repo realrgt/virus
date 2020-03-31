@@ -5,15 +5,16 @@ import 'package:vogu/util/svg_assets.dart';
 class CrossIcon extends StatelessWidget {
 
   final double paddingRight;
+  final double paddingTop;
 
-  const CrossIcon({Key key, this.paddingRight = 5.0}) : super(key: key);
+  const CrossIcon({Key key, this.paddingRight = 5.0, this.paddingTop = 5.0}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.topRight,
       child: Padding(
-        padding: EdgeInsets.only(right: paddingRight),
+        padding: EdgeInsets.only(right: paddingRight, top: paddingTop),
         child: GestureDetector(
           onTap: () => Navigator.of(context).pop(),
           child: SvgPicture.asset(

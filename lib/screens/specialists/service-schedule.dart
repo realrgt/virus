@@ -39,8 +39,8 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
                 "Selecione os serviços",
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.w600,
+                  fontSize: 28.0,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             ),
