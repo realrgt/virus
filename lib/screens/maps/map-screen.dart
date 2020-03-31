@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_place_picker/google_maps_place_picker.dart';
+import 'package:vogu/screens/specialists/service-schedule.dart';
 import 'package:vogu/util/credentials.dart';
 import 'package:vogu/util/default_colors.dart';
 
@@ -15,7 +16,8 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  PickResult selectedPlace;
+  PickResult _selectedPlace;
+  String _displayAddress = 'Endereço devia aparecer aqui!';
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class _MapScreenState extends State<MapScreen> {
       hintText: "Onde quer ser atendido?",
       searchingText: "A carregar...",
       autoCompleteDebounceInMilliseconds: 500,
-      //usePlaceDetailSearch: true,
+//      usePlaceDetailSearch: true,
 //      onPlacePicked: (PickResult result) {
 //        Navigator.of(context).pop();
 //        setState(() {
@@ -41,7 +43,6 @@ class _MapScreenState extends State<MapScreen> {
       selectedPlaceWidgetBuilder:
           (_, selectedPlace, state, isSearchBarFocused) {
 //        print("state: $state, isSearchBarFocused: $isSearchBarFocused, selectedPlace: ${selectedPlace}");
-        print("STATE: $state, isSearchBarFocused: $isSearchBarFocused");
         return isSearchBarFocused
             ? Container()
             : FloatingCard(
@@ -72,17 +73,23 @@ class _MapScreenState extends State<MapScreen> {
                               textAlign: TextAlign.center,
                             ),
                             RaisedButton(
-                              child: Text("Selecionar aqui"),
+                              child: Text("Selecionar aqui",
+                                  style: TextStyle(fontSize: 16.0)),
                               elevation: 0.1,
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(32.0)),
+                                borderRadius: BorderRadius.circular(32.0),
+                              ),
                               color: PURPLE_ACCENT,
                               textColor: Colors.grey.shade300,
                               onPressed: () {
-                                // IMPORTANT: You MUST manage selectedPlace data yourself as using this build will not invoke onPlacePicker as
+                                //TODO: IMPORTANT: You MUST manage selectedPlace data yourself as using this build will not invoke onPlacePicker as
                                 //            this will override default 'Select here' Button.
                                 print("do something with [selectedPlace] data");
-                                Navigator.of(context).pop();
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => ServiceSchedule(),
+                                  ),
+                                );
                               },
                             ),
                           ],
@@ -92,9 +99,17 @@ class _MapScreenState extends State<MapScreen> {
       },
       pinBuilder: (context, state) {
         if (state == PinState.Idle) {
-          return Icon(Icons.favorite_border);
+          return Icon(
+            Icons.location_on,
+            size: 60.0,
+            color: BLUE,
+          );
         } else {
-          return Icon(Icons.favorite);
+          return Icon(
+            Icons.location_on,
+            size: 45.0,
+            color: PURPLE_DEEP,
+          );
         }
       },
     ));
