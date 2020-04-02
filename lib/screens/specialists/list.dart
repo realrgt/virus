@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vogu/models/specialist.dart';
 import 'package:vogu/util/default_colors.dart';
+import 'package:vogu/widgets/cross-icon.dart';
 
 import 'details.dart';
 
@@ -16,12 +17,17 @@ class _SpecialistListState extends State<SpecialistList> {
       body: ListView(
         children: <Widget>[
           SizedBox(height: 20.0),
-          Padding(
-            padding: const EdgeInsets.only(left: 20.0, right: 120.0),
-            child: Text(
-              'Especialistas Sugeridos',
-              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
-            ),
+          Stack(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 20.0, right: 120.0),
+                child: Text(
+                  'Especialistas Sugeridos',
+                  style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+                ),
+              ),
+              CrossIcon(color: Colors.black26, paddingRight: 16.0)
+            ],
           ),
           SizedBox(height: 20.0),
           Padding(

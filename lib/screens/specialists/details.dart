@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vogu/models/specialist.dart';
 import 'package:vogu/screens/payment/payment-options.dart';
 import 'package:vogu/util/default_colors.dart';
-import 'package:vogu/widgets/icon_close.dart';
+import 'package:vogu/widgets/cross-icon.dart';
 
 class SpecialistDetails extends StatefulWidget {
   final Specialist specialist;
@@ -15,7 +15,6 @@ class SpecialistDetails extends StatefulWidget {
 }
 
 class _SpecialistDetailsState extends State<SpecialistDetails> {
-//  final double expanded_height = 400.0;
   final double expanded_height = 350.0;
   final double rounded_container_height = 50.0;
 

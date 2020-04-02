@@ -6,7 +6,7 @@ import 'package:flutter_rounded_date_picker/src/material_rounded_date_picker_sty
 import 'package:vogu/screens/specialists/list.dart';
 import 'package:vogu/util/default_colors.dart';
 import 'package:vogu/widgets/categories-scroll.dart';
-import 'package:vogu/widgets/icon_close.dart';
+import 'package:vogu/widgets/cross-icon.dart';
 
 class ServiceSchedule extends StatefulWidget {
   final int temp;
