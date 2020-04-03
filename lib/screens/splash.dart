@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vogu/screens/specialists/list.dart';
+import 'package:vogu/screens/maps/map-screen.dart';
+import 'package:vogu/screens/specialists/dashboard/availability.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -19,7 +20,7 @@ class _SplashState extends State<Splash> {
       () => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => SpecialistList(),
+          builder: (context) => Availability(),
 //          builder: (context) => MapScreen(),
         ),
       ),

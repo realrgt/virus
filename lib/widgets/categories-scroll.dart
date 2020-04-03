@@ -110,9 +110,7 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
                   width: 85.0,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
-                    color: _selectedIndex == index
-                        ? PINK
-                        : PURPLE_DEEP,
+                    color: _selectedIndex == index ? PINK : PURPLE_DEEP,
                   ),
                 ),
                 Positioned(
@@ -148,7 +146,9 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
                       Text(
                         '${_categoryList[0]}',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16.0),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.0,
+                        ),
                       )
                     ],
                   )
