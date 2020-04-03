@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vogu/screens/specialists/list.dart';
 import 'package:vogu/util/default_colors.dart';
@@ -31,8 +32,9 @@ class _AvailabilityState extends State<Availability> {
 
   @override
   void initState() {
-    super.initState();
+    _selectedTimes = List();
     WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+    super.initState();
   }
 
   @override
@@ -133,10 +135,26 @@ class _AvailabilityState extends State<Availability> {
                                   ),
                                 ),
                                 SizedBox(height: 20.0),
-                                _buildTimes(),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Wrap(
+                                    alignment: WrapAlignment.center,
+                                    runSpacing: 10.0,
+                                    spacing: 10.0,
+                                    children: _times
+                                        .asMap()
+                                        .entries
+                                        .map(
+                                          (MapEntry map) =>
+                                              _buildTimes(map.key),
+                                        )
+                                        .toList(),
+                                  ),
+                                ),
                                 SizedBox(height: 10.0),
                                 CheckboxListTile(
-                                  controlAffinity: ListTileControlAffinity.leading,
+                                  controlAffinity:
+                                      ListTileControlAffinity.leading,
                                   value: _isAllDayAvailable,
                                   activeColor: PURPLE_DEEP,
                                   onChanged: (bool val) {
@@ -205,13 +223,13 @@ class _AvailabilityState extends State<Availability> {
       },
       child: Container(
         margin: EdgeInsets.only(right: 2.5),
-        width: 68,
+        width: 68.0,
         decoration: BoxDecoration(
           color: _selectedDay == index ? Colors.white : Colors.transparent,
           borderRadius: BorderRadius.circular(12.0),
           border: Border.all(
-              color:
-                  _todayWeekday == index ? Colors.white : Colors.transparent),
+            color: _todayWeekday == index ? Colors.white : Colors.transparent,
+          ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -237,15 +255,33 @@ class _AvailabilityState extends State<Availability> {
     );
   }
 
-  Widget _buildTimes() {
-    List timeBlocks = <Widget>[];
-    for (int i = 0; i < _times.length; i++) {
-      var item = _times[i];
-      timeBlocks.add(Container(
-        width: 99,
-        height: 48,
+  //TODO: moveUp
+  List<SelectedTime> _selectedTimes;
+  int _selectedTime = 0;
+  ValueChanged<bool> isSelected;
+
+  Widget _buildTimes(index) {
+    return InkWell(
+      onTap: () {
+        setState(() {
+          _selectedTime = index;
+
+          if (!_selectedTimes.map((t) => t.time).contains(_times[index])) {
+            _selectedTimes
+                .add(SelectedTime(time: _times[index], isSelected: true));
+          } else {
+            _selectedTimes.removeWhere((t) => t.time == _times[index]);
+          }
+          _selectedTimes.forEach((t) => print(t.time));
+        });
+      },
+      child: Container(
+        width: 99.0,
+        height: 48.0,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: _selectedTime == index
+              ? PURPLE_DEEP.withOpacity(0.2)
+              : Colors.white,
           borderRadius: BorderRadius.circular(10.0),
           border: Border.all(color: Colors.grey.shade100),
           boxShadow: [
@@ -257,24 +293,22 @@ class _AvailabilityState extends State<Availability> {
         ),
         child: Center(
           child: Text(
-            item,
+            _times[index],
             style: TextStyle(
               fontSize: 18.0,
             ),
           ),
         ),
-      ));
-    }
-    return Align(
-      alignment: Alignment.center,
-      child: Wrap(
-        alignment: WrapAlignment.center,
-        spacing: 10.0,
-        runSpacing: 10.0,
-        children: timeBlocks,
       ),
     );
   }
+}
+
+class SelectedTime {
+  String time;
+  bool isSelected;
+
+  SelectedTime({this.time, this.isSelected = false});
 }
 
 List<String> _days = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];

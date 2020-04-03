@@ -162,27 +162,29 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
   _buildChipsList() {
     List<Widget> chips = List();
     _serviceList.forEach((item) {
-      chips.add(FilterChip(
-        avatar: CircleAvatar(
-          backgroundColor: Colors.grey.shade50,
+      chips.add(
+        FilterChip(
+          avatar: CircleAvatar(
+            backgroundColor: Colors.grey.shade50,
+          ),
+          label: Text(item.name),
+          checkmarkColor: Colors.white,
+          labelStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 12.5,
+          ),
+          selected: selectedChoices.contains(item),
+          backgroundColor: PURPLE_DEEP,
+          onSelected: (isSelected) {
+            setState(() {
+              selectedChoices.contains(item)
+                  ? selectedChoices.remove(item)
+                  : selectedChoices.add(item);
+            });
+          },
+          selectedColor: PINK,
         ),
-        label: Text(item.name),
-        checkmarkColor: Colors.white,
-        labelStyle: TextStyle(
-          color: Colors.white,
-          fontSize: 12.5,
-        ),
-        selected: selectedChoices.contains(item),
-        backgroundColor: PURPLE_DEEP,
-        onSelected: (isSelected) {
-          setState(() {
-            selectedChoices.contains(item)
-                ? selectedChoices.remove(item)
-                : selectedChoices.add(item);
-          });
-        },
-        selectedColor: PINK,
-      ));
+      );
     });
 
     return chips;
