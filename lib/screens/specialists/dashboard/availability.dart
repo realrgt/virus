@@ -12,7 +12,8 @@ class Availability extends StatefulWidget {
 }
 
 class _AvailabilityState extends State<Availability> {
-  bool _isAllDayAvailable = true;
+  bool _isAvailableForWorks = true;
+  bool _isAllDayAvailable = false;
   int _selectedDay = 0;
   var _daysInWeek;
   var _todayWeekday = DateTime.now().weekday;
@@ -20,9 +21,11 @@ class _AvailabilityState extends State<Availability> {
   ScrollController _scrollController = ScrollController();
 
   _scrollToBottom() {
-    _scrollController.animateTo(100, duration: Duration(milliseconds: 1900), curve: Curves.ease);
+    _scrollController.animateTo(100,
+        duration: Duration(milliseconds: 1900), curve: Curves.ease);
     Timer(Duration(seconds: 2), () {
-      _scrollController.animateTo(-10, duration: Duration(milliseconds: 1000), curve: Curves.ease);
+      _scrollController.animateTo(-10,
+          duration: Duration(milliseconds: 1000), curve: Curves.ease);
     });
   }
 
@@ -34,7 +37,6 @@ class _AvailabilityState extends State<Availability> {
 
   @override
   Widget build(BuildContext context) {
-
     DateTime today = DateTime.now();
 
     _daysInWeek = Utils.daysInRange(
@@ -70,12 +72,11 @@ class _AvailabilityState extends State<Availability> {
                     borderColor: Colors.white,
                     borderSize: 1,
                     borderRadius: 5.0,
-                    value: _isAllDayAvailable,
+                    value: _isAvailableForWorks,
                     height: 27.0,
                     onChanged: (value) {
-                      print("AllDayAvailable : $value");
                       setState(() {
-                        _isAllDayAvailable = value;
+                        _isAvailableForWorks = value;
                       });
                     },
                   ),
@@ -121,10 +122,33 @@ class _AvailabilityState extends State<Availability> {
                         padding: EdgeInsets.symmetric(horizontal: 32.0),
                         child: Column(
                           children: <Widget>[
-                            SizedBox(height: 40.0),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: <Widget>[
+                                Text(
+                                  "Horários",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 36.0,
+                                  ),
+                                ),
+                                SizedBox(height: 20.0),
+                                _buildTimes(),
+                                SizedBox(height: 10.0),
+                                CheckboxListTile(
+                                  controlAffinity: ListTileControlAffinity.leading,
+                                  value: _isAllDayAvailable,
+                                  activeColor: PURPLE_DEEP,
+                                  onChanged: (bool val) {
+                                    setState(() {
+                                      _isAllDayAvailable = val;
+                                    });
+                                  },
+                                  title: Text(
+                                    'Estou disponivel todo o dia',
+                                  ),
+                                ),
+                                SizedBox(height: 10.0),
                                 GestureDetector(
                                   onTap: () => Navigator.of(context).push(
                                     MaterialPageRoute(
@@ -132,7 +156,6 @@ class _AvailabilityState extends State<Availability> {
                                     ),
                                   ),
                                   child: Container(
-                                    width: 145.0,
                                     height: 47.0,
                                     padding:
                                         EdgeInsets.symmetric(horizontal: 20.0),
@@ -186,7 +209,9 @@ class _AvailabilityState extends State<Availability> {
         decoration: BoxDecoration(
           color: _selectedDay == index ? Colors.white : Colors.transparent,
           borderRadius: BorderRadius.circular(12.0),
-          border: Border.all(color: _todayWeekday == index ? Colors.white : Colors.transparent),
+          border: Border.all(
+              color:
+                  _todayWeekday == index ? Colors.white : Colors.transparent),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -211,6 +236,62 @@ class _AvailabilityState extends State<Availability> {
       ),
     );
   }
+
+  Widget _buildTimes() {
+    List timeBlocks = <Widget>[];
+    for (int i = 0; i < _times.length; i++) {
+      var item = _times[i];
+      timeBlocks.add(Container(
+        width: 99,
+        height: 48,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10.0),
+          border: Border.all(color: Colors.grey.shade100),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              blurRadius: 3.0,
+            )
+          ],
+        ),
+        child: Center(
+          child: Text(
+            item,
+            style: TextStyle(
+              fontSize: 18.0,
+            ),
+          ),
+        ),
+      ));
+    }
+    return Align(
+      alignment: Alignment.center,
+      child: Wrap(
+        alignment: WrapAlignment.center,
+        spacing: 10.0,
+        runSpacing: 10.0,
+        children: timeBlocks,
+      ),
+    );
+  }
 }
 
 List<String> _days = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
+List<String> _times = [
+  '07:00',
+  '08:00',
+  '09:00',
+  '10:00',
+  '11:00',
+  '12:00',
+  '13:00',
+  '14:00',
+  '15:00',
+  '16:00',
+  '17:00',
+  '18:00',
+  '19:00',
+  '20:00',
+  '21:00',
+];
