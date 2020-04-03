@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vogu/screens/specialists/dashboard/services-update.dart';
 import 'package:vogu/screens/specialists/list.dart';
 import 'package:vogu/util/default_colors.dart';
 import 'package:vogu/util/util-date.dart';
@@ -170,7 +171,7 @@ class _AvailabilityState extends State<Availability> {
                                 GestureDetector(
                                   onTap: () => Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (_) => SpecialistList(),
+                                      builder: (_) => ServicesUpdate(),
                                     ),
                                   ),
                                   child: Container(
@@ -296,6 +297,7 @@ class _AvailabilityState extends State<Availability> {
             _times[index],
             style: TextStyle(
               fontSize: 18.0,
+              color: _selectedTime == index ? Colors.white : Colors.black,
             ),
           ),
         ),
