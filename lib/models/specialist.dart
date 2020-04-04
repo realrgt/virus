@@ -21,7 +21,7 @@ List<Specialist> specialists = [
     address: 'Nacala, Mozambique',
   ),
   Specialist(
-    imgUrl: 'assets/images/woman2.jpg',
+    imgUrl: 'assets/images/woman.jpg',
     name: 'Taynara Isabel',
     rating: 4,
     address: 'Matola, Mozambique',
@@ -29,6 +29,24 @@ List<Specialist> specialists = [
   Specialist(
     imgUrl: 'assets/images/woman3.jpg',
     name: 'Antónia Stark',
+    rating: 4,
+    address: 'Maputo, Mozambique',
+  ),
+  Specialist(
+    imgUrl: 'assets/images/woman2.jpg',
+    name: 'Helena Lisboa',
+    rating: 4,
+    address: 'Matola, Mozambique',
+  ),
+  Specialist(
+    imgUrl: 'assets/images/woman1.jpg',
+    name: 'Rufina Cabelo',
+    rating: 3,
+    address: 'Xai-xai, Mozambique',
+  ),
+  Specialist(
+    imgUrl: 'assets/images/woman3.jpg',
+    name: 'Mica Jofrey',
     rating: 4,
     address: 'Maputo, Mozambique',
   ),
