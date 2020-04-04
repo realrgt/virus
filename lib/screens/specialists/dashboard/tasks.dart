@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vogu/models/specialist.dart';
+import 'package:vogu/screens/specialists/dashboard/task-location.dart';
 import 'package:vogu/util/default_colors.dart';
 import 'package:vogu/widgets/cross-icon.dart';
 
@@ -115,7 +116,12 @@ class _TasksState extends State<Tasks> {
                                       SizedBox(
                                         height: 20.0,
                                         child: RaisedButton(
-                                          onPressed: () {},
+                                          onPressed: () =>
+                                              Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (_) => TaskLocation(),
+                                            ),
+                                          ),
                                           color: Colors.black,
                                           textColor: Colors.white,
                                           shape: RoundedRectangleBorder(
