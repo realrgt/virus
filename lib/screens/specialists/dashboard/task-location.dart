@@ -12,17 +12,14 @@ class TaskLocation extends StatefulWidget {
 }
 
 class _TaskLocationState extends State<TaskLocation> {
+
   Completer<GoogleMapController> _controller = Completer();
 
   Set<Marker> _markers = {};
 
-  static double _latitude;
-  static double _longitude;
-
+  double _latitude;
+  double _longitude;
   ///-25.971210, 32.587494
-
-  CameraPosition _posicaoCamera =
-      CameraPosition(target: LatLng(_latitude, _longitude), zoom: 16.0);
 
   _showMarker() {
     double pixelRatio = MediaQuery.of(context).devicePixelRatio;
@@ -63,7 +60,7 @@ class _TaskLocationState extends State<TaskLocation> {
         children: <Widget>[
           GoogleMap(
             mapType: MapType.normal,
-            initialCameraPosition: _posicaoCamera,
+            initialCameraPosition: CameraPosition(target: LatLng(_latitude, _longitude), zoom: 15.0),
             onMapCreated: _onMapCreated,
             myLocationButtonEnabled: false,
             markers: _markers,
