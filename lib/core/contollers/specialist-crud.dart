@@ -8,11 +8,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class SpecialistCRUD extends ChangeNotifier {
   Api _api = locator<Api>();
 
+  String path = 'specialist';
   List<Specialist> specialists;
 
 
+
   Future<List<Specialist>> fetchSpecialists() async {
-    var result = await _api.getDataCollection();
+    var result = await _api.getDataCollection(this.path);
     specialists = result.documents
         .map((doc) => Specialist.fromMap(doc.data, doc.documentID))
         .toList();
@@ -20,26 +22,27 @@ class SpecialistCRUD extends ChangeNotifier {
   }
 
   Stream<QuerySnapshot> fetchSpecialistsAsStream() {
-    return _api.streamDataCollection();
+    return _api.streamDataCollection(this.path);
   }
 
   Future<Specialist> getSpecialistById(String id) async {
-    var doc = await _api.getDocumentById(id);
+    var doc = await _api.getDocumentById(this.path, id);
     return  Specialist.fromMap(doc.data, doc.documentID) ;
   }
 
 
   Future removeSpecialist(String id) async{
-    await _api.removeDocument(id) ;
+    await _api.removeDocument(this.path, id) ;
     return ;
   }
+  
   Future updateSpecialist(Specialist data,String id) async{
-    await _api.updateDocument(data.toJson(), id) ;
+    await _api.updateDocument(this.path, data.toJson(), id) ;
     return ;
   }
 
   Future addSpecialist(Specialist data) async{
-    var result  = await _api.addDocument(data.toJson()) ;
+    var result  = await _api.addDocument(this.path, data.toJson()) ;
 
     return ;
 

@@ -3,35 +3,35 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Api {
 
   final Firestore _db = Firestore.instance;
-  final String path;
-  CollectionReference ref;
+  // final String path;
+  // CollectionReference ref;
 
-  Api(this.path) {
-    ref = _db.collection(path);
+  // Api(this.path) {
+  //   ref = _db.collection(path);
+  // }
+
+  Future<QuerySnapshot> getDataCollection(String path) {
+    return _db.collection(path).getDocuments();
   }
 
-  Future<QuerySnapshot> getDataCollection() {
-    return ref.getDocuments();
+  Stream<QuerySnapshot> streamDataCollection(String path) {
+    return _db.collection(path).snapshots();
   }
 
-  Stream<QuerySnapshot> streamDataCollection() {
-    return ref.snapshots();
+  Future<DocumentSnapshot> getDocumentById(String path, String id) {
+    return _db.collection(path).document(id).get();
   }
 
-  Future<DocumentSnapshot> getDocumentById(String id) {
-    return ref.document(id).get();
+  Future<void> removeDocument(String path, String id) {
+    return _db.collection(path).document(id).delete();
   }
 
-  Future<void> removeDocument(String id) {
-    return ref.document(id).delete();
+  Future<DocumentReference> addDocument(String path, Map data) {
+    return _db.collection(path).add(data);
   }
 
-  Future<DocumentReference> addDocument(Map data) {
-    return ref.add(data);
-  }
-
-  Future<void> updateDocument(Map data, String id) {
-    return ref.document(id).updateData(data);
+  Future<void> updateDocument(String path, Map data, String id) {
+    return _db.collection(path).document(id).updateData(data);
   }
 
 }

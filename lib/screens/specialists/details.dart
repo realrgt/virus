@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vogu/models/specialist.dart';
+import 'package:vogu/core/models/specialist.dart';
 import 'package:vogu/screens/payment/payment-options.dart';
 import 'package:vogu/util/default_colors.dart';
 import 'package:vogu/widgets/cross-icon.dart';
 
 class SpecialistDetails extends StatefulWidget {
+  
   final Specialist specialist;
 
   const SpecialistDetails({Key key, this.specialist}) : super(key: key);
@@ -92,7 +93,7 @@ class DetailSliverDelegate extends SliverPersistentHeaderDelegate {
           tag: specialist.imgUrl,
           child: Stack(
             children: <Widget>[
-              Image.asset(
+              Image.network(
                 specialist.imgUrl,
                 width: MediaQuery.of(context).size.width,
                 height: expendedHeight,

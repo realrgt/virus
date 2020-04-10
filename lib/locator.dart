@@ -6,6 +6,7 @@ import './core/services/api.dart';
 GetIt locator = GetIt();
 
 void setupLocator() {
-  locator.registerLazySingleton(() => Api('specialist'));
+  // locator.registerLazySingleton(() => Api('specialist'));
+  locator.registerLazySingleton(() => Api());
   locator.registerLazySingleton(() => SpecialistCRUD()) ;
 }

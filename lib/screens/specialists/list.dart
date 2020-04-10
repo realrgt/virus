@@ -59,7 +59,7 @@ class _SpecialistListState extends State<SpecialistList> {
                           context,
                           MaterialPageRoute(
                             builder: (_) => SpecialistDetails(
-                                // specialist: specialists, //TODO
+                                specialist: specialists[index],
                                 ),
                           ),
                         ),
