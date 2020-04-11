@@ -13,19 +13,16 @@ class Splash extends StatefulWidget {
 
 class _SplashState extends State<Splash> {
   @override
-  void initState() {
-    super.initState();
-
-    Timer(
-      Duration(seconds: 1),
-      () => Navigator.push(
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    Timer(Duration(seconds: 2), () {
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          // builder: (context) => Availability(),
-         builder: (context) => MapScreen(),
+          builder: (_) => MapScreen(),
         ),
-      ),
-    );
+      );
+    });
   }
 
   @override

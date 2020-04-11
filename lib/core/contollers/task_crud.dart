@@ -29,7 +29,7 @@ class TaskCRUD extends ChangeNotifier {
   }
 
 
-  Future removeTask(String id) async{
+  Future removeTask(String id) async {
     await _api.removeDocument(this.path, id);
     return;
   }

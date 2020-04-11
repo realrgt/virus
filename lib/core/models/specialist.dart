@@ -8,13 +8,14 @@ class Specialist {
   String imgUrl;
   bool isAvailable;
 
-  Specialist(
-      {this.id,
-      this.name,
-      this.address,
-      this.rating,
-      this.imgUrl,
-      this.isAvailable});
+  Specialist({
+    this.id,
+    this.name,
+    this.address,
+    this.rating,
+    this.imgUrl,
+    this.isAvailable,
+  });
 
   Specialist.fromMap(Map snapshot, String id)
       : id = id,
