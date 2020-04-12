@@ -12,8 +12,9 @@ class ServiceSchedule extends StatefulWidget {
 }
 
 class _ServiceScheduleState extends State<ServiceSchedule> {
-  
+
   String _date;
+  String _time;
 
   _formatDate(DateTime date) {
     var formatter = DateFormat('dd/MM/yyyy');
@@ -23,6 +24,7 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
   @override
   void initState() {
     _formatDate(DateTime.now());
+    _time = TimeOfDay.now().toString().substring(10, 15);
     super.initState();
   }
 
@@ -131,6 +133,12 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
                                         primarySwatch: Colors.purple,
                                       ),
                                     );
+
+                                    setState(() {
+                                      _time = timePicked
+                                          .toString()
+                                          .substring(10, 15);
+                                    });
                                   },
                                   child: Container(
                                     width: 150.0,
@@ -146,7 +154,7 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
                                           MainAxisAlignment.spaceAround,
                                       children: <Widget>[
                                         Text(
-                                          '10:45 AM',
+                                          _time,
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 14.0,

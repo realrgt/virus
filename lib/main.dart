@@ -4,14 +4,6 @@ import 'package:vogu/core/contollers/specialist-crud.dart';
 import 'package:vogu/locator.dart';
 import 'package:vogu/screens/splash.dart';
 
-// void main() => runApp(MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       theme: ThemeData(
-//         backgroundColor: Color(0xfff44ea0),
-//       ),
-//       home: Splash(),
-//     ));
-
 void main() {
   setupLocator();
   runApp(MyApp());
