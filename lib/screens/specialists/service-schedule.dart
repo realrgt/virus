@@ -1,27 +1,33 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/rounded_picker.dart';
-// ignore: implementation_imports
-import 'package:flutter_rounded_date_picker/src/material_rounded_date_picker_style.dart';
+import 'package:intl/intl.dart';
 import 'package:vogu/screens/specialists/list.dart';
 import 'package:vogu/util/default_colors.dart';
 import 'package:vogu/widgets/categories-scroll.dart';
 import 'package:vogu/widgets/cross-icon.dart';
 
 class ServiceSchedule extends StatefulWidget {
-  final int temp;
-
-  const ServiceSchedule({Key key, this.temp}) : super(key: key);
-
   @override
   _ServiceScheduleState createState() => _ServiceScheduleState();
 }
 
 class _ServiceScheduleState extends State<ServiceSchedule> {
+  
+  String _date;
+
+  _formatDate(DateTime date) {
+    var formatter = DateFormat('dd/MM/yyyy');
+    return _date = formatter.format(date);
+  }
+
+  @override
+  void initState() {
+    _formatDate(DateTime.now());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    double _width = MediaQuery.of(context).size.width;
-
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Container(
@@ -57,7 +63,7 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
                   child: Column(
                     children: <Widget>[
                       SizedBox(height: 30.0),
-                      CategoriesScroll(scrollItem: widget.temp),
+                      CategoriesScroll(),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 32.0),
                         child: Column(
@@ -76,16 +82,16 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
                                         Duration(days: 1),
                                       ),
                                       lastDate: DateTime.now().add(
-                                        Duration(days: 15),
+                                        Duration(days: 45),
                                       ),
                                       theme: ThemeData(
-                                          primarySwatch: Colors.deepPurple),
-                                      styleDatePicker:
-                                          MaterialRoundedDatePickerStyle(
-                                        paddingMonthHeader:
-                                            EdgeInsets.only(top: 15.0),
+                                        primarySwatch: Colors.purple,
                                       ),
                                     );
+
+                                    setState(() {
+                                      _formatDate(datePicked);
+                                    });
                                   },
                                   child: Container(
                                     width: 150.0,
@@ -101,7 +107,7 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
                                           MainAxisAlignment.spaceAround,
                                       children: <Widget>[
                                         Text(
-                                          '08/12/2020',
+                                          _date,
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 14.0,
@@ -122,7 +128,8 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
                                       context: context,
                                       initialTime: TimeOfDay.now(),
                                       theme: ThemeData(
-                                          primarySwatch: Colors.deepPurple),
+                                        primarySwatch: Colors.purple,
+                                      ),
                                     );
                                   },
                                   child: Container(
