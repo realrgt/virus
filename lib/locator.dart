@@ -1,8 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:vogu/core/contollers/specialist-crud.dart';
 import 'package:vogu/core/contollers/task_crud.dart';
-
-import './core/services/api.dart';
+import 'package:vogu/core/services/api.dart';
 
 GetIt locator = GetIt();
 
