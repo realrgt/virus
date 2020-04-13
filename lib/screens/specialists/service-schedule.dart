@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/rounded_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:vogu/models/categories-services.dart';
 import 'package:vogu/screens/specialists/list.dart';
 import 'package:vogu/util/default_colors.dart';
 import 'package:vogu/widgets/categories-scroll.dart';
@@ -12,7 +14,6 @@ class ServiceSchedule extends StatefulWidget {
 }
 
 class _ServiceScheduleState extends State<ServiceSchedule> {
-
   String _date;
   String _time;
 
@@ -30,6 +31,8 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
 
   @override
   Widget build(BuildContext context) {
+    var selectedChoicesInfo = Provider.of<Service>(context);
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Container(
@@ -43,13 +46,36 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
             SizedBox(height: 20),
             Padding(
               padding: EdgeInsets.only(left: 32.0),
-              child: Text(
-                "Selecione os serviços",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 28.0,
-                  fontWeight: FontWeight.w500,
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    "Selecione os serviços",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28.0,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Container(
+                    height: 35.0,
+                    width: 35.0,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Text(
+                        '${'0'}',
+                        style: TextStyle(
+                          color: PINK,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ), //TODO
+                  ),
+                ],
               ),
             ),
             SizedBox(height: 15.0),

@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:vogu/core/models/service.dart';
 import 'package:vogu/util/img_assets.dart';
 
 class Category {
@@ -14,10 +16,20 @@ class Category {
   }
 }
 
-class Service {
+class Service with ChangeNotifier {
   int serviceId;
   String name;
   double price;
+
+  List<Service> _list;
+
+
+  List<Service> get list => _list;
+
+  set list(List<Service> value) {
+    _list = value;
+    notifyListeners();
+  }
 
   Service({this.serviceId, this.name, this.price});
 

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:vogu/models/categories-services.dart';
 import 'package:vogu/util/default_colors.dart';
 
@@ -19,11 +20,10 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
 
   int _selectedIndex = 0;
 
-  //////////////////////////////////////
+  // Related to choiceChips
   List<Service> _serviceList;
   List<String> _categoryList;
   List<Service> selectedChoices = List();
-  String _catName = "";
 
   _setColor() {
     Color color;
@@ -45,6 +45,10 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
 
   @override
   Widget build(BuildContext context) {
+    
+    var selectedServiceInfo = Provider.of<Service>(context);
+    selectedServiceInfo.list = selectedChoices;
+
     _serviceList = categories
         .where((c) => c.id == _selectedIndex)
         .expand((c) => c.services)
@@ -53,8 +57,6 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
         .where((c) => c.id == _selectedIndex)
         .map((c) => c.categoryName)
         .toList();
-
-    _categoryList.forEach(print);
 
     return Column(
       children: <Widget>[
