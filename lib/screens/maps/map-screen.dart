@@ -16,9 +16,6 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  PickResult _selectedPlace;
-  String _displayAddress = 'Endereço devia aparecer aqui!';
-
   double latitude;
   double longitude;
   String address;
@@ -66,13 +63,18 @@ class _MapScreenState extends State<MapScreen> {
 //          selectInitialPosition: true,
         selectedPlaceWidgetBuilder:
             (_, selectedPlace, state, bool isSearchBarFocused) {
-//        print("state: $state, isSearchBarFocused: $isSearchBarFocused, selectedPlace: ${selectedPlace}");
+//          print(
+//              "state: $state, isSearchBarFocused: $isSearchBarFocused, selectedPlace: ${selectedPlace}");
           print('SELECTED PLACE: ${selectedPlace.toString()}');
 
-          _setLatLng(selectedPlace.geometry.location.lat,
-              selectedPlace.geometry.location.lng);
+          if (selectedPlace != null) {
+            _setLatLng(
+              selectedPlace.geometry.location.lat,
+              selectedPlace.geometry.location.lng,
+            );
+            print('LATITUDE: $latitude, LONGITUDE: $longitude');
+          }
 
-          print('LATITUDE: $latitude, LONGITUDE: $longitude');
 
           return isSearchBarFocused
               ? Container()
@@ -98,14 +100,17 @@ class _MapScreenState extends State<MapScreen> {
                               Text(
                                 '${selectedPlace.formattedAddress}',
                                 style: TextStyle(
-                                    fontSize: 18.0,
-                                    color: Colors.grey.shade300,
-                                    fontWeight: FontWeight.bold),
+                                  fontSize: 18.0,
+                                  color: Colors.grey.shade300,
+                                  fontWeight: FontWeight.bold,
+                                ),
                                 textAlign: TextAlign.center,
                               ),
                               RaisedButton(
-                                child: Text("Selecionar aqui",
-                                    style: TextStyle(fontSize: 16.0)),
+                                child: Text(
+                                  "Selecionar aqui",
+                                  style: TextStyle(fontSize: 16.0),
+                                ),
                                 elevation: 0.1,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(32.0),
