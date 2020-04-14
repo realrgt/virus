@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vogu/core/models/task.dart';
 import 'package:vogu/models/categories-services.dart';
 import 'package:vogu/util/default_colors.dart';
 
@@ -46,9 +47,6 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
   @override
   Widget build(BuildContext context) {
     
-    var selectedServiceInfo = Provider.of<Service>(context);
-    selectedServiceInfo.list = selectedChoices;
-
     _serviceList = categories
         .where((c) => c.id == _selectedIndex)
         .expand((c) => c.services)
@@ -82,7 +80,7 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
               alignment: WrapAlignment.spaceEvenly,
               spacing: 2.0,
               runSpacing: 0.0,
-              children: _buildChipsList(),
+              children: _buildChipsList(context), //todo
             ),
           ),
         ),
@@ -161,7 +159,12 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
     );
   }
 
-  _buildChipsList() {
+  _buildChipsList(BuildContext ctx) {
+
+    ///try provider
+    var taskInfo = Provider.of<Task>(context);
+    ///end try provider
+
     List<Widget> chips = List();
     _serviceList.forEach((item) {
       chips.add(
@@ -179,9 +182,18 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
           backgroundColor: PURPLE_DEEP,
           onSelected: (isSelected) {
             setState(() {
-              selectedChoices.contains(item)
-                  ? selectedChoices.remove(item)
-                  : selectedChoices.add(item);
+//              selectedChoices.contains(item)
+//                  ? selectedChoices.remove(item)
+//                  : selectedChoices.add(item);
+
+              if (selectedChoices.contains(item)) {
+                selectedChoices.remove(item);
+                taskInfo.setServices(selectedChoices);
+              } else {
+                selectedChoices.add(item);
+                taskInfo.setServices(selectedChoices);
+              }
+
             });
           },
           selectedColor: PINK,

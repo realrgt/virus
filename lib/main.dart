@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vogu/core/contollers/specialist-crud.dart';
+import 'package:vogu/core/models/task.dart';
 import 'package:vogu/locator.dart';
-import 'package:vogu/models/categories-services.dart';
 import 'package:vogu/screens/splash.dart';
 
 void main() {
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => locator<SpecialistCRUD>()),
-        ChangeNotifierProvider(create: (_) => locator<Service>()),
+        ChangeNotifierProvider(create: (_) => Task()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -1,6 +1,9 @@
-import 'package:vogu/core/models/service.dart';
+import 'dart:collection';
 
-class Task {
+import 'package:flutter/material.dart';
+import 'package:vogu/models/categories-services.dart';
+
+class Task extends ChangeNotifier {
   String id;
   String userId;
   String userName;
@@ -10,6 +13,15 @@ class Task {
   String time;
   String date;
   String specialistId;
+
+  List<Service> _services = List();
+
+  UnmodifiableListView<Service> get items => UnmodifiableListView(_services);
+
+  void setServices(List<Service> service) {
+    _services = service;
+    notifyListeners();
+  }
 
   Task({
     this.id,

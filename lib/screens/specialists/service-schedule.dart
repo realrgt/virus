@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/rounded_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:vogu/models/categories-services.dart';
+import 'package:vogu/core/models/task.dart';
 import 'package:vogu/screens/specialists/list.dart';
 import 'package:vogu/util/default_colors.dart';
 import 'package:vogu/widgets/categories-scroll.dart';
@@ -31,7 +31,15 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
 
   @override
   Widget build(BuildContext context) {
-    var selectedChoicesInfo = Provider.of<Service>(context);
+
+    ///try provider
+    var taskInfo = Provider.of<Task>(context);
+    var itemCount = 0;
+
+    if (taskInfo.items != null) {
+      itemCount = taskInfo.items.length;
+    }
+    ///end try provider
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -45,7 +53,7 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
             CrossIcon(paddingRight: 20.0),
             SizedBox(height: 20),
             Padding(
-              padding: EdgeInsets.only(left: 32.0),
+              padding: EdgeInsets.only(left: 32.0, right: 32.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -61,19 +69,19 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
                     height: 35.0,
                     width: 35.0,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: BLUE,
                       shape: BoxShape.circle,
                     ),
                     child: Center(
                       child: Text(
-                        '${'0'}',
+                        '$itemCount', //TODO
                         style: TextStyle(
                           color: PINK,
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ), //TODO
+                    ),
                   ),
                 ],
               ),
