@@ -2,24 +2,29 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:vogu/models/categories-services.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'task.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 class Task extends ChangeNotifier {
   String id;
   String userId;
   String userName;
   String address;
-  String latitude;
-  String longitude;
+  double latitude;
+  double longitude;
   String time;
   String date;
   String specialistId;
+  List<Service> list = List();
 
   List<Service> _services = List();
 
-  UnmodifiableListView<Service> get items => UnmodifiableListView(_services);
+  UnmodifiableListView<Service> get items => UnmodifiableListView(list);
 
   void setServices(List<Service> service) {
-    _services = service;
+    list = service;
     notifyListeners();
   }
 
@@ -35,27 +40,32 @@ class Task extends ChangeNotifier {
     this.specialistId,
   });
 
-  Task.fromMap(Map snapshot, String id)
-      : id = id,
-        userId = snapshot['userId'],
-        userName = snapshot['userName'],
-        address = snapshot['address'],
-        latitude = snapshot['latitude'],
-        longitude = snapshot['longitude'],
-        time = snapshot['time'],
-        date = snapshot['date'],
-        specialistId = snapshot['specialistId'];
+  factory Task.fromMap(Map<String, dynamic> snapshot, String id) => _$TaskFromJson(snapshot, id);
 
-  toJson() {
-    return {
-      "userId": userId,
-      "userName": userName,
-      "address": address,
-      "latitude": latitude,
-      "longitude": longitude,
-      "time": time,
-      "date": date,
-      "specialistId": specialistId,
-    };
-  }
+  Map<String, dynamic> toJson() => _$TaskToJson(this);
+
+
+//  Task.fromMap(Map snapshot, String id)
+//      : id = id,
+//        userId = snapshot['userId'],
+//        userName = snapshot['userName'],
+//        address = snapshot['address'],
+//        latitude = snapshot['latitude'],
+//        longitude = snapshot['longitude'],
+//        time = snapshot['time'],
+//        date = snapshot['date'],
+//        specialistId = snapshot['specialistId'];
+//
+//  toJson() {
+//    return {
+//      "userId": userId,
+//      "userName": userName,
+//      "address": address,
+//      "latitude": latitude,
+//      "longitude": longitude,
+//      "time": time,
+//      "date": date,
+//      "specialistId": specialistId,
+//    };
+//  }
 }

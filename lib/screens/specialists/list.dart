@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vogu/core/contollers/specialist-crud.dart';
 import 'package:vogu/core/models/specialist.dart';
+import 'package:vogu/core/models/task.dart';
 import 'package:vogu/screens/specialists/details.dart';
 import 'package:vogu/util/default_colors.dart';
 import 'package:vogu/widgets/cross-icon.dart';
@@ -17,7 +18,10 @@ class _SpecialistListState extends State<SpecialistList> {
 
   @override
   Widget build(BuildContext context) {
+    ///try provider
     final specialistProvider = Provider.of<SpecialistCRUD>(context);
+    var taskInfo = Provider.of<Task>(context);
+    ///try provider
 
     return Scaffold(
       body: ListView(
@@ -55,14 +59,20 @@ class _SpecialistListState extends State<SpecialistList> {
                     itemBuilder: (context, index) {
                       Specialist specialist = specialists[index];
                       return GestureDetector(
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => SpecialistDetails(
+                        onTap: () {
+
+                          /// set [specialistId] to task provider
+                          taskInfo.specialistId = specialists[index].id;
+
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => SpecialistDetails(
                                 specialist: specialists[index],
-                                ),
-                          ),
-                        ),
+                              ),
+                            ),
+                          );
+                        },
                         child: Stack(
                           children: <Widget>[
                             Container(

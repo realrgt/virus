@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:vogu/util/img_assets.dart';
+
+part 'categories-services.g.dart';
 
 class Category {
   int id;
@@ -15,12 +18,16 @@ class Category {
   }
 }
 
+@JsonSerializable()
 class Service with ChangeNotifier {
   int serviceId;
   String name;
   double price;
 
   Service({this.serviceId, this.name, this.price});
+
+  factory Service.fromJson(Map<String, dynamic> json) => _$ServiceFromJson(json);
+  Map<String, dynamic> toJson() => _$ServiceToJson(this);
 
   @override
   String toString() {

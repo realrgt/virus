@@ -74,7 +74,7 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
                     ),
                     child: Center(
                       child: Text(
-                        '$itemCount', //TODO
+                        '$itemCount',
                         style: TextStyle(
                           color: PINK,
                           fontSize: 20.0,
@@ -128,6 +128,10 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
                                     setState(() {
                                       _formatDate(datePicked);
                                     });
+
+                                    ///set date to TaskProvider
+                                    taskInfo.date = _date;
+
                                   },
                                   child: Container(
                                     width: 150.0,
@@ -173,6 +177,10 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
                                           .toString()
                                           .substring(10, 15);
                                     });
+
+                                    ///set-time to TaskProvider
+                                    taskInfo.time = _time;
+
                                   },
                                   child: Container(
                                     width: 150.0,

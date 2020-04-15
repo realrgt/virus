@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_place_picker/google_maps_place_picker.dart';
+import 'package:provider/provider.dart';
+import 'package:vogu/core/models/task.dart';
 import 'package:vogu/screens/specialists/service-schedule.dart';
 import 'package:vogu/util/credentials.dart';
 import 'package:vogu/util/default_colors.dart';
@@ -42,6 +44,11 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    ///try provider
+    var taskInfo = Provider.of<Task>(context);
+    ///end try provider
+
     return Scaffold(
       body: PlacePicker(
         apiKey: PLACES_KEY,
@@ -72,6 +79,9 @@ class _MapScreenState extends State<MapScreen> {
               selectedPlace.geometry.location.lat,
               selectedPlace.geometry.location.lng,
             );
+            taskInfo.address = selectedPlace.formattedAddress;
+            taskInfo.latitude = selectedPlace.geometry.location.lat;
+            taskInfo.longitude= selectedPlace.geometry.location.lng;
             print('LATITUDE: $latitude, LONGITUDE: $longitude');
           }
 

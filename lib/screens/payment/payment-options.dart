@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:provider/provider.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+import 'package:vogu/core/contollers/task_crud.dart';
+import 'package:vogu/core/models/task.dart';
 import 'package:vogu/screens/payment/result.dart';
 import 'package:vogu/util/default_colors.dart';
-import 'package:vogu/util/img_assets.dart';
 import 'package:vogu/widgets/purple-wave.dart';
 import 'package:vogu/widgets/radio-group.dart';
 
@@ -17,6 +19,11 @@ class _PaymentOptionsState extends State<PaymentOptions> {
 
   @override
   Widget build(BuildContext context) {
+    ///try provider
+    final taskInfo = Provider.of<Task>(context);
+    taskInfo.list.forEach(print);
+    ///try provider
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -41,20 +48,19 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                     children: <Widget>[
                       SleekCircularSlider(
                         appearance: CircularSliderAppearance(
-                            spinnerMode: true,
-                            spinnerDuration: 2000,
-                            size: 230,
-                            customWidths: CustomSliderWidths(
-                                handlerSize: 0,
-                                progressBarWidth: 10,
-                                trackWidth: 8),
-                            customColors: CustomSliderColors(
-                              progressBarColors: [
-                                PURPLE_ACCENT,
-                                PURPLE_DEEP
-                              ],
-                              hideShadow: true,
-                            )),
+                          spinnerMode: true,
+                          spinnerDuration: 3000,
+                          size: 230,
+                          customWidths: CustomSliderWidths(
+                            handlerSize: 0,
+                            progressBarWidth: 10,
+                            trackWidth: 8,
+                          ),
+                          customColors: CustomSliderColors(
+                            progressBarColors: [PURPLE_ACCENT, PURPLE_DEEP],
+                            hideShadow: true,
+                          ),
+                        ),
                       ),
                       Positioned(
                         top: 90.0,
@@ -92,11 +98,25 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                       children: <Widget>[
                         RaisedButton(
                           padding: EdgeInsets.symmetric(vertical: 12.0),
-                          onPressed: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (_) => PaymentResult(),
-                            ),
-                          ),
+                          onPressed: () {
+                            //TODO: saveTask()
+                            TaskCRUD().addTask(Task(
+                              specialistId: taskInfo.specialistId,
+                              address: taskInfo.address,
+                              latitude: taskInfo.latitude,
+                              longitude: taskInfo.longitude,
+                              date: taskInfo.date,
+                              time: taskInfo.time,
+                              userId: 'TODO',
+                              userName: 'TODO'
+                            ));
+
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => PaymentResult(),
+                              ),
+                            );
+                          },
                           color: PURPLE_DEEP,
                           textColor: Colors.white,
                           child: Text('Pagar'),

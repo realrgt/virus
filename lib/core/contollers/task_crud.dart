@@ -28,23 +28,19 @@ class TaskCRUD extends ChangeNotifier {
     return Task.fromMap(doc.data, doc.documentID);
   }
 
-
   Future removeTask(String id) async {
     await _api.removeDocument(this.path, id);
     return;
   }
-  
-  Future updateTask(Task data,String id) async {
+
+  Future updateTask(Task data, String id) async {
     await _api.updateDocument(this.path, data.toJson(), id);
     return;
   }
 
   Future addTask(Task data) async {
-    var result  = await _api.addDocument(this.path, data.toJson());
+    var result = await _api.addDocument(this.path, data.toJson());
 
     return;
-
   }
-
-
 }
