@@ -17,14 +17,12 @@ class Task extends ChangeNotifier {
   String time;
   String date;
   String specialistId;
-  List<Service> list = List();
+  List<Service> services = List();
 
-  List<Service> _services = List();
-
-  UnmodifiableListView<Service> get items => UnmodifiableListView(list);
+  UnmodifiableListView<Service> get items => UnmodifiableListView(services);
 
   void setServices(List<Service> service) {
-    list = service;
+    services = service;
     notifyListeners();
   }
 
@@ -38,6 +36,7 @@ class Task extends ChangeNotifier {
     this.time,
     this.date,
     this.specialistId,
+    this.services,
   });
 
   factory Task.fromMap(Map<String, dynamic> snapshot, String id) => _$TaskFromJson(snapshot, id);

@@ -17,7 +17,7 @@ Task _$TaskFromJson(Map<String, dynamic> json, String id) {
     time: json['time'] as String,
     date: json['date'] as String,
     specialistId: json['specialistId'] as String,
-  )..list = (json['list'] as List)
+  )..services = (json['list'] as List)
       ?.map(
           (e) => e == null ? null : Service.fromJson(e as Map<String, dynamic>))
       ?.toList();
@@ -32,5 +32,5 @@ Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
       'time': instance.time,
       'date': instance.date,
       'specialistId': instance.specialistId,
-      'list': instance.list?.map((e) => e?.toJson())?.toList(),
+      'list': instance.services?.map((e) => e?.toJson())?.toList(),
     };

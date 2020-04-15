@@ -21,7 +21,8 @@ class _PaymentOptionsState extends State<PaymentOptions> {
   Widget build(BuildContext context) {
     ///try provider
     final taskInfo = Provider.of<Task>(context);
-    taskInfo.list.forEach(print);
+    taskInfo.services.forEach(print);
+
     ///try provider
 
     return Scaffold(
@@ -100,16 +101,19 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                           padding: EdgeInsets.symmetric(vertical: 12.0),
                           onPressed: () {
                             //TODO: saveTask()
-                            TaskCRUD().addTask(Task(
-                              specialistId: taskInfo.specialistId,
-                              address: taskInfo.address,
-                              latitude: taskInfo.latitude,
-                              longitude: taskInfo.longitude,
-                              date: taskInfo.date,
-                              time: taskInfo.time,
-                              userId: 'TODO',
-                              userName: 'TODO'
-                            ));
+                            TaskCRUD().addTask(
+                              Task(
+                                specialistId: taskInfo.specialistId,
+                                address: taskInfo.address,
+                                latitude: taskInfo.latitude,
+                                longitude: taskInfo.longitude,
+                                date: taskInfo.date,
+                                time: taskInfo.time,
+                                userId: 'TODO',
+                                userName: 'TODO',
+                                services: taskInfo.services,
+                              ),
+                            );
 
                             Navigator.of(context).push(
                               MaterialPageRoute(
