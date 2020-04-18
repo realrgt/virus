@@ -7,6 +7,12 @@ class AuthService {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  Future<String> getCurrentUser() async {
+    final FirebaseUser user = await _auth.currentUser();
+    final String uid = user.uid.toString();
+    return uid;
+  }
+
   // create client obj based on firebase user
   Client _clientFromFirebaseUser(FirebaseUser user) {
     return user != null ? Client(id: user.uid) : null;
@@ -14,6 +20,11 @@ class AuthService {
   // create specialist obj based on firebase user
   Specialist _specialistFromFirebaseUser(FirebaseUser user) {
     return user != null ? Specialist(id: user.uid) : null;
+  }
+
+  // auth change FireBaseUSer stream
+  Stream<FirebaseUser> get user {
+    return _auth.onAuthStateChanged;
   }
 
   // auth change client stream
@@ -49,10 +60,10 @@ class AuthService {
       FirebaseUser user = result.user;
       // create a new document for the user with the uid
       if (isSpecialist) {
-        await Firestore.instance.collection('specialist').document(user.uid).setData({'email': email, 'password': password});
+        await Firestore.instance.collection('specialist').document(user.uid).setData({'email': email, 'isSpec': true});
         return _specialistFromFirebaseUser(user);
       } else {
-        await Firestore.instance.collection('clients').document(user.uid).setData({'email': email, 'password': password});
+        await Firestore.instance.collection('clients').document(user.uid).setData({'email': email, 'isSpec': false});
         return _specialistFromFirebaseUser(user);
       }
     } catch (error) {

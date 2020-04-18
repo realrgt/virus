@@ -1,7 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vogu/core/contollers/specialist-crud.dart';
+import 'package:vogu/core/models/client.dart';
+import 'package:vogu/core/models/specialist.dart';
 import 'package:vogu/core/models/task.dart';
+import 'package:vogu/core/services/auth.dart';
 import 'package:vogu/locator.dart';
 import 'package:vogu/splash.dart';
 
@@ -17,6 +21,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => locator<SpecialistCRUD>()),
         ChangeNotifierProvider(create: (_) => Task()),
+        StreamProvider<FirebaseUser>.value(value: AuthService().user),
+//        StreamProvider<Client>.value(value: AuthService().client),
+//        StreamProvider<Specialist>.value(value: AuthService().specialist),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

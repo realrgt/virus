@@ -9,6 +9,7 @@ class Specialist {
   bool isAvailable;
   String email;
   String password;
+  bool isSpec;
 
   Specialist({
     this.id,
@@ -19,17 +20,18 @@ class Specialist {
     this.isAvailable,
     this.email,
     this.password,
+    this.isSpec,
   });
 
   Specialist.fromMap(Map snapshot, String id)
-      : id = id,
-        name = snapshot['name'],
-        address = snapshot['address'],
-        rating = snapshot['rating'],
-        imgUrl = snapshot['imgUrl'],
-        isAvailable = snapshot['isAvailable'],
-        email = snapshot['email'],
-        password = snapshot['password'];
+      : id = id ?? '',
+        name = snapshot['name'] ?? '',
+        address = snapshot['address'] ?? '',
+        rating = snapshot['rating'] ?? '',
+        imgUrl = snapshot['imgUrl'] ?? '',
+        isAvailable = snapshot['isAvailable'] ?? '',
+        email = snapshot['email'] ?? '',
+        isSpec = snapshot['isSpec'] ?? '';
 
   toJson() {
     return {
@@ -40,6 +42,7 @@ class Specialist {
       "isAvailable": isAvailable,
       "email": email,
       "password": password,
+      "isSpec": isSpec,
     };
   }
 }
