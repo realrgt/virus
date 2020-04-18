@@ -8,7 +8,6 @@ class Specialist {
   String imgUrl;
   bool isAvailable;
   String email;
-  String password;
   bool isSpec;
 
   Specialist({
@@ -19,7 +18,6 @@ class Specialist {
     this.imgUrl,
     this.isAvailable,
     this.email,
-    this.password,
     this.isSpec,
   });
 
@@ -27,11 +25,11 @@ class Specialist {
       : id = id ?? '',
         name = snapshot['name'] ?? '',
         address = snapshot['address'] ?? '',
-        rating = snapshot['rating'] ?? '',
+        rating = snapshot['rating'],
         imgUrl = snapshot['imgUrl'] ?? '',
-        isAvailable = snapshot['isAvailable'] ?? '',
+        isAvailable = snapshot['isAvailable'],
         email = snapshot['email'] ?? '',
-        isSpec = snapshot['isSpec'] ?? '';
+        isSpec = snapshot['isSpec'];
 
   toJson() {
     return {
@@ -41,7 +39,6 @@ class Specialist {
       "imgUrl": imgUrl,
       "isAvailable": isAvailable,
       "email": email,
-      "password": password,
       "isSpec": isSpec,
     };
   }

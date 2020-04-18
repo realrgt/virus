@@ -19,7 +19,9 @@ class Task extends ChangeNotifier {
   String specialistId;
   List<Service> services = List();
 
-  UnmodifiableListView<Service> get items => UnmodifiableListView(services);
+//  UnmodifiableListView<Service> get items => UnmodifiableListView(services);
+
+  List<Service> get items => services;
 
   void setServices(List<Service> service) {
     services = service;
