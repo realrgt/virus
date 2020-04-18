@@ -7,6 +7,8 @@ class Specialist {
   dynamic rating;
   String imgUrl;
   bool isAvailable;
+  String email;
+  String password;
 
   Specialist({
     this.id,
@@ -15,6 +17,8 @@ class Specialist {
     this.rating,
     this.imgUrl,
     this.isAvailable,
+    this.email,
+    this.password,
   });
 
   Specialist.fromMap(Map snapshot, String id)
@@ -23,7 +27,9 @@ class Specialist {
         address = snapshot['address'],
         rating = snapshot['rating'],
         imgUrl = snapshot['imgUrl'],
-        isAvailable = snapshot['isAvailable'];
+        isAvailable = snapshot['isAvailable'],
+        email = snapshot['email'],
+        password = snapshot['password'];
 
   toJson() {
     return {
@@ -32,6 +38,8 @@ class Specialist {
       "rating": rating,
       "imgUrl": imgUrl,
       "isAvailable": isAvailable,
+      "email": email,
+      "password": password,
     };
   }
 }

@@ -23,8 +23,6 @@ class _PaymentOptionsState extends State<PaymentOptions> {
     final taskInfo = Provider.of<Task>(context);
     taskInfo.services.forEach(print);
 
-    ///try provider
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(

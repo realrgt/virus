@@ -1,10 +1,8 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vogu/screens/maps/map-screen.dart';
-import 'package:vogu/screens/specialists/dashboard/availability.dart';
+import 'package:vogu/screens/wrapper.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -19,7 +17,7 @@ class _SplashState extends State<Splash> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (_) => MapScreen(),
+          builder: (_) => Wrapper(),
         ),
       );
     });
@@ -27,10 +25,6 @@ class _SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
-    Firestore.instance
-        .collection('test')
-        .document('testDoc')
-        .setData({'name': 'ergito', 'aka': 'realrgt'});
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,

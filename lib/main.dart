@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:vogu/core/contollers/specialist-crud.dart';
 import 'package:vogu/core/models/task.dart';
 import 'package:vogu/locator.dart';
-import 'package:vogu/screens/splash.dart';
+import 'package:vogu/splash.dart';
 
 void main() {
   setupLocator();
@@ -20,9 +20,6 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          backgroundColor: Color(0xfff44ea0),
-        ),
         home: Splash(),
       ),
     );
