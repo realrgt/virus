@@ -311,13 +311,6 @@ class _AvailabilityState extends State<Availability> {
   }
 }
 
-//class SelectedTime {
-//  String time;
-//  bool isSelected;
-//
-//  SelectedTime({this.time, this.isSelected = false});
-//}
-
 List<String> _times = [
   '07:00',
   '08:00',

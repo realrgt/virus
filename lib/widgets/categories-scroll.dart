@@ -7,9 +7,6 @@ import 'package:vogu/models/categories-services.dart';
 import 'package:vogu/util/default_colors.dart';
 
 class CategoriesScroll extends StatefulWidget {
-  final int scrollItem;
-
-  const CategoriesScroll({Key key, this.scrollItem}) : super(key: key);
 
   @override
   _CategoriesScrollState createState() => _CategoriesScrollState();
@@ -63,7 +60,7 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
           width: double.infinity,
           child: ListView(
             scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.only(left: 50.0),
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
             children: _imgUrls.asMap().entries.map(
               (MapEntry map) {
                 return _buildCircleImg(map.key);
@@ -80,7 +77,7 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
               alignment: WrapAlignment.spaceEvenly,
               spacing: 2.0,
               runSpacing: 0.0,
-              children: _buildChipsList(context), //todo
+              children: _buildChipsList(context),
             ),
           ),
         ),
@@ -182,10 +179,6 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
           backgroundColor: PURPLE_DEEP,
           onSelected: (isSelected) {
             setState(() {
-//              selectedChoices.contains(item)
-//                  ? selectedChoices.remove(item)
-//                  : selectedChoices.add(item);
-
               if (selectedChoices.contains(item)) {
                 selectedChoices.remove(item);
                 taskInfo.setServices(selectedChoices);

@@ -42,7 +42,10 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
         itemCount = taskInfo.items.length;
       });
     }
-    ///end try provider
+
+    //set date and time on TaskProvider
+    taskInfo.date = _date;
+    taskInfo.time = _time;
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -132,9 +135,6 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
                                       _formatDate(datePicked);
                                     });
 
-                                    ///set date to TaskProvider
-                                    taskInfo.date = _date;
-
                                   },
                                   child: Container(
                                     width: 150.0,
@@ -180,9 +180,6 @@ class _ServiceScheduleState extends State<ServiceSchedule> {
                                           .toString()
                                           .substring(10, 15);
                                     });
-
-                                    ///set-time to TaskProvider
-                                    taskInfo.time = _time;
 
                                   },
                                   child: Container(

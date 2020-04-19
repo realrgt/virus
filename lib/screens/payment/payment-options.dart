@@ -107,7 +107,7 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                                 longitude: taskInfo.longitude,
                                 date: taskInfo.date,
                                 time: taskInfo.time,
-                                userId: 'TODO',
+                                userId: taskInfo.userId,
                                 userName: 'TODO',
                                 services: taskInfo.services,
                               ),
