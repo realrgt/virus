@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vogu/screens/specialists/dashboard/services-update.dart';
-import 'package:vogu/screens/specialists/list.dart';
 import 'package:vogu/util/default_colors.dart';
 import 'package:vogu/util/util-date.dart';
 import 'package:vogu/widgets/switch-widget.dart';
@@ -40,6 +39,12 @@ class _AvailabilityState extends State<Availability> {
 
   @override
   Widget build(BuildContext context) {
+
+    // make weekdays start form 0 -> sunday
+    if (_todayWeekday == 7) {
+      _todayWeekday = 0;
+    }
+
     DateTime today = DateTime.now();
 
     _daysInWeek = Utils.daysInRange(
@@ -98,7 +103,7 @@ class _AvailabilityState extends State<Availability> {
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       controller: _scrollController,
-                      children: _days
+                      children: Utils.weekdays
                           .asMap()
                           .entries
                           .map((MapEntry map) => _buildDays(map.key))
@@ -236,7 +241,7 @@ class _AvailabilityState extends State<Availability> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              '${_days[index]}',
+              '${Utils.weekdays[index]}',
               style: TextStyle(
                 fontSize: 18.0,
                 color: _selectedDay == index ? PURPLE_DEEP : Colors.white,
@@ -313,7 +318,6 @@ class SelectedTime {
   SelectedTime({this.time, this.isSelected = false});
 }
 
-List<String> _days = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
 List<String> _times = [
   '07:00',
   '08:00',
