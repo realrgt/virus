@@ -262,30 +262,30 @@ class _AvailabilityState extends State<Availability> {
   }
 
   //TODO: moveUp
-  List<SelectedTime> _selectedTimes;
-  int _selectedTime = 0;
-  ValueChanged<bool> isSelected;
+  List<String> _selectedTimes = List(_times.length);
+  List<bool> _isSelected = List.generate(_times.length, (i) => false);
 
   Widget _buildTimes(index) {
+
     return InkWell(
       onTap: () {
         setState(() {
-          _selectedTime = index;
+          _isSelected[index] = !_isSelected[index];
 
-          if (!_selectedTimes.map((t) => t.time).contains(_times[index])) {
+          if (!_selectedTimes.contains(_times[index])) {
             _selectedTimes
-                .add(SelectedTime(time: _times[index], isSelected: true));
+                .add(_times[index]);
           } else {
-            _selectedTimes.removeWhere((t) => t.time == _times[index]);
+            _selectedTimes.remove(_times[index]);
           }
-          _selectedTimes.forEach((t) => print(t.time));
+          _selectedTimes.forEach(print);
         });
       },
       child: Container(
         width: 99.0,
         height: 48.0,
         decoration: BoxDecoration(
-          color: _selectedTime == index
+          color: _isSelected[index] || _isAllDayAvailable
               ? PURPLE_DEEP.withOpacity(0.2)
               : Colors.white,
           borderRadius: BorderRadius.circular(10.0),
@@ -302,7 +302,7 @@ class _AvailabilityState extends State<Availability> {
             _times[index],
             style: TextStyle(
               fontSize: 18.0,
-              color: _selectedTime == index ? Colors.white : Colors.black,
+              color: _isSelected[index] ? Colors.white : Colors.black,
             ),
           ),
         ),
@@ -311,12 +311,12 @@ class _AvailabilityState extends State<Availability> {
   }
 }
 
-class SelectedTime {
-  String time;
-  bool isSelected;
-
-  SelectedTime({this.time, this.isSelected = false});
-}
+//class SelectedTime {
+//  String time;
+//  bool isSelected;
+//
+//  SelectedTime({this.time, this.isSelected = false});
+//}
 
 List<String> _times = [
   '07:00',
