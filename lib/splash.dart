@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vogu/screens/maps/map-screen.dart';
 import 'package:vogu/screens/wrapper.dart';
 
 class Splash extends StatefulWidget {

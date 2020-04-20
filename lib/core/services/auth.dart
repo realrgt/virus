@@ -54,16 +54,22 @@ class AuthService {
   }
 
   // register with email and password
-  Future registerWithEmailAndPassword(String email, String password, bool isSpecialist) async {
+  Future registerWithEmailAndPassword(String name, email, password, bool isSpecialist) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
+
+      // update firebaseUser displayName
+      UserUpdateInfo userUpdateInfo = UserUpdateInfo();
+      userUpdateInfo.displayName = name;
+      result.user.updateProfile(userUpdateInfo);
+
       // create a new document for the user with the uid
       if (isSpecialist) {
-        await Firestore.instance.collection('specialist').document(user.uid).setData({'email': email, 'isSpec': true});
+        await Firestore.instance.collection('specialist').document(user.uid).setData({'name': name, 'email': email});
         return _specialistFromFirebaseUser(user);
       } else {
-        await Firestore.instance.collection('clients').document(user.uid).setData({'email': email, 'isSpec': false});
+        await Firestore.instance.collection('clients').document(user.uid).setData({'name': name, 'email': email});
         return _specialistFromFirebaseUser(user);
       }
     } catch (error) {

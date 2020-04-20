@@ -17,11 +17,14 @@ class Wrapper extends StatelessWidget {
     final firebaseUser = Provider.of<FirebaseUser>(context);
     final taskInfo = Provider.of<Task>(context);
 
+
     // return either the Home or Authenticate widget
     if (firebaseUser == null) {
       return Authenticate();
     } else {
+      firebaseUser.reload();
       print('user: ${firebaseUser.uid}');
+      print('user: ${firebaseUser.displayName}');
       // navigate to corresponding screen
 
       dynamic specialist;
@@ -44,6 +47,7 @@ class Wrapper extends StatelessWidget {
       _clientCRUD.getClientById(firebaseUser.uid).then((user) {
 
         taskInfo.userId = firebaseUser.uid; // assign firebase uid to task user's id
+        taskInfo.userName = firebaseUser.displayName; // assign displayName in userProvider
 
         //todo ==> Change email
         client = user.email;

@@ -97,9 +97,9 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                       children: <Widget>[
                         RaisedButton(
                           padding: EdgeInsets.symmetric(vertical: 12.0),
-                          onPressed: () {
+                          onPressed: () async {
                             //TODO: saveTask()
-                            TaskCRUD().addTask(
+                            await TaskCRUD().addTask(
                               Task(
                                 specialistId: taskInfo.specialistId,
                                 address: taskInfo.address,
@@ -108,7 +108,7 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                                 date: taskInfo.date,
                                 time: taskInfo.time,
                                 userId: taskInfo.userId,
-                                userName: 'TODO',
+                                userName: taskInfo.userName,
                                 services: taskInfo.services,
                               ),
                             );

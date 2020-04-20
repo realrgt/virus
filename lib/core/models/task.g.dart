@@ -11,6 +11,7 @@ Task _$TaskFromJson(Map<String, dynamic> json, String id) {
     id: id,
     userId: json['userId'] as String,
     userName: json['userName'] as String,
+    imgUrl: json['imgUrl'] as String,
     address: json['address'] as String,
     latitude: (json['latitude'] as num)?.toDouble(),
     longitude: (json['longitude'] as num)?.toDouble(),
@@ -26,6 +27,7 @@ Task _$TaskFromJson(Map<String, dynamic> json, String id) {
 Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
       'userId': instance.userId,
       'userName': instance.userName,
+      'imgUrl': instance.imgUrl,
       'address': instance.address,
       'latitude': instance.latitude,
       'longitude': instance.longitude,

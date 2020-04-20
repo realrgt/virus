@@ -8,7 +8,6 @@ class Specialist {
   String imgUrl;
   bool isAvailable;
   String email;
-  bool isSpec;
 
   Specialist({
     this.id,
@@ -18,7 +17,6 @@ class Specialist {
     this.imgUrl,
     this.isAvailable,
     this.email,
-    this.isSpec,
   });
 
   Specialist.fromMap(Map snapshot, String id)
@@ -26,10 +24,9 @@ class Specialist {
         name = snapshot['name'] ?? '',
         address = snapshot['address'] ?? '',
         rating = snapshot['rating'],
-        imgUrl = snapshot['imgUrl'] ?? '',
+        imgUrl = snapshot['imgUrl'] ?? 'https://image.shutterstock.com/image-vector/default-avatar-profile-icon-grey-600w-518740741.jpg',
         isAvailable = snapshot['isAvailable'],
-        email = snapshot['email'] ?? '',
-        isSpec = snapshot['isSpec'];
+        email = snapshot['email'] ?? '';
 
   toJson() {
     return {
@@ -39,7 +36,6 @@ class Specialist {
       "imgUrl": imgUrl,
       "isAvailable": isAvailable,
       "email": email,
-      "isSpec": isSpec,
     };
   }
 }

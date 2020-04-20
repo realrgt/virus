@@ -11,6 +11,7 @@ class Task extends ChangeNotifier {
   String id;
   String userId;
   String userName;
+  String imgUrl;
   String address;
   double latitude;
   double longitude;
@@ -32,6 +33,7 @@ class Task extends ChangeNotifier {
     this.id,
     this.userId,
     this.userName,
+    this.imgUrl,
     this.address,
     this.latitude,
     this.longitude,
@@ -45,28 +47,4 @@ class Task extends ChangeNotifier {
 
   Map<String, dynamic> toJson() => _$TaskToJson(this);
 
-
-//  Task.fromMap(Map snapshot, String id)
-//      : id = id,
-//        userId = snapshot['userId'],
-//        userName = snapshot['userName'],
-//        address = snapshot['address'],
-//        latitude = snapshot['latitude'],
-//        longitude = snapshot['longitude'],
-//        time = snapshot['time'],
-//        date = snapshot['date'],
-//        specialistId = snapshot['specialistId'];
-//
-//  toJson() {
-//    return {
-//      "userId": userId,
-//      "userName": userName,
-//      "address": address,
-//      "latitude": latitude,
-//      "longitude": longitude,
-//      "time": time,
-//      "date": date,
-//      "specialistId": specialistId,
-//    };
-//  }
 }

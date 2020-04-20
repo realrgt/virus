@@ -1,53 +1,32 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vogu/core/services/auth.dart';
 import 'package:vogu/util/constants.dart';
 
 class Register extends StatefulWidget {
+
   final Function toggleView;
-  Register({this.toggleView});
+  Register({ this.toggleView });
 
   @override
   _RegisterState createState() => _RegisterState();
 }
 
 class _RegisterState extends State<Register> {
+
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
   String error = '';
 
   // text field state
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passController = TextEditingController();
+  String name = '';
+  String email = '';
+  String password = '';
   bool _isSpecialist = false;
-
-  _register(String email, password, bool isSpecialist) async {
-
-      if( email.isNotEmpty && email.contains("@") ){
-
-        if( password.isNotEmpty && password.length > 6 ){
-
-
-          return await _auth.registerWithEmailAndPassword(email, password, isSpecialist);
-
-
-        }else{
-          setState(() {
-            error = "Preencha a senha! digite mais de 6 caracteres";
-          });
-        }
-
-      }else{
-        setState(() {
-          error = "Preencha o E-mail válido";
-        });
-      }
-
-
-  }
-
-
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
@@ -62,67 +41,92 @@ class _RegisterState extends State<Register> {
           ),
         ],
       ),
-      body: Container(
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: 20.0),
-            TextField(
-              controller: _emailController,
-              decoration: textInputDecoration.copyWith(hintText: 'email'),
-              keyboardType: TextInputType.emailAddress,
-            ),
-            SizedBox(height: 20.0),
-            TextField(
-              controller: _passController,
-              decoration: textInputDecoration.copyWith(hintText: 'password'),
-              obscureText: true,
-            ),
-            SizedBox(height: 10.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
               children: <Widget>[
-                Text(
-                  'Cliente',
-                  style: TextStyle(
-                    color: Colors.deepOrange,
-                    fontSize: 28.0,
-                  ),
-                ),
-                Switch(
-                  value: _isSpecialist,
-                  onChanged: (bool value) {
-                    setState(() {
-                      _isSpecialist = value;
-                      print(_isSpecialist);
-                    });
+                SizedBox(height: 20.0),
+                TextFormField(
+                  decoration: textInputDecoration.copyWith(hintText: 'nome'),
+                  validator: (val) => val.isEmpty ? 'Enter a username' : null,
+                  onChanged: (val) {
+                    setState(() => name = val);
                   },
                 ),
-                Text(
-                  'Especialista',
-                  style: TextStyle(
-                    color: Colors.deepOrange,
-                    fontSize: 28.0,
-                  ),
+                SizedBox(height: 20.0),
+                TextFormField(
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: textInputDecoration.copyWith(hintText: 'email'),
+                  validator: (val) => val.isEmpty ? 'Enter an email' : null,
+                  onChanged: (val) {
+                    setState(() => email = val);
+                  },
                 ),
+                SizedBox(height: 20.0),
+                TextFormField(
+                  decoration: textInputDecoration.copyWith(hintText: 'password'),
+                  obscureText: true,
+                  validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
+                  onChanged: (val) {
+                    setState(() => password = val);
+                  },
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Text(
+                      'Cliente',
+                      style: TextStyle(
+                        color: Colors.deepOrange.shade200,
+                        fontSize: 22.0,
+                      ),
+                    ),
+                    Switch(
+                      value: _isSpecialist,
+                      activeColor: Colors.deepOrange,
+                      onChanged: (bool value) {
+                        setState(() {
+                          _isSpecialist = value;
+                        });
+                      },
+                    ),
+                    Text(
+                      'Especialista',
+                      style: TextStyle(
+                        color: Colors.deepOrange,
+                        fontSize: 22.0,
+                      ),
+                    ),
+                  ],
+                ),
+                RaisedButton(
+                    color: Colors.pink[400],
+                    child: Text(
+                      'Register',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () async {
+                      if(_formKey.currentState.validate()){
+                        dynamic result = await _auth.registerWithEmailAndPassword(name, email, password, _isSpecialist);
+                        if(result == null) {
+                          setState(() {
+                            error = 'Please supply a valid email';
+                          });
+                        }
+                      }
+                    }
+                ),
+                SizedBox(height: 12.0),
+                Text(
+                  error,
+                  style: TextStyle(color: Colors.red, fontSize: 14.0),
+                )
               ],
             ),
-            SizedBox(height: 20.0),
-            RaisedButton(
-                color: Colors.pink[400],
-                child: Text(
-                  'Register',
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () async {
-                  _register(_emailController.text, _passController.text, _isSpecialist);
-                }),
-            SizedBox(height: 12.0),
-            Text(
-              error,
-              style: TextStyle(color: Colors.red, fontSize: 14.0),
-            )
-          ],
+          ),
         ),
       ),
     );
