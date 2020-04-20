@@ -1,5 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
+import 'package:vogu/core/contollers/task_crud.dart';
+import 'package:vogu/core/models/task.dart';
 import 'package:vogu/screens/specialists/dashboard/tasks.dart';
 import 'package:vogu/util/default_colors.dart';
 
@@ -9,173 +15,254 @@ class ServicesUpdate extends StatefulWidget {
 }
 
 class _ServicesUpdateState extends State<ServicesUpdate> {
+  List<Task> tasks;
+
   @override
   Widget build(BuildContext context) {
+    final taskProvider = Provider.of<TaskCRUD>(context);
+    final firebaseUser = Provider.of<FirebaseUser>(context);
+
+    final uid = firebaseUser.uid;
+    print(uid);
+
     return Scaffold(
       backgroundColor: PURPLE_DEEP,
       body: ListView(
         padding: EdgeInsets.symmetric(vertical: 32.0),
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(left: 32.0, top: 10.0),
-            child: Text(
-              'Atualize',
-              style: TextStyle(
-                  fontSize: 24.0,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 32.0, top: 2.0, bottom: 20.0),
-            child: Text(
-              'os preços dos serviços',
-              style: TextStyle(
-                  fontSize: 24.0,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500),
-            ),
-          ),
+          SizedBox(height: 10.0),
           Column(
             children: <Widget>[
-              _buildServices(1),
-              _buildServices(2),
-              SizedBox(height: 10.0),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 32.0),
-                child: Text(
-                  'Concordo que a vogu acresce uma taxa de 25% ao valor cobrado ao cliente em dispesas de marketing e manutenção daplataforma.',
-                  textAlign: TextAlign.justify,
-                  style: TextStyle(
-                    color: Colors.grey[300],
-                  ),
-                ),
-              )
-            ],
-          ),
-          SizedBox(height: 15.0),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 32.0),
-            child: RaisedButton(
-              padding: EdgeInsets.symmetric(vertical: 13.0),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
-              ),
-              color: PURPLE_ACCENT,
-              textColor: Colors.white,
-              child: Text('Confirmar'),
-              onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => Tasks(),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+              StreamBuilder(
+                stream: taskProvider.fetchTasksAsStream(),
+                builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasData) {
+                    tasks = snapshot.data.documents
+//                        .where((t) => t.documentID == uid)
+                        .map(
+                          (doc) => Task.fromMap(doc.data, doc.documentID),
+                        )
+                        .toList();
 
-  _buildServices(int i) {
-    return Container(
-      height: 213.0,
-      margin: EdgeInsets.symmetric(vertical: 5.0),
-      padding: EdgeInsets.all(25.0),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(40.0),
-            bottomLeft: Radius.circular(40.0),
-            topRight: Radius.circular(40.0),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black45,
-              offset: Offset(0, 5.0),
-              blurRadius: 10.0,
-            )
-          ]),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            'Unhas',
-            style: TextStyle(
-              fontSize: 30.0,
-              color: PURPLE_DEEP,
-            ),
-          ),
-          Stack(
-            children: <Widget>[
-              Container(
-                height: 50.0,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      'Gel',
-                      style: TextStyle(
-                        fontSize: 18.0,
+                    if (tasks.length <= 0) {
+                      // that specialist has no scheduled tasks yet
+                      return Container(
+                        height: MediaQuery.of(context).size.height - 100,
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Column(
+                                children: <Widget>[
+                                  Text(
+                                    'Ainda nao adicionou nenhum servico!',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.grey[300],
+                                      fontSize: 22.0,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  SizedBox(height: 50.0),
+                                  FlatButton(
+                                    onPressed: () =>
+                                        Navigator.of(context).pop(),
+                                    color: Colors.grey.withOpacity(0.1),
+                                    splashColor: Colors.grey,
+                                    child: Text(
+                                      'Voltar',
+                                      style: TextStyle(
+                                        color: Colors.grey[300],
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    } else {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding:
+                            const EdgeInsets.only(left: 32.0, top: 10.0),
+                            child: Text(
+                              'Atualize \nos preços dos serviços',
+                              style: TextStyle(
+                                fontSize: 24.0,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: ClampingScrollPhysics(),
+                            itemCount: tasks.length,
+                            itemBuilder: (context, index) {
+                              Task task = tasks[index];
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Container(
+                                    height: 120.0,
+                                    margin: EdgeInsets.symmetric(vertical: 5.0),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 25.0, vertical: 5),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(40.0),
+                                          bottomLeft: Radius.circular(40.0),
+                                          topRight: Radius.circular(40.0),
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black45,
+                                            offset: Offset(0, 5.0),
+                                            blurRadius: 10.0,
+                                          )
+                                        ]),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Container(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                            children: <Widget>[
+                                              Text(
+                                                'Unhas',
+                                                style: TextStyle(
+                                                  fontSize: 30.0,
+                                                  color: PURPLE_DEEP,
+                                                ),
+                                              ),
+                                              Row(
+                                                children: <Widget>[
+                                                  Text(
+                                                    'Editar',
+                                                    style: TextStyle(
+                                                      fontSize: 18.0,
+                                                      color: PINK,
+                                                    ),
+                                                  ),
+                                                  IconButton(
+                                                    icon: Icon(
+                                                      Icons.edit,
+                                                      color: PURPLE_ACCENT,
+                                                    ),
+                                                    onPressed: () =>
+                                                        print('You clicked me'),
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        Stack(
+                                          children: <Widget>[
+                                            Container(
+                                              height: 50.0,
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                                mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                                children: <Widget>[
+                                                  Text(
+                                                    'Gel',
+                                                    style: TextStyle(
+                                                      fontSize: 18.0,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    'MT',
+                                                    style: TextStyle(
+                                                      fontSize: 18.0,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Positioned(
+                                              right: 25,
+                                              top: 6.0,
+                                              child: Text(
+                                                '150',
+                                                style: TextStyle(
+                                                  fontSize: 48.0,
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                          SizedBox(height: 10.0),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 32.0),
+                            child: Text(
+                              'Concordo que a vogu acresce uma taxa de 25% ao valor cobrado ao cliente em dispesas de marketing e manutenção daplataforma.',
+                              textAlign: TextAlign.justify,
+                              style: TextStyle(
+                                color: Colors.grey[300],
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 15.0),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 32.0),
+                            child: RaisedButton(
+                              padding: EdgeInsets.symmetric(vertical: 13.0),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                              ),
+                              color: PURPLE_ACCENT,
+                              textColor: Colors.white,
+                              child: Center(
+                                child: Text('Confirmar'),
+                              ),
+                              onPressed: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => Tasks(),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                  } else {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'Buscando...',
+                            style: TextStyle(
+                              fontSize: 28.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    Text(
-                      'MT',
-                      style: TextStyle(
-                        fontSize: 18.0,
-                      ),
-                    ),
-                  ],
-                ),
+                    );
+                  }
+                },
               ),
-              Positioned(
-                right: 25,
-                top: 6.0,
-                child: Text(
-                  '150',
-                  style: TextStyle(
-                    fontSize: 48.0,
-                  ),
-                ),
-              )
             ],
           ),
-          Divider(height: 30.0, thickness: 1),
-          Stack(
-            children: <Widget>[
-              Container(
-                height: 50.0,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      'Limpeza',
-                      style: TextStyle(
-                        fontSize: 18.0,
-                      ),
-                    ),
-                    Text(
-                      'MT',
-                      style: TextStyle(
-                        fontSize: 18.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Positioned(
-                right: 25,
-                top: 6.0,
-                child: Text(
-                  '100',
-                  style: TextStyle(
-                    fontSize: 48.0,
-                  ),
-                ),
-              )
-            ],
-          )
         ],
       ),
     );
