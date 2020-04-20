@@ -11,7 +11,7 @@ Task _$TaskFromJson(Map<String, dynamic> json, String id) {
     id: id,
     userId: json['userId'] as String,
     userName: json['userName'] as String,
-    imgUrl: json['imgUrl'] as String,
+    imgUrl: json['imgUrl'] as String ?? 'https://cdn.pixabay.com/photo/2016/05/29/23/10/sphere-1423959_960_720.png',
     address: json['address'] as String,
     latitude: (json['latitude'] as num)?.toDouble(),
     longitude: (json['longitude'] as num)?.toDouble(),

@@ -56,7 +56,7 @@ class _AvailabilityState extends State<Availability> {
       backgroundColor: Colors.transparent,
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(color: PURPLE_DEEP),
+        color: PURPLE_DEEP,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -152,15 +152,15 @@ class _AvailabilityState extends State<Availability> {
                                         .entries
                                         .map(
                                           (MapEntry map) =>
-                                              _buildTimes(map.key),
-                                        )
+                                          _buildTimes(map.key),
+                                    )
                                         .toList(),
                                   ),
                                 ),
                                 SizedBox(height: 10.0),
                                 CheckboxListTile(
                                   controlAffinity:
-                                      ListTileControlAffinity.leading,
+                                  ListTileControlAffinity.leading,
                                   value: _isAllDayAvailable,
                                   activeColor: PURPLE_DEEP,
                                   onChanged: (bool val) {
@@ -182,14 +182,14 @@ class _AvailabilityState extends State<Availability> {
                                   child: Container(
                                     height: 47.0,
                                     padding:
-                                        EdgeInsets.symmetric(horizontal: 20.0),
+                                    EdgeInsets.symmetric(horizontal: 20.0),
                                     decoration: BoxDecoration(
                                       color: PURPLE_DEEP,
                                       borderRadius: BorderRadius.circular(15.0),
                                     ),
                                     child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      MainAxisAlignment.center,
                                       children: <Widget>[
                                         Text(
                                           'Confirmar',

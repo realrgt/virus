@@ -3,10 +3,21 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:vogu/models/specialist.dart';
 import 'package:vogu/util/default_colors.dart';
 
 class TaskLocation extends StatefulWidget {
+
+  final String imgUrl;
+  final String name;
+  final String address;
+  final String time;
+  final String day;
+  final String month;
+  final double latitude;
+  final double longitude;
+
+  const TaskLocation({Key key, this.imgUrl, this.name, this.address, this.time, this.day, this.month, this.latitude, this.longitude}) : super(key: key);
+
   @override
   _TaskLocationState createState() => _TaskLocationState();
 }
@@ -49,8 +60,10 @@ class _TaskLocationState extends State<TaskLocation> {
   Widget build(BuildContext context) {
     //TODO: use locations from fireBase
     setState(() {
-      _latitude = -25.971210;
-      _longitude = 32.587494;
+//      _latitude = -25.971210;
+//      _longitude = 32.587494;
+      _latitude = widget.latitude;
+      _longitude = widget.longitude;
     });
 
     _showMarker();
@@ -95,8 +108,8 @@ class _TaskLocationState extends State<TaskLocation> {
                             children: <Widget>[
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(50.0),
-                                child: Image.asset(
-                                  specialists[1].imgUrl,
+                                child: Image.network(
+                                  widget.imgUrl,
                                   width: 80.0,
                                   height: 80.0,
                                   fit: BoxFit.cover,
@@ -112,7 +125,7 @@ class _TaskLocationState extends State<TaskLocation> {
                                       children: <Widget>[
                                         SizedBox(width: 3.0),
                                         Text(
-                                          specialists[1].name,
+                                          widget.name,
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 24.0,
@@ -128,7 +141,7 @@ class _TaskLocationState extends State<TaskLocation> {
                                           size: 18.0,
                                         ),
                                         Text(
-                                          specialists[1].address,
+                                          widget.address,
                                           style: TextStyle(
                                             fontSize: 13.0,
                                           ),
@@ -149,7 +162,7 @@ class _TaskLocationState extends State<TaskLocation> {
                                             ),
                                             SizedBox(width: 5.0),
                                             Text(
-                                              '14:00',
+                                              widget.time,
                                               style: TextStyle(
                                                 fontSize: 13.0,
                                               ),
@@ -179,7 +192,7 @@ class _TaskLocationState extends State<TaskLocation> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Text(
-                                    '01',
+                                    widget.day,
                                     style: TextStyle(
                                       fontSize: 40.0,
                                       fontWeight: FontWeight.w700,
@@ -187,7 +200,7 @@ class _TaskLocationState extends State<TaskLocation> {
                                     ),
                                   ),
                                   Text(
-                                    'AGO',
+                                    widget.month,
                                     style: TextStyle(
                                       fontSize: 24.0,
                                       fontWeight: FontWeight.w500,
