@@ -4,8 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:vogu/core/contollers/task_crud.dart';
-import 'package:vogu/core/models/task.dart';
+import 'package:vogu/core/contollers/service-crud.dart';
+import 'package:vogu/core/models/service.dart';
+import 'package:vogu/models/categories-services.dart';
 import 'package:vogu/screens/specialists/dashboard/add-service.dart';
 import 'package:vogu/screens/specialists/dashboard/tasks.dart';
 import 'package:vogu/util/default_colors.dart';
@@ -16,11 +17,11 @@ class ServicesUpdate extends StatefulWidget {
 }
 
 class _ServicesUpdateState extends State<ServicesUpdate> {
-  List<Task> tasks;
+  List<Servico> services;
 
   @override
   Widget build(BuildContext context) {
-    final taskProvider = Provider.of<TaskCRUD>(context);
+    final serviceProvider = Provider.of<ServiceCRUD>(context);
     final firebaseUser = Provider.of<FirebaseUser>(context);
 
     final uid = firebaseUser.uid;
@@ -35,18 +36,20 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
           Column(
             children: <Widget>[
               StreamBuilder(
-                stream: taskProvider.fetchTasksAsStream(),
+                stream: serviceProvider.fetchServicesAsStream(),
                 builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasData) {
-                    tasks = snapshot.data.documents
+                    services = snapshot.data.documents
 //                        .where((t) => t.documentID == uid)
                         .map(
-                          (doc) => Task.fromMap(doc.data, doc.documentID),
+                          (doc) => Servico.fromMap(doc.data, doc.documentID),
                         )
                         .toList();
 
-                    if (tasks.length <= 0) {
-                      // that specialist has no scheduled tasks yet
+                    var serviceList = services.expand((s) => s.services).toList();
+
+                    if (serviceList.length <= 0) {
+                      // that specialist has no scheduled services yet
                       return Container(
                         height: MediaQuery.of(context).size.height - 100,
                         child: Center(
@@ -130,9 +133,9 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
                           ListView.builder(
                             shrinkWrap: true,
                             physics: ClampingScrollPhysics(),
-                            itemCount: tasks.length,
+                            itemCount: serviceList.length,
                             itemBuilder: (context, index) {
-                              Task task = tasks[index];
+                              var service = serviceList[index];
                               return Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
@@ -165,7 +168,7 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: <Widget>[
                                               Text(
-                                                'Unhas',
+                                                service.category,
                                                 style: TextStyle(
                                                   fontSize: 30.0,
                                                   color: PURPLE_DEEP,
@@ -205,7 +208,7 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
                                                         .spaceBetween,
                                                 children: <Widget>[
                                                   Text(
-                                                    'Gel',
+                                                    service.name,
                                                     style: TextStyle(
                                                       fontSize: 18.0,
                                                     ),
@@ -223,7 +226,7 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
                                               right: 25,
                                               top: 6.0,
                                               child: Text(
-                                                '150',
+                                                '${service.price}',
                                                 style: TextStyle(
                                                   fontSize: 48.0,
                                                 ),

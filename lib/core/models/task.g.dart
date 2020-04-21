@@ -11,17 +11,18 @@ Task _$TaskFromJson(Map<String, dynamic> json, String id) {
     id: id,
     userId: json['userId'] as String,
     userName: json['userName'] as String,
-    imgUrl: json['imgUrl'] as String ?? 'https://cdn.pixabay.com/photo/2016/05/29/23/10/sphere-1423959_960_720.png',
+    imgUrl: json['imgUrl'] as String,
     address: json['address'] as String,
     latitude: (json['latitude'] as num)?.toDouble(),
     longitude: (json['longitude'] as num)?.toDouble(),
     time: json['time'] as String,
     date: json['date'] as String,
     specialistId: json['specialistId'] as String,
-  )..services = (json['list'] as List)
-      ?.map(
-          (e) => e == null ? null : Service.fromJson(e as Map<String, dynamic>))
-      ?.toList();
+    services: (json['services'] as List)
+        ?.map((e) =>
+            e == null ? null : Service.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
 }
 
 Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
@@ -34,5 +35,5 @@ Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
       'time': instance.time,
       'date': instance.date,
       'specialistId': instance.specialistId,
-      'list': instance.services?.map((e) => e?.toJson())?.toList(),
+      'services': instance.services?.map((e) => e?.toJson())?.toList(),
     };
