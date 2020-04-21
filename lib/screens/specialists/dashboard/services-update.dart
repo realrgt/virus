@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:vogu/core/contollers/task_crud.dart';
 import 'package:vogu/core/models/task.dart';
+import 'package:vogu/screens/specialists/dashboard/add-service.dart';
 import 'package:vogu/screens/specialists/dashboard/tasks.dart';
 import 'package:vogu/util/default_colors.dart';
 
@@ -89,15 +90,41 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Padding(
-                            padding:
-                            const EdgeInsets.only(left: 32.0, top: 10.0),
-                            child: Text(
-                              'Atualize \nos preços dos serviços',
-                              style: TextStyle(
-                                fontSize: 24.0,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                              ),
+                            padding: EdgeInsets.only(
+                                left: 32.0, top: 10.0, right: 32.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text(
+                                  'Atualize \nos preços dos serviços',
+                                  style: TextStyle(
+                                    fontSize: 24.0,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (_) => AddService(),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 40,
+                                    width: 40,
+                                    decoration: BoxDecoration(
+                                      color: PINK,
+                                      borderRadius: BorderRadius.circular(30.0),
+                                    ),
+                                    child: Icon(
+                                      Icons.add,
+                                      color: PURPLE_DEEP,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           ListView.builder(
@@ -129,12 +156,13 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
                                           )
                                         ]),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: <Widget>[
                                         Container(
                                           child: Row(
                                             mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                                MainAxisAlignment.spaceBetween,
                                             children: <Widget>[
                                               Text(
                                                 'Unhas',
@@ -171,9 +199,10 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
                                               height: 50.0,
                                               child: Row(
                                                 crossAxisAlignment:
-                                                CrossAxisAlignment.end,
+                                                    CrossAxisAlignment.end,
                                                 mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: <Widget>[
                                                   Text(
                                                     'Gel',
