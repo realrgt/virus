@@ -20,84 +20,84 @@ class Category {
 
 @JsonSerializable()
 class Service with ChangeNotifier {
-  int serviceId;
   String name;
   double price;
+  String category;
 
-  Service({this.serviceId, this.name, this.price});
+  Service({this.name, this.price, this.category});
 
   factory Service.fromJson(Map<String, dynamic> json) => _$ServiceFromJson(json);
   Map<String, dynamic> toJson() => _$ServiceToJson(this);
 
   @override
   String toString() {
-    return 'Service{serviceId: $serviceId, name: $name, price: $price}';
+    return 'category: $category, name: $name, price: $price';
   }
 }
 
 var categories = <Category>[
   Category(id: 0, categoryName: 'Unhas', imgUrl: NEILS, services: <Service>[
-    Service(serviceId: 1, name: 'Manicure', price: 100.0),
-    Service(serviceId: 2, name: 'Pedicure', price: 100.0),
-    Service(serviceId: 3, name: 'Colocar acrílicas', price: 100.0),
-    Service(serviceId: 4, name: 'Overlay', price: 100.0),
-    Service(serviceId: 5, name: 'Gelish', price: 100.0),
-    Service(serviceId: 6, name: 'Manutenção acrílicas', price: 100.0),
-    Service(serviceId: 7, name: 'Manutenção overlay', price: 100.0),
+    Service(name: 'Manicure', price: 100.0, category: 'Unhas'),
+    Service(name: 'Pedicure', price: 100.0, category: 'Unhas'),
+    Service(name: 'Colocar acrílicas', price: 100.0, category: 'Unhas'),
+    Service(name: 'Overlay', price: 100.0, category: 'Unhas'),
+    Service(name: 'Gelish', price: 100.0, category: 'Unhas'),
+    Service(name: 'Manutenção acrílicas', price: 100.0, category: 'Unhas'),
+    Service(name: 'Manutenção overlay', price: 100.0, category: 'Unhas'),
   ]),
   Category(id: 1, categoryName: 'Rosto', imgUrl: FACE, services: <Service>[
-    Service(serviceId: 1, name: 'Limpeza facial', price: 100.0),
-    Service(serviceId: 2, name: 'Design sombracelhas', price: 100.0),
-    Service(serviceId: 3, name: 'Pintura sombracelhas', price: 100.0),
-    Service(serviceId: 4, name: 'Tatuagem sombracelhas', price: 100.0),
-    Service(serviceId: 5, name: 'Colocar pestanas 1 a 1', price: 100.0),
-    Service(serviceId: 6, name: 'Colocar pestanas em saia', price: 100.0),
-    Service(serviceId: 7, name: 'Colocar pestanas 4 a 4', price: 100.0),
-    Service(serviceId: 8, name: 'Busso da barba', price: 100.0),
-    Service(serviceId: 9, name: 'Busso do bigode', price: 100.0),
+    Service(name: 'Limpeza facial', price: 100.0, category: 'Rosto'),
+    Service(name: 'Design sombracelhas', price: 100.0, category: 'Rosto'),
+    Service(name: 'Pintura sombracelhas', price: 100.0, category: 'Rosto'),
+    Service(name: 'Tatuagem sombracelhas', price: 100.0, category: 'Rosto'),
+    Service(name: 'Colocar pestanas 1 a 1', price: 100.0, category: 'Rosto'),
+    Service(name: 'Colocar pestanas em saia', price: 100.0, category: 'Rosto'),
+    Service(name: 'Colocar pestanas 4 a 4', price: 100.0, category: 'Rosto'),
+    Service(name: 'Busso da barba', price: 100.0, category: 'Rosto'),
+    Service(name: 'Busso do bigode', price: 100.0, category: 'Rosto'),
   ]),
   Category(id: 2, categoryName: 'MakeUp', imgUrl: MAKEUP, services: <Service>[
-    Service(serviceId: 1, name: 'Simples', price: 100.0),
-    Service(serviceId: 2, name: 'Para casamento', price: 100.0),
-    Service(serviceId: 3, name: 'Causal', price: 100.0),
-    Service(serviceId: 4, name: 'Para espectáculos', price: 100.0),
-    Service(serviceId: 5, name: 'artística', price: 100.0),
-    Service(serviceId: 6, name: 'Para noivados', price: 100.0),
-    Service(serviceId: 7, name: 'Para apresentação', price: 100.0),
-    Service(serviceId: 8, name: 'Profissional', price: 100.0),
+    Service(name: 'Simples', price: 100.0, category: 'Makeup'),
+    Service(name: 'Para casamento', price: 100.0, category: 'Makeup'),
+    Service(name: 'Causal', price: 100.0, category: 'Makeup'),
+    Service(name: 'Para espectáculos', price: 100.0, category: 'Makeup'),
+    Service(name: 'artística', price: 100.0, category: 'Makeup'),
+    Service(name: 'Para noivados', price: 100.0, category: 'Makeup'),
+    Service(name: 'Para apresentação', price: 100.0, category: 'Makeup'),
+    Service(name: 'Profissional', price: 100.0, category: 'Makeup'),
   ]),
   Category(
       id: 3,
       categoryName: 'Massagem',
       imgUrl: MASSAGE,
       services: <Service>[
-        Service(serviceId: 1, name: 'Shiatsu', price: 100.0),
-        Service(serviceId: 2, name: 'Drenagem', price: 100.0),
-        Service(serviceId: 3, name: 'Linfática', price: 100.0),
-        Service(serviceId: 4, name: 'Pedras quentes', price: 100.0),
-        Service(serviceId: 5, name: 'Esportiva', price: 100.0),
-        Service(serviceId: 6, name: 'Pré-natal', price: 100.0),
+        Service(name: 'Shiatsu', price: 100.0, category: 'Massagem'),
+        Service(name: 'Drenagem', price: 100.0, category: 'Massagem'),
+        Service(name: 'Linfática', price: 100.0, category: 'Massagem'),
+        Service(name: 'Pedras quentes', price: 100.0, category: 'Massagem'),
+        Service(name: 'Esportiva', price: 100.0, category: 'Massagem'),
+        Service(name: 'Pré-natal', price: 100.0, category: 'Massagem'),
       ]),
   Category(
       id: 4,
       categoryName: 'Depilação',
       imgUrl: HAIR_REMOVAL,
       services: <Service>[
-        Service(serviceId: 1, name: 'Axila', price: 100.0),
-        Service(serviceId: 2, name: 'Verilha', price: 100.0),
-        Service(serviceId: 3, name: 'Corpo todo', price: 100.0),
-        Service(serviceId: 4, name: 'Pernas', price: 100.0),
-        Service(serviceId: 5, name: 'Púbica', price: 100.0),
-        Service(serviceId: 6, name: 'Rosto', price: 100.0),
+        Service(name: 'Axila', price: 100.0, category: 'Depilação'),
+        Service(name: 'Verilha', price: 100.0, category: 'Depilação'),
+        Service(name: 'Corpo todo', price: 100.0, category: 'Depilação'),
+        Service(name: 'Pernas', price: 100.0, category: 'Depilação'),
+        Service(name: 'Púbica', price: 100.0, category: 'Depilação'),
+        Service(name: 'Rosto', price: 100.0, category: 'Depilação'),
       ]),
   Category(id: 5, categoryName: 'Cabelos', imgUrl: HAIR, services: <Service>[
-    Service(serviceId: 6, name: 'Tranças', price: 100.0),
-    Service(serviceId: 6, name: 'Próteses', price: 100.0),
-    Service(serviceId: 6, name: 'Tissagem', price: 100.0),
-    Service(serviceId: 6, name: 'Extensões', price: 100.0),
-    Service(serviceId: 6, name: 'Tratamento cabelo', price: 100.0),
-    Service(serviceId: 6, name: 'Penteados casamentos', price: 100.0),
-    Service(serviceId: 6, name: 'Penteados noivados', price: 100.0),
-    Service(serviceId: 6, name: 'Penteados apresentações', price: 100.0),
+    Service(name: 'Tranças', price: 100.0, category: 'Cabelos'),
+    Service(name: 'Próteses', price: 100.0, category: 'Cabelos'),
+    Service(name: 'Tissagem', price: 100.0, category: 'Cabelos'),
+    Service(name: 'Extensões', price: 100.0, category: 'Cabelos'),
+    Service(name: 'Tratamento cabelo', price: 100.0, category: 'Cabelos'),
+    Service(name: 'Penteados casamentos', price: 100.0, category: 'Cabelos'),
+    Service(name: 'Penteados noivados', price: 100.0, category: 'Cabelos'),
+    Service(name: 'Penteados apresentações', price: 100.0, category: 'Cabelos'),
   ]),
 ];

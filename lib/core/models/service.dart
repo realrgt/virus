@@ -1,28 +1,23 @@
 
 import 'package:flutter/material.dart';
+import 'package:vogu/models/categories-services.dart';
 
 class Servico with ChangeNotifier {
   String id;
-  String name;
-  double price;
-  String category;
   String specialistId;
+  List<Service> services = List();
 
-  Servico({this.id, this.name, this.price, this.category, this.specialistId});
+  Servico({this.id, this.specialistId, this.services});
 
   Servico.fromMap(Map snapshot, String id)
       : id = id,
-        name = snapshot['name'],
-        price = snapshot['price'],
-        category = snapshot['category'],
-        specialistId = snapshot['specialistId'];
+        specialistId = snapshot['specialistId'] ?? '',
+        services = (snapshot['services'] as List)?.map((s) => s == null ? null : Service.fromJson(s as Map<String, dynamic>));
 
   toJson() {
     return {
-      "name": name,
-      "price": price,
-      "category": category,
       "specialistId": specialistId,
+      'services': services?.map((s) => s?.toJson())?.toList(),
     };
   }
 

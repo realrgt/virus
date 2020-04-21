@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vogu/core/contollers/service-crud.dart';
 import 'package:vogu/core/models/service.dart';
 import 'package:vogu/core/models/task.dart';
 import 'package:vogu/models/categories-services.dart';
@@ -43,8 +44,13 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    
+
     _serviceList = categories
         .where((c) => c.id == _selectedIndex)
         .expand((c) => c.services)
@@ -57,19 +63,10 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
     // TODO: watch this======================
     final serviceProvider = Provider.of<Servico>(context);
 
-    if (selectedChoices.length <= 0) {
-      serviceProvider.name = _serviceList[0].name;
-      serviceProvider.price = _serviceList[0].price;
-    } else {
-      serviceProvider.name = selectedChoices[selectedChoices.length -1].name;
-      serviceProvider.price = selectedChoices[selectedChoices.length -1].price;
+    if (selectedChoices.length > 0) {
+      serviceProvider.services = selectedChoices;
+      serviceProvider.services.forEach(print);
     }
-
-    serviceProvider.category = _categoryList[0];
-    //DEBUG
-    print(serviceProvider.name);
-    print(serviceProvider.price);
-    print(serviceProvider.category);
 
     return Column(
       children: <Widget>[

@@ -70,9 +70,7 @@ class _AddServiceState extends State<AddService> {
               onPressed: () async {
                 await ServiceCRUD().addService(
                   Servico(
-                    name: servicoPrivider.name,
-                    price: servicoPrivider.price,
-                    category: servicoPrivider.category,
+                    services: servicoPrivider.services,
                     specialistId: firebaseUser.uid,
                   ),
                 );

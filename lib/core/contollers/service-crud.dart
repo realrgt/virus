@@ -8,7 +8,7 @@ import 'package:vogu/locator.dart';
 class ServiceCRUD extends ChangeNotifier {
   Api _api = locator<Api>();
 
-  String path = 'service';
+  String path = 'services';
   List<Servico> services;
 
   Future<List<Servico>> fetchServices() async {
