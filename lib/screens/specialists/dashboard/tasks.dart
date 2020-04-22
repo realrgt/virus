@@ -34,7 +34,7 @@ class _TasksState extends State<Tasks> {
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasData) {
                 tasks = snapshot.data.documents
-                    .where((t) => t.documentID == uid)
+//                    .where((t) => t.documentID == uid)
                     .map(
                       (doc) => Task.fromMap(doc.data, doc.documentID),
                     )

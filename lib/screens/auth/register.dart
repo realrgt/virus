@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vogu/core/services/auth.dart';
 import 'package:vogu/util/constants.dart';
+import 'package:vogu/util/default_colors.dart';
 
 class Register extends StatefulWidget {
 
@@ -28,11 +29,11 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: Colors.brown[100],
+      backgroundColor: PURPLE_DEEP,
       appBar: AppBar(
-        backgroundColor: Colors.brown[400],
+        backgroundColor: Colors.purple,
         elevation: 0.0,
-        title: Text('Sign up to Brew Crew'),
+        title: Text('Sign up'),
         actions: <Widget>[
           FlatButton.icon(
             icon: Icon(Icons.person),

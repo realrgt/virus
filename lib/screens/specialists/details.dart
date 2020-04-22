@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:vogu/core/models/specialist.dart';
 import 'package:vogu/screens/payment/payment-options.dart';
 import 'package:vogu/util/default_colors.dart';
+import 'package:vogu/widgets/categories-scroll.dart';
 import 'package:vogu/widgets/cross-icon.dart';
 
 class SpecialistDetails extends StatefulWidget {
-  
   final Specialist specialist;
 
   const SpecialistDetails({Key key, this.specialist}) : super(key: key);
@@ -46,8 +46,10 @@ class _SpecialistDetailsState extends State<SpecialistDetails> {
         children: <Widget>[
           Container(
             height: expanded_height - 100,
-            decoration:
-                BoxDecoration(border: Border.all(color: Colors.red, width: 1)),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.red, width: 1),
+            ),
+            child: CategoriesScroll(),
           ),
           SizedBox(height: 20.0),
           RaisedButton(

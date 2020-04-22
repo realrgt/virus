@@ -6,7 +6,6 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:vogu/core/contollers/service-crud.dart';
 import 'package:vogu/core/models/service.dart';
-import 'package:vogu/models/categories-services.dart';
 import 'package:vogu/screens/specialists/dashboard/add-service.dart';
 import 'package:vogu/screens/specialists/dashboard/tasks.dart';
 import 'package:vogu/util/default_colors.dart';
@@ -19,13 +18,24 @@ class ServicesUpdate extends StatefulWidget {
 class _ServicesUpdateState extends State<ServicesUpdate> {
   List<Servico> services;
 
+  String uid;
+
   @override
   Widget build(BuildContext context) {
+    // retrieve specialist services form firestore
     final serviceProvider = Provider.of<ServiceCRUD>(context);
+    // current user section
     final firebaseUser = Provider.of<FirebaseUser>(context);
+
+    // to set the specialists last selected services
+    final servicoProvider = Provider.of<Servico>(context);
 
     final uid = firebaseUser.uid;
     print(uid);
+
+    setState(() {
+      this.uid = firebaseUser.uid;
+    });
 
     return Scaffold(
       backgroundColor: PURPLE_DEEP,
@@ -46,7 +56,11 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
                         )
                         .toList();
 
-                    var serviceList = services.expand((s) => s.services).toList();
+                    // reduce servico data to get only its services array
+                    final serviceList =
+                        services.expand((Servico s) => s.services).toList();
+                    servicoProvider.services =
+                        serviceList; // assign last selected services
 
                     if (serviceList.length <= 0) {
                       // that specialist has no scheduled services yet
@@ -69,12 +83,22 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
                                   ),
                                   SizedBox(height: 50.0),
                                   FlatButton(
-                                    onPressed: () =>
-                                        Navigator.of(context).pop(),
-                                    color: Colors.grey.withOpacity(0.1),
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 30.0,
+                                      vertical: 12.0,
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                    ),
+                                    onPressed: () => Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (_) => AddService(),
+                                      ),
+                                    ),
+                                    color: PURPLE_ACCENT,
                                     splashColor: Colors.grey,
                                     child: Text(
-                                      'Voltar',
+                                      'Adicionar Serviços',
                                       style: TextStyle(
                                         color: Colors.grey[300],
                                         fontSize: 20.0,
@@ -141,9 +165,12 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
                                 children: <Widget>[
                                   Container(
                                     height: 120.0,
-                                    margin: EdgeInsets.symmetric(vertical: 5.0),
+                                    margin:
+                                        EdgeInsets.symmetric(vertical: 10.0),
                                     padding: EdgeInsets.symmetric(
-                                        horizontal: 25.0, vertical: 5),
+                                      horizontal: 25.0,
+                                      vertical: 5,
+                                    ),
                                     decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.only(
@@ -170,7 +197,8 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
                                               Text(
                                                 service.category,
                                                 style: TextStyle(
-                                                  fontSize: 30.0,
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.w600,
                                                   color: PURPLE_DEEP,
                                                 ),
                                               ),
@@ -188,8 +216,10 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
                                                       Icons.edit,
                                                       color: PURPLE_ACCENT,
                                                     ),
-                                                    onPressed: () =>
-                                                        print('You clicked me'),
+                                                    onPressed: () {
+                                                      print('You clicked me');
+                                                      _buildEdit(context);
+                                                    },
                                                   ),
                                                 ],
                                               )
@@ -210,7 +240,10 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
                                                   Text(
                                                     service.name,
                                                     style: TextStyle(
-                                                      fontSize: 18.0,
+                                                      fontSize: 22.0,
+                                                      color: BLUE,
+                                                      fontWeight:
+                                                          FontWeight.w300,
                                                     ),
                                                   ),
                                                   Text(
@@ -297,6 +330,78 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
           ),
         ],
       ),
+    );
+  }
+
+  _buildEdit(BuildContext context) {
+    // button configuration
+    Widget okButton = FlatButton(
+      child: Text(
+        "OK",
+        style: TextStyle(
+          color: Colors.grey[300],
+        ),
+      ),
+      onPressed: () async {
+        Navigator.of(context).pop();
+      },
+    );
+
+    // AlertDialog Setup
+    AlertDialog alert = AlertDialog(
+      backgroundColor: PURPLE_DEEP,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30.0),
+      ),
+      title: Text(
+        "Digite o novo preço",
+        style: TextStyle(
+          color: Colors.grey[300],
+        ),
+      ),
+      content: TextField(
+        style: TextStyle(color: Colors.grey[300]),
+        keyboardType: TextInputType.number,
+        cursorColor: PURPLE_ACCENT,
+        decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(4)),
+              borderSide: BorderSide(width: 1, color: Colors.grey[300]),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(4)),
+              borderSide: BorderSide(width: 1, color: Colors.grey[300]),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(4)),
+              borderSide: BorderSide(width: 1, color: Colors.grey[300]),
+            ),
+            hintText: 'Tell us about yourself',
+            hintStyle: TextStyle(color: Colors.grey[400]),
+            helperText: 'Digite o preço desejado.',
+            helperStyle: TextStyle(color: Colors.white),
+            labelText: 'Preço',
+            labelStyle: TextStyle(color: Colors.grey[400]),
+            prefixIcon: const Icon(
+              Icons.account_balance,
+              color: Colors.white,
+            ),
+            prefixText: ' ',
+            suffixText: 'MZN',
+            suffixStyle: const TextStyle(color: Colors.white)),
+      ),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // Dialog show up
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }

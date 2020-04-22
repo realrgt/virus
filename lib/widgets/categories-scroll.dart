@@ -25,24 +25,6 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
   List<String> _categoryList;
   List<Service> selectedChoices = List();
 
-  _setColor() {
-    Color color;
-    int random = Random().nextInt(3);
-
-    switch (random) {
-      case 0:
-        color = Colors.purple;
-        break;
-      case 1:
-        color = Colors.purpleAccent;
-        break;
-      default:
-        color = Colors.deepPurple;
-    }
-
-    return color;
-  }
-
   @override
   void initState() {
     super.initState();
@@ -60,13 +42,14 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
         .map((c) => c.categoryName)
         .toList();
 
-    // TODO: watch this======================
-    final serviceProvider = Provider.of<Servico>(context);
-
-    if (selectedChoices.length > 0) {
-      serviceProvider.services = selectedChoices;
-      serviceProvider.services.forEach(print);
-    }
+//    // TODO: watch this======================
+//    final servicoProvider = Provider.of<Servico>(context);
+//    selectedChoices = servicoProvider.services;
+//
+//    if (selectedChoices.length > 0) {
+//      servicoProvider.services = selectedChoices;
+//      servicoProvider.services.forEach(print);
+//    }
 
     return Column(
       children: <Widget>[
@@ -102,7 +85,6 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
 
   var temp2;
   Widget _buildCircleImg(int index) {
-    Color _color = _setColor();
 
     return GestureDetector(
       onTap: () {
@@ -173,40 +155,51 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
 
   _buildChipsList(BuildContext ctx) {
 
+    // TODO: watch this======================
+    final servicoProvider = Provider.of<Servico>(context);
+    selectedChoices = servicoProvider.services;
+
+    if (selectedChoices.length > 0) {
+      servicoProvider.services = selectedChoices;
+      servicoProvider.services.forEach(print);
+    }
+
     ///try provider
     var taskInfo = Provider.of<Task>(context);
     ///end try provider
 
     List<Widget> chips = List();
     _serviceList.forEach((item) {
-      chips.add(
-        FilterChip(
-          avatar: CircleAvatar(
-            backgroundColor: Colors.grey.shade50,
-          ),
-          label: Text(item.name),
-          checkmarkColor: Colors.white,
-          labelStyle: TextStyle(
-            color: Colors.white,
-            fontSize: 12.5,
-          ),
-          selected: selectedChoices.contains(item),
-          backgroundColor: PURPLE_DEEP,
-          onSelected: (isSelected) {
-            setState(() {
-              if (selectedChoices.contains(item)) {
-                selectedChoices.remove(item);
-                taskInfo.setServices(selectedChoices);
-              } else {
-                selectedChoices.add(item);
-                taskInfo.setServices(selectedChoices);
-              }
+      if (!selectedChoices.contains(item.name)) {
+        chips.add(
+          FilterChip(
+            avatar: CircleAvatar(
+              backgroundColor: Colors.grey.shade50,
+            ),
+            label: Text(item.name),
+            checkmarkColor: Colors.white,
+            labelStyle: TextStyle(
+              color: Colors.white,
+              fontSize: 12.5,
+            ),
+            selected: selectedChoices.contains(item),
+            backgroundColor: PURPLE_DEEP,
+            onSelected: (isSelected) {
+              setState(() {
+                if (selectedChoices.contains(item)) {
+                  selectedChoices.remove(item);
+                  taskInfo.setServices(selectedChoices);
+                } else {
+                  selectedChoices.add(item);
+                  taskInfo.setServices(selectedChoices);
+                }
 
-            });
-          },
-          selectedColor: PINK,
-        ),
-      );
+              });
+            },
+            selectedColor: PINK,
+          ),
+        );
+      }
     });
 
     return chips;

@@ -44,15 +44,6 @@ class _SplashState extends State<Splash> {
                   color: Color(0xfff44ea0),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 60),
-                child: Container(
-                  child: CircularProgressIndicator(
-//                    backgroundColor: Color(0xfff44ea0),
-                    valueColor: new AlwaysStoppedAnimation(Color(0xfff44ea0)),
-                  ),
-                ),
-              )
             ],
           )
         ],

@@ -11,7 +11,7 @@ Task _$TaskFromJson(Map<String, dynamic> json, String id) {
     id: id,
     userId: json['userId'] as String,
     userName: json['userName'] as String,
-    imgUrl: json['imgUrl'] as String,
+    imgUrl: json['imgUrl'] as String ?? 'https://jazzaero.com.br/wp-content/uploads/2017/05/default-placeholder-profile-icon-avatar-gray-woman-90197997-300x300.jpg',
     address: json['address'] as String,
     latitude: (json['latitude'] as num)?.toDouble(),
     longitude: (json['longitude'] as num)?.toDouble(),

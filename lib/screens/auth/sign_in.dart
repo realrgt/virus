@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vogu/core/services/auth.dart';
 import 'package:vogu/util/constants.dart';
+import 'package:vogu/util/default_colors.dart';
 
 class SignIn extends StatefulWidget {
 
@@ -24,11 +25,11 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown[100],
+      backgroundColor: PURPLE_DEEP,
       appBar: AppBar(
-        backgroundColor: Colors.brown[400],
+        backgroundColor: Colors.purple,
         elevation: 0.0,
-        title: Text('Sign in to Brew Crew'),
+        title: Text('Sign in'),
         actions: <Widget>[
           FlatButton.icon(
             icon: Icon(Icons.person),
@@ -45,6 +46,7 @@ class _SignInState extends State<SignIn> {
             children: <Widget>[
               SizedBox(height: 20.0),
               TextFormField(
+                keyboardType: TextInputType.emailAddress,
                 decoration: textInputDecoration.copyWith(hintText: 'email'),
                 validator: (val) => val.isEmpty ? 'Enter an email' : null,
                 onChanged: (val) {
