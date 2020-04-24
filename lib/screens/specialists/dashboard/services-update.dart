@@ -57,10 +57,9 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
                         .toList();
 
                     // reduce servico data to get only its services array
-                    final serviceList =
-                        services.expand((Servico s) => s.services).toList();
-                    servicoProvider.services =
-                        serviceList; // assign last selected services
+                    final serviceList = services.expand((Servico s) => s.services).toList();
+                    // assign last selected services
+                    servicoProvider.services = serviceList;
 
                     if (serviceList.length <= 0) {
                       // that specialist has no scheduled services yet

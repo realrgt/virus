@@ -8,24 +8,11 @@ part 'service.g.dart';
 @JsonSerializable(explicitToJson: true)
 class Servico with ChangeNotifier {
   String id;
-  String specialistId;
   List<Service> services = List();
 
-  Servico({this.id, this.specialistId, this.services});
-
-//  Servico.fromMap(Map snapshot, String id)
-//      : id = id,
-//        specialistId = snapshot['specialistId'] ?? '',
-//        services = (snapshot['services'] as List)?.map((s) => s == null ? null : Service.fromJson(s as Map<String, dynamic>));
+  Servico({this.id, this.services});
 
   factory Servico.fromMap(Map<String, dynamic> json, String id) => _$ServicoFromJson(json, id);
   Map<String, dynamic> toJson() => _$ServicoToJson(this);
-
-//  toJson() {
-//    return {
-//      "specialistId": specialistId,
-//      'services': services?.map((s) => s?.toJson())?.toList(),
-//    };
-//  }
 
 }

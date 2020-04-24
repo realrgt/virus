@@ -155,7 +155,7 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
 
   _buildChipsList(BuildContext ctx) {
 
-    // TODO: watch this======================
+    // TODO: watch this======================s
     final servicoProvider = Provider.of<Servico>(context);
     selectedChoices = servicoProvider.services;
 

@@ -4,6 +4,7 @@ import 'package:vogu/core/models/service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:vogu/core/services/api.dart';
 import 'package:vogu/locator.dart';
+import 'package:vogu/models/categories-services.dart';
 
 class ServiceCRUD extends ChangeNotifier {
   Api _api = locator<Api>();
@@ -44,6 +45,21 @@ class ServiceCRUD extends ChangeNotifier {
 
     return result ;
 
+  }
+
+  // updates the list of services
+  Future setServices(List<Service> data , String id) async {
+
+    List<Map> list = new List();
+
+    if(data !=null && data.isNotEmpty){
+      data.forEach((s){
+        list.add(s.toJson());
+      });
+    }
+
+
+    return await Firestore.instance.collection(path).document(id).updateData({"services": FieldValue.arrayUnion(list)}) ;
   }
 
 

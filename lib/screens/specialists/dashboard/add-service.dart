@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vogu/core/contollers/service-crud.dart';
-import 'package:vogu/core/contollers/specialist-crud.dart';
 import 'package:vogu/core/models/service.dart';
 import 'package:vogu/util/default_colors.dart';
 import 'package:vogu/widgets/categories-scroll.dart';
@@ -16,7 +15,8 @@ class AddService extends StatefulWidget {
 class _AddServiceState extends State<AddService> {
   @override
   Widget build(BuildContext context) {
-    final servicoPrivider = Provider.of<Servico>(context);
+
+    final servicoProvider = Provider.of<Servico>(context);
     final firebaseUser = Provider.of<FirebaseUser>(context);
 
     return Scaffold(
@@ -68,12 +68,10 @@ class _AddServiceState extends State<AddService> {
                 child: Text('Confirmar'),
               ),
               onPressed: () async {
-                await ServiceCRUD().addService(
-                  Servico(
-                    services: servicoPrivider.services,
-                    specialistId: firebaseUser.uid,
-                  ),
-                );
+                  await ServiceCRUD().setServices(
+                    servicoProvider.services,
+                    firebaseUser.uid,
+                  );
                 Navigator.of(context).pop();
               },
             ),
