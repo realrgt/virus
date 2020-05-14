@@ -34,7 +34,7 @@ class _TasksState extends State<Tasks> {
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasData) {
                 tasks = snapshot.data.documents
-                  //  .where((t) => t.documentID == uid)
+                    //  .where((t) => t.documentID == uid)
                     .map(
                       (doc) => Task.fromMap(doc.data, doc.documentID),
                     )
@@ -92,7 +92,7 @@ class _TasksState extends State<Tasks> {
                               style: TextStyle(fontSize: 30.0),
                             ),
                           ),
-            //  CrossIcon(color: Colors.black26, paddingRight: 16.0)
+                          //  CrossIcon(color: Colors.black26, paddingRight: 16.0)
                         ],
                       ),
                       SizedBox(height: 20.0),
@@ -153,10 +153,13 @@ class _TasksState extends State<Tasks> {
                                                   ),
                                                   SizedBox(width: 10.0),
                                                   Container(
-                                                    width: MediaQuery.of(context).size.width * 0.47,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.47,
                                                     child: Text(
                                                       task.address,
-                                                      // overflow: TextOverflow.clip,
                                                       style: TextStyle(
                                                         fontSize: 13.0,
                                                       ),
@@ -319,67 +322,42 @@ class _TasksState extends State<Tasks> {
 
     switch (month) {
       case '01':
-        {
-          builtMonth = 'JAN';
-        }
+        builtMonth = 'JAN';
         break;
       case '02':
-        {
-          builtMonth = 'FEV';
-        }
+        builtMonth = 'FEV';
         break;
       case '03':
-        {
-          builtMonth = 'MAR';
-        }
+        builtMonth = 'MAR';
         break;
       case '04':
-        {
-          builtMonth = 'ABR';
-        }
+        builtMonth = 'ABR';
         break;
       case '05':
-        {
-          builtMonth = 'MAI';
-        }
+        builtMonth = 'MAI';
         break;
       case '06':
-        {
-          builtMonth = 'JUN';
-        }
+        builtMonth = 'JUN';
         break;
       case '07':
-        {
-          builtMonth = 'JUL';
-        }
+        builtMonth = 'JUL';
         break;
       case '08':
-        {
-          builtMonth = 'AGO';
-        }
+        builtMonth = 'AGO';
         break;
       case '09':
-        {
-          builtMonth = 'SET';
-        }
+        builtMonth = 'SET';
         break;
       case '10':
-        {
-          builtMonth = 'OUT';
-        }
+        builtMonth = 'OUT';
         break;
       case '11':
-        {
-          builtMonth = 'NOV';
-        }
+        builtMonth = 'NOV';
         break;
       default:
-        {
-          builtMonth = 'DEZ';
-        }
+        builtMonth = 'DEZ';
         break;
     }
-
     return builtMonth;
   }
 }

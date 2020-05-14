@@ -6,7 +6,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:vogu/util/default_colors.dart';
 
 class TaskLocation extends StatefulWidget {
-
   final String imgUrl;
   final String name;
   final String address;
@@ -16,20 +15,30 @@ class TaskLocation extends StatefulWidget {
   final double latitude;
   final double longitude;
 
-  const TaskLocation({Key key, this.imgUrl, this.name, this.address, this.time, this.day, this.month, this.latitude, this.longitude}) : super(key: key);
+  const TaskLocation({
+    Key key,
+    this.imgUrl,
+    this.name,
+    this.address,
+    this.time,
+    this.day,
+    this.month,
+    this.latitude,
+    this.longitude,
+  }) : super(key: key);
 
   @override
   _TaskLocationState createState() => _TaskLocationState();
 }
 
 class _TaskLocationState extends State<TaskLocation> {
-
   Completer<GoogleMapController> _controller = Completer();
 
   Set<Marker> _markers = Set();
 
   double _latitude;
   double _longitude;
+
   ///-25.971210, 32.587494
 
   _showMarker() {
@@ -71,7 +80,8 @@ class _TaskLocationState extends State<TaskLocation> {
         children: <Widget>[
           GoogleMap(
             mapType: MapType.normal,
-            initialCameraPosition: CameraPosition(target: LatLng(_latitude, _longitude), zoom: 15.0),
+            initialCameraPosition: CameraPosition(
+                target: LatLng(_latitude, _longitude), zoom: 15.0),
             onMapCreated: _onMapCreated,
             myLocationButtonEnabled: false,
             markers: _markers,
@@ -138,10 +148,16 @@ class _TaskLocationState extends State<TaskLocation> {
                                           Icons.location_on,
                                           size: 18.0,
                                         ),
-                                        Text(
-                                          widget.address,
-                                          style: TextStyle(
-                                            fontSize: 13.0,
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.47,
+                                          child: Text(
+                                            widget.address,
+                                            style: TextStyle(
+                                              fontSize: 13.0,
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -218,7 +234,9 @@ class _TaskLocationState extends State<TaskLocation> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       RaisedButton(
-                        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width / 10, vertical: 15.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: MediaQuery.of(context).size.width / 10,
+                            vertical: 15.0),
                         onPressed: () {},
                         color: PURPLE_DEEP,
                         textColor: Colors.white,
@@ -231,7 +249,9 @@ class _TaskLocationState extends State<TaskLocation> {
                         ),
                       ),
                       RaisedButton(
-                        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width / 10, vertical: 15.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: MediaQuery.of(context).size.width / 10,
+                            vertical: 15.0),
                         onPressed: () {},
                         color: PURPLE_DEEP,
                         textColor: Colors.white,

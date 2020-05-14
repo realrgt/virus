@@ -6,7 +6,6 @@ import 'package:vogu/models/categories-services.dart';
 import 'package:vogu/util/default_colors.dart';
 
 class CategoriesScroll extends StatefulWidget {
-
   @override
   _CategoriesScrollState createState() => _CategoriesScrollState();
 }
@@ -23,13 +22,7 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
   List<Service> selectedChoices = List();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-
     _serviceList = categories
         .where((c) => c.id == _selectedIndex)
         .expand((c) => c.services)
@@ -38,15 +31,6 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
         .where((c) => c.id == _selectedIndex)
         .map((c) => c.categoryName)
         .toList();
-
-//    // TODO: watch this======================
-//    final servicoProvider = Provider.of<Servico>(context);
-//    selectedChoices = servicoProvider.services;
-//
-//    if (selectedChoices.length > 0) {
-//      servicoProvider.services = selectedChoices;
-//      servicoProvider.services.forEach(print);
-//    }
 
     return Column(
       children: <Widget>[
@@ -80,9 +64,7 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
     );
   }
 
-  var temp2;
   Widget _buildCircleImg(int index) {
-
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -151,14 +133,12 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
   }
 
   _buildChipsList(BuildContext ctx) {
-
-    // TODO: watch this======================s
-    final servicoProvider = Provider.of<Servico>(context);
-    selectedChoices = servicoProvider.services;
+    // TODO: watch this======================
+    final serviceProvider = Provider.of<Servico>(context);
 
     if (selectedChoices.length > 0) {
-      servicoProvider.services = selectedChoices;
-      servicoProvider.services.forEach(print);
+      serviceProvider.services = selectedChoices;
+      serviceProvider.services.forEach(print);
     }
 
     ///try provider
@@ -190,7 +170,6 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
                   selectedChoices.add(item);
                   taskInfo.setServices(selectedChoices);
                 }
-
               });
             },
             selectedColor: PINK,
