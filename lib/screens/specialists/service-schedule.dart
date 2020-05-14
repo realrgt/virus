@@ -3,7 +3,6 @@ import 'package:flutter_rounded_date_picker/rounded_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:vogu/core/models/task.dart';
-import 'package:vogu/models/categories-services.dart';
 import 'package:vogu/screens/specialists/list.dart';
 import 'package:vogu/util/default_colors.dart';
 import 'package:vogu/widgets/categories-scroll.dart';

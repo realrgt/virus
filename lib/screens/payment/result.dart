@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:vogu/util/default_colors.dart';
-import 'package:vogu/util/img_assets.dart';
 import 'package:vogu/widgets/purple-wave.dart';
 
 class PaymentResult extends StatefulWidget {

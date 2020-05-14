@@ -44,7 +44,7 @@ class SpecialistCRUD extends ChangeNotifier {
   Future addSpecialist(Specialist data) async{
     var result  = await _api.addDocument(this.path, data.toJson()) ;
 
-    return ;
+    return result;
 
   }
 

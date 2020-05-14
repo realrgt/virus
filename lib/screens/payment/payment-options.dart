@@ -98,7 +98,6 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                         RaisedButton(
                           padding: EdgeInsets.symmetric(vertical: 12.0),
                           onPressed: () async {
-                            //TODO: saveTask()
                             await TaskCRUD().addTask(
                               Task(
                                 specialistId: taskInfo.specialistId,

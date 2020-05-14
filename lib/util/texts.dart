@@ -1,0 +1,1 @@
+const String TERMS = 'Concordo que a vogu acresce uma taxa de 25% ao valor cobrado ao cliente em dispesas de marketing e manutenção daplataforma.';

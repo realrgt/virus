@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:vogu/models/categories-services.dart';
 import 'package:json_annotation/json_annotation.dart';

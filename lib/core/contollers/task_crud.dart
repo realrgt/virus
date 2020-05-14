@@ -41,6 +41,6 @@ class TaskCRUD extends ChangeNotifier {
   Future addTask(Task data) async {
     var result = await _api.addDocument(this.path, data.toJson());
 
-    return;
+    return result;
   }
 }

@@ -9,6 +9,7 @@ import 'package:vogu/core/models/service.dart';
 import 'package:vogu/screens/specialists/dashboard/add-service.dart';
 import 'package:vogu/screens/specialists/dashboard/tasks.dart';
 import 'package:vogu/util/default_colors.dart';
+import 'package:vogu/util/texts.dart';
 
 class ServicesUpdate extends StatefulWidget {
   @override
@@ -50,14 +51,15 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
                 builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasData) {
                     services = snapshot.data.documents
-//                        .where((t) => t.documentID == uid)
+                        .where((t) => t.documentID == uid)
                         .map(
                           (doc) => Servico.fromMap(doc.data, doc.documentID),
                         )
                         .toList();
 
                     // reduce servico data to get only its services array
-                    final serviceList = services.expand((Servico s) => s.services).toList();
+                    final serviceList =
+                        services.expand((Servico s) => s.services).toList();
                     // assign last selected services
                     servicoProvider.services = serviceList;
 
@@ -217,7 +219,8 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
                                                     ),
                                                     onPressed: () {
                                                       print('You clicked me');
-                                                      _buildEdit(context);
+                                                      _buildEdit(
+                                                          context, index);
                                                     },
                                                   ),
                                                 ],
@@ -277,7 +280,7 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 32.0),
                             child: Text(
-                              'Concordo que a vogu acresce uma taxa de 25% ao valor cobrado ao cliente em dispesas de marketing e manutenção daplataforma.',
+                              TERMS,
                               textAlign: TextAlign.justify,
                               style: TextStyle(
                                 color: Colors.grey[300],
@@ -332,7 +335,20 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
     );
   }
 
-  _buildEdit(BuildContext context) {
+  _buildEdit(BuildContext context, index) {
+    // local variables
+    final servicoProvider = Provider.of<Servico>(context, listen: false);
+    String _oldPrice = servicoProvider.services[index].price.toString();
+    final _priceController = TextEditingController(text: _oldPrice);
+    final _focusNode = FocusNode();
+
+    _focusNode.addListener(() {
+      if (_focusNode.hasFocus) {
+        _priceController.selection = TextSelection(
+            baseOffset: 0, extentOffset: _priceController.text.length);
+      }
+    });
+
     // button configuration
     Widget okButton = FlatButton(
       child: Text(
@@ -342,6 +358,9 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
         ),
       ),
       onPressed: () async {
+        servicoProvider.services[index].price =
+            double.parse(_priceController.text).toDouble();
+        await ServiceCRUD().setServices(servicoProvider.services, uid);
         Navigator.of(context).pop();
       },
     );
@@ -353,12 +372,14 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
         borderRadius: BorderRadius.circular(30.0),
       ),
       title: Text(
-        "Digite o novo preço",
+        servicoProvider.services[index].name,
         style: TextStyle(
           color: Colors.grey[300],
         ),
       ),
       content: TextField(
+        controller: _priceController,
+        focusNode: _focusNode,
         style: TextStyle(color: Colors.grey[300]),
         keyboardType: TextInputType.number,
         cursorColor: PURPLE_ACCENT,
@@ -376,11 +397,11 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
               borderRadius: BorderRadius.all(Radius.circular(4)),
               borderSide: BorderSide(width: 1, color: Colors.grey[300]),
             ),
-            hintText: 'Tell us about yourself',
+            hintText: 'Preço',
             hintStyle: TextStyle(color: Colors.grey[400]),
             helperText: 'Digite o preço desejado.',
             helperStyle: TextStyle(color: Colors.white),
-            labelText: 'Preço',
+            labelText: 'Digite o novo preço',
             labelStyle: TextStyle(color: Colors.grey[400]),
             prefixIcon: const Icon(
               Icons.account_balance,

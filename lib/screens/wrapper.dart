@@ -8,8 +8,14 @@ import 'package:vogu/screens/auth/authenticate.dart';
 import 'package:vogu/screens/maps/map-screen.dart';
 import 'package:vogu/screens/specialists/dashboard/availability.dart';
 
-class Wrapper extends StatelessWidget {
+class Wrapper extends StatefulWidget {
+  @override
+  _WrapperState createState() => _WrapperState();
+}
+
+class _WrapperState extends State<Wrapper> {
   SpecialistCRUD _specialistCRUD = SpecialistCRUD();
+
   ClientCRUD _clientCRUD = ClientCRUD();
 
   @override

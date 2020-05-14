@@ -1,5 +1,3 @@
-import 'package:vogu/core/models/service.dart';
-
 class Specialist {
   String id;
   String name;

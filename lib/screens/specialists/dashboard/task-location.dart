@@ -26,7 +26,7 @@ class _TaskLocationState extends State<TaskLocation> {
 
   Completer<GoogleMapController> _controller = Completer();
 
-  Set<Marker> _markers = {};
+  Set<Marker> _markers = Set();
 
   double _latitude;
   double _longitude;
@@ -60,8 +60,6 @@ class _TaskLocationState extends State<TaskLocation> {
   Widget build(BuildContext context) {
     //TODO: use locations from fireBase
     setState(() {
-//      _latitude = -25.971210;
-//      _longitude = 32.587494;
       _latitude = widget.latitude;
       _longitude = widget.longitude;
     });

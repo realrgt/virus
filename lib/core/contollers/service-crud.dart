@@ -58,8 +58,7 @@ class ServiceCRUD extends ChangeNotifier {
       });
     }
 
-
-    return await Firestore.instance.collection(path).document(id).updateData({"services": FieldValue.arrayUnion(list)}) ;
+    return await Firestore.instance.collection(path).document(id).setData({"services": FieldValue.arrayUnion(list)}) ;
   }
 
 

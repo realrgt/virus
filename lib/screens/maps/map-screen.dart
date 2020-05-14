@@ -128,10 +128,6 @@ class _MapScreenState extends State<MapScreen> {
                                 color: PURPLE_ACCENT,
                                 textColor: Colors.grey.shade300,
                                 onPressed: () {
-                                  //TODO: IMPORTANT: You MUST manage selectedPlace data yourself as using this build will not invoke onPlacePicker as
-                                  //            this will override default 'Select here' Button.
-                                  print(
-                                      "do something with [selectedPlace] data");
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (_) => ServiceSchedule(),
