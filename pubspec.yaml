@@ -40,7 +40,6 @@ dependencies:
   provider: ^4.0.1
   get_it: ^1.0.3+2
   json_annotation: ^3.0.1
-#  google_maps_place_picker: ^0.9.0
 
 dev_dependencies:
   pedantic: ^1.4.0

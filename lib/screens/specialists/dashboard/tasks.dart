@@ -34,7 +34,7 @@ class _TasksState extends State<Tasks> {
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasData) {
                 tasks = snapshot.data.documents
-//                    .where((t) => t.documentID == uid)
+                  //  .where((t) => t.documentID == uid)
                     .map(
                       (doc) => Task.fromMap(doc.data, doc.documentID),
                     )
@@ -92,7 +92,7 @@ class _TasksState extends State<Tasks> {
                               style: TextStyle(fontSize: 30.0),
                             ),
                           ),
-//              CrossIcon(color: Colors.black26, paddingRight: 16.0)
+            //  CrossIcon(color: Colors.black26, paddingRight: 16.0)
                         ],
                       ),
                       SizedBox(height: 20.0),
@@ -151,10 +151,15 @@ class _TasksState extends State<Tasks> {
                                                     Icons.location_on,
                                                     size: 18.0,
                                                   ),
-                                                  Text(
-                                                    task.address,
-                                                    style: TextStyle(
-                                                      fontSize: 13.0,
+                                                  SizedBox(width: 10.0),
+                                                  Container(
+                                                    width: MediaQuery.of(context).size.width * 0.47,
+                                                    child: Text(
+                                                      task.address,
+                                                      // overflow: TextOverflow.clip,
+                                                      style: TextStyle(
+                                                        fontSize: 13.0,
+                                                      ),
                                                     ),
                                                   ),
                                                 ],
