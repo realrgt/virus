@@ -12,12 +12,12 @@ class DetailsScroll extends StatefulWidget {
 
 class _DetailsScrollState extends State<DetailsScroll> {
   // List of categoryImages
-  // List<String> _imgUrls = categories.map((c) => c.imgUrl).toList();
   Set<String> _imgUrls = {};
 
   int _selectedIndex = 0;
 
   // Related to choiceChips
+  List<Service> _servicesFromProvider;
   List<Service> _serviceList;
   Set<String> _categorySet = {};
 
@@ -26,37 +26,39 @@ class _DetailsScrollState extends State<DetailsScroll> {
     /// [task] provider
     var taskProvider = Provider.of<Task>(context);
 
-    _serviceList = taskProvider.services.toList();
+    _servicesFromProvider = taskProvider.services.toList();
 
-    _serviceList.forEach((s) {
+    _servicesFromProvider.forEach((s) {
       _categorySet.add(s.category);
     });
 
-    _categorySet.forEach((c){
+    _categorySet.forEach((c) {
       switch (c) {
-          case 'Unhas': _imgUrls.add(NEILS);
-            break;
-          case 'Rosto': _imgUrls.add(FACE);
-            break;
-          case 'MakeUp': _imgUrls.add(MAKEUP);
-            break;
-          case 'Massagem': _imgUrls.add(MASSAGE);
-            break;
-          case 'Depilação': _imgUrls.add(HAIR_REMOVAL);
-            break;
-          case 'Cabelos': _imgUrls.add(HAIR);
-            break;
-        }
+        case 'Unhas':
+          _imgUrls.add(NEILS);
+          break;
+        case 'Rosto':
+          _imgUrls.add(FACE);
+          break;
+        case 'MakeUp':
+          _imgUrls.add(MAKEUP);
+          break;
+        case 'Massagem':
+          _imgUrls.add(MASSAGE);
+          break;
+        case 'Depilação':
+          _imgUrls.add(HAIR_REMOVAL);
+          break;
+        case 'Cabelos':
+          _imgUrls.add(HAIR);
+          break;
+      }
     });
-
-    print('DEBUG ==========================');
-    _imgUrls.forEach(print);
-    print('DEBUG ==========================');
 
     return Column(
       children: <Widget>[
         Container(
-          height: 140.0,
+          height: 95.0,
           width: double.infinity,
           child: ListView(
             scrollDirection: Axis.horizontal,
@@ -70,13 +72,20 @@ class _DetailsScrollState extends State<DetailsScroll> {
         ),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 32.0),
-          height: 200.0,
+          height: 205.4,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             border: Border.all(color: Colors.red, width: 1),
           ),
           child: SingleChildScrollView(
-            child: Text('Flexible'),
+            child: Column(
+              children: _categorySet
+                  .toList()
+                  .asMap()
+                  .entries
+                  .map((MapEntry map) => _buildTiles(map.key))
+                  .toList(),
+            ),
           ),
         ),
       ],
@@ -98,8 +107,8 @@ class _DetailsScrollState extends State<DetailsScroll> {
             Stack(
               children: <Widget>[
                 Container(
-                  height: 85.0,
-                  width: 85.0,
+                  height: 80.0,
+                  width: 80.0,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
                     color: _selectedIndex == index ? PINK : PURPLE_DEEP,
@@ -109,8 +118,8 @@ class _DetailsScrollState extends State<DetailsScroll> {
                   top: 5,
                   left: 5,
                   child: Container(
-                    height: 75.0,
-                    width: 75.0,
+                    height: 70.0,
+                    width: 70.0,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(37.5),
                       image: DecorationImage(
@@ -124,31 +133,60 @@ class _DetailsScrollState extends State<DetailsScroll> {
             ),
             SizedBox(height: 3.0),
             _selectedIndex == index
-                ? Column(
-                    children: <Widget>[
-                      Container(
-                        height: 10.0,
-                        width: 10.0,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.0),
-                          color: PINK,
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      Text(
-                        '',
-                        // '${_categoryList[0]}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.0,
-                        ),
-                      )
-                    ],
+                ? Container(
+                    height: 10.0,
+                    width: 10.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.0),
+                      color: PINK,
+                    ),
                   )
                 : Container(),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildTiles(int index) {
+    _serviceList = _servicesFromProvider
+        .where(
+          (s) => s.category == _categorySet.elementAt(index),
+        )
+        .toList();
+
+    return ExpansionTile(
+      title: Text(
+        _categorySet.elementAt(index),
+      ),
+      children: _serviceList
+          .asMap()
+          .entries
+          .map((MapEntry map) => _buildServiceItems(map.key))
+          .toList(),
+    );
+  }
+
+  Widget _buildServiceItems(index) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Row(
+          children: <Widget>[
+            Container(
+              width: 5,
+              height: 5,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.red,
+              ),
+            ),
+            SizedBox(width: 10.0),
+            Text(_serviceList[index].name),
+          ],
+        ),
+        Text('${_serviceList[index].price} MT'),
+      ],
     );
   }
 }
