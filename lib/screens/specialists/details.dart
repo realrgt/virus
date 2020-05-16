@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:vogu/core/models/specialist.dart';
 import 'package:vogu/screens/payment/payment-options.dart';
 import 'package:vogu/util/default_colors.dart';
-import 'package:vogu/widgets/categories-scroll.dart';
 import 'package:vogu/widgets/cross-icon.dart';
+import 'package:vogu/widgets/details-scroll.dart';
 
 class SpecialistDetails extends StatefulWidget {
   final Specialist specialist;
@@ -34,7 +34,10 @@ class _SpecialistDetailsState extends State<SpecialistDetails> {
   Widget _buildSilverHead() {
     return SliverPersistentHeader(
       delegate: DetailSliverDelegate(
-          expanded_height, widget.specialist, rounded_container_height),
+        expanded_height,
+        widget.specialist,
+        rounded_container_height,
+      ),
     );
   }
 
@@ -45,11 +48,12 @@ class _SpecialistDetailsState extends State<SpecialistDetails> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
-            height: expanded_height - 100,
+            height:
+                expanded_height - MediaQuery.of(context).size.height * 0.065,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.red, width: 1),
             ),
-            child: CategoriesScroll(),
+            child: DetailsScroll(),
           ),
           SizedBox(height: 20.0),
           RaisedButton(

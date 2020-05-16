@@ -26,7 +26,8 @@ class Service with ChangeNotifier {
 
   Service({this.name, this.price, this.category});
 
-  factory Service.fromJson(Map<String, dynamic> json) => _$ServiceFromJson(json);
+  factory Service.fromJson(Map<String, dynamic> json) =>
+      _$ServiceFromJson(json);
   Map<String, dynamic> toJson() => _$ServiceToJson(this);
 
   @override
@@ -57,14 +58,14 @@ var categories = <Category>[
     Service(name: 'Busso do bigode', price: 100.0, category: 'Rosto'),
   ]),
   Category(id: 2, categoryName: 'MakeUp', imgUrl: MAKEUP, services: <Service>[
-    Service(name: 'Simples', price: 100.0, category: 'Makeup'),
-    Service(name: 'Para casamento', price: 100.0, category: 'Makeup'),
-    Service(name: 'Causal', price: 100.0, category: 'Makeup'),
-    Service(name: 'Para espectáculos', price: 100.0, category: 'Makeup'),
-    Service(name: 'artística', price: 100.0, category: 'Makeup'),
-    Service(name: 'Para noivados', price: 100.0, category: 'Makeup'),
-    Service(name: 'Para apresentação', price: 100.0, category: 'Makeup'),
-    Service(name: 'Profissional', price: 100.0, category: 'Makeup'),
+    Service(name: 'Simples', price: 100.0, category: 'MakeUp'),
+    Service(name: 'Para casamento', price: 100.0, category: 'MakeUp'),
+    Service(name: 'Causal', price: 100.0, category: 'MakeUp'),
+    Service(name: 'Para espectáculos', price: 100.0, category: 'MakeUp'),
+    Service(name: 'artística', price: 100.0, category: 'MakeUp'),
+    Service(name: 'Para noivados', price: 100.0, category: 'MakeUp'),
+    Service(name: 'Para apresentação', price: 100.0, category: 'MakeUp'),
+    Service(name: 'Profissional', price: 100.0, category: 'MakeUp'),
   ]),
   Category(
       id: 3,
