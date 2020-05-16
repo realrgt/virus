@@ -4,6 +4,7 @@ import 'package:vogu/core/models/task.dart';
 import 'package:vogu/models/categories-services.dart';
 import 'package:vogu/util/default_colors.dart';
 import 'package:vogu/util/img_assets.dart';
+import 'package:vogu/widgets/custom-expansiontile.dart';
 
 class DetailsScroll extends StatefulWidget {
   @override
@@ -40,7 +41,7 @@ class _DetailsScrollState extends State<DetailsScroll> {
         case 'Rosto':
           _imgUrls.add(FACE);
           break;
-        case 'MakeUp':
+        case 'Makeup':
           _imgUrls.add(MAKEUP);
           break;
         case 'Massagem':
@@ -155,38 +156,60 @@ class _DetailsScrollState extends State<DetailsScroll> {
         )
         .toList();
 
-    return ExpansionTile(
-      title: Text(
-        _categorySet.elementAt(index),
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.red, width: 1)
       ),
-      children: _serviceList
-          .asMap()
-          .entries
-          .map((MapEntry map) => _buildServiceItems(map.key))
-          .toList(),
+      child: CustomExpansionTile(
+        animatedWidgetFollowingHeader: Icon(
+          Icons.expand_more,
+          color: Color(0xFF707070),
+        ),
+        header: Text(_categorySet.elementAt(index)),
+        children: _serviceList
+            .asMap()
+            .entries
+            .map((MapEntry map) => _buildServiceItems(map.key))
+            .toList(),
+      ),
     );
   }
 
   Widget _buildServiceItems(index) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Row(
-          children: <Widget>[
-            Container(
-              width: 5,
-              height: 5,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.red,
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 3.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              Container(
+                width: 5,
+                height: 5,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: PURPLE_DEEP,
+                ),
               ),
+              SizedBox(width: 10.0),
+              Text(
+                _serviceList[index].name,
+                style: TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+          Text(
+            '${_serviceList[index].price} MT',
+            style: TextStyle(
+              fontSize: 16.0,
+              fontWeight: FontWeight.w600,
             ),
-            SizedBox(width: 10.0),
-            Text(_serviceList[index].name),
-          ],
-        ),
-        Text('${_serviceList[index].price} MT'),
-      ],
+          ),
+        ],
+      ),
     );
   }
 }
