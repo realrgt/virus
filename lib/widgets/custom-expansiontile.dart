@@ -193,6 +193,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
               onTap: _handleTap,
               child: Container(
                   color: headerColor,
+                  height: 30,
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

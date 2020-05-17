@@ -71,13 +71,11 @@ class _DetailsScrollState extends State<DetailsScroll> {
             ).toList(),
           ),
         ),
+        SizedBox(height: 5.0),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 32.0),
-          height: 205.4,
+          height: 200,
           width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.red, width: 1),
-          ),
           child: SingleChildScrollView(
             child: Column(
               children: _categorySet
@@ -157,15 +155,20 @@ class _DetailsScrollState extends State<DetailsScroll> {
         .toList();
 
     return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.red, width: 1)
-      ),
       child: CustomExpansionTile(
         animatedWidgetFollowingHeader: Icon(
           Icons.expand_more,
-          color: Color(0xFF707070),
+          // color: Color(0xFF707070),
+          color: PURPLE_DEEP,
         ),
-        header: Text(_categorySet.elementAt(index)),
+        header: Text(
+          _categorySet.elementAt(index),
+          style: TextStyle(
+            color: Colors.black.withOpacity(0.7),
+            fontSize: 20.0,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
         children: _serviceList
             .asMap()
             .entries
@@ -196,7 +199,7 @@ class _DetailsScrollState extends State<DetailsScroll> {
                 _serviceList[index].name,
                 style: TextStyle(
                   fontSize: 16.0,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
             ],
@@ -205,7 +208,7 @@ class _DetailsScrollState extends State<DetailsScroll> {
             '${_serviceList[index].price} MT',
             style: TextStyle(
               fontSize: 16.0,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w400,
             ),
           ),
         ],

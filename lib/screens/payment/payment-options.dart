@@ -15,13 +15,16 @@ class PaymentOptions extends StatefulWidget {
 }
 
 class _PaymentOptionsState extends State<PaymentOptions> {
-  double _totalAmount = 3025;
+  double _totalAmount = 0;
 
   @override
   Widget build(BuildContext context) {
     ///try provider
     final taskInfo = Provider.of<Task>(context);
-    taskInfo.services.forEach(print);
+    _totalAmount = -_totalAmount; // avoid adding totalAmout on rebuild [REPLACE IT]
+    taskInfo.services.forEach((s) {
+      _totalAmount += s.price;
+    });
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -63,25 +66,28 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                       ),
                       Positioned(
                         top: 90.0,
-                        left: 45.0,
+                        left: 0.0,
                         child: Container(
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                'Preço Total:',
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
+                          width: 230.0, //used the slider's size value here
+                          child: Center(
+                            child: Column(
+                              children: <Widget>[
+                                Text(
+                                  'Preço Total:',
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                '$_totalAmount MT',
-                                style: TextStyle(
-                                  fontSize: 34.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              )
-                            ],
+                                Text(
+                                  '$_totalAmount MT',
+                                  style: TextStyle(
+                                    fontSize: 34.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       )
@@ -111,7 +117,6 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                                 services: taskInfo.services,
                               ),
                             );
-
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (_) => PaymentResult(),

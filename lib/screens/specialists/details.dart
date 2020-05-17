@@ -22,6 +22,7 @@ class _SpecialistDetailsState extends State<SpecialistDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: <Widget>[
           _buildSilverHead(),
@@ -50,9 +51,6 @@ class _SpecialistDetailsState extends State<SpecialistDetails> {
           Container(
             height:
                 expanded_height - MediaQuery.of(context).size.height * 0.065,
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.red, width: 1),
-            ),
             child: DetailsScroll(),
           ),
           SizedBox(height: 20.0),
@@ -117,7 +115,7 @@ class DetailSliverDelegate extends SliverPersistentHeaderDelegate {
           left: 0.0,
           child: Container(
             width: MediaQuery.of(context).size.width,
-            height: roundedContainerHeight,
+            height: roundedContainerHeight + 1,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.vertical(
@@ -135,16 +133,18 @@ class DetailSliverDelegate extends SliverPersistentHeaderDelegate {
               Text(
                 specialist.name,
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30.0,
-                    decoration: TextDecoration.none),
+                  color: Colors.white,
+                  fontSize: 30.0,
+                  decoration: TextDecoration.none,
+                ),
               ),
               Text(
                 specialist.address,
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15.0,
-                    decoration: TextDecoration.none),
+                  color: Colors.white,
+                  fontSize: 15.0,
+                  decoration: TextDecoration.none,
+                ),
               ),
             ],
           ),
