@@ -23,6 +23,11 @@ class TaskCRUD extends ChangeNotifier {
     return _api.streamDataCollection(this.path);
   }
 
+  // Queried stream data
+  Stream<QuerySnapshot> fetchFilteredTasksAsStream(String id) {
+    return _api.streamFilteredDataCollection(this.path, id);
+  }
+
   Future<Task> getTaskById(String id) async {
     var doc = await _api.getDocumentById(this.path, id);
     return Task.fromMap(doc.data, doc.documentID);

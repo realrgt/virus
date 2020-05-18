@@ -69,25 +69,25 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                         left: 0.0,
                         child: Container(
                           width: 230.0, //used the slider's size value here
-                          child: Center(
-                            child: Column(
-                              children: <Widget>[
-                                Text(
-                                  'Preço Total:',
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                'Preço Total:',
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                Text(
-                                  '$_totalAmount MT',
-                                  style: TextStyle(
-                                    fontSize: 34.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                )
-                              ],
-                            ),
+                              ),
+                              Text(
+                                '$_totalAmount MT',
+                                style: TextStyle(
+                                  fontSize: 34.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            ],
                           ),
                         ),
                       )

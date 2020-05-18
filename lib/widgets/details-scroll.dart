@@ -63,7 +63,8 @@ class _DetailsScrollState extends State<DetailsScroll> {
           width: double.infinity,
           child: ListView(
             scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            padding: EdgeInsets.symmetric(horizontal: 32.0),
+            shrinkWrap: true,
             children: _imgUrls.toList().asMap().entries.map(
               (MapEntry map) {
                 return _buildCircleImg(map.key);

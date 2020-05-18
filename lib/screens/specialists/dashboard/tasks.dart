@@ -30,11 +30,10 @@ class _TasksState extends State<Tasks> {
         children: <Widget>[
           SizedBox(height: 20.0),
           StreamBuilder(
-            stream: taskProvider.fetchTasksAsStream(),
+            stream: taskProvider.fetchFilteredTasksAsStream(uid),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasData) {
                 tasks = snapshot.data.documents
-                    //  .where((t) => t.documentID == uid)
                     .map(
                       (doc) => Task.fromMap(doc.data, doc.documentID),
                     )

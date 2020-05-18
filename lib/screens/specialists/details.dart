@@ -43,18 +43,18 @@ class _SpecialistDetailsState extends State<SpecialistDetails> {
   }
 
   Widget _buildDetail() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 32.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Container(
-            height:
-                expanded_height - MediaQuery.of(context).size.height * 0.065,
-            child: DetailsScroll(),
-          ),
-          SizedBox(height: 20.0),
-          RaisedButton(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        Container(
+          height:
+              expanded_height - MediaQuery.of(context).size.height * 0.065,
+          child: DetailsScroll(),
+        ),
+        SizedBox(height: 20.0),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 32.0),
+          child: RaisedButton(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             ),
@@ -73,9 +73,9 @@ class _SpecialistDetailsState extends State<SpecialistDetails> {
               ),
             ),
           ),
-          SizedBox(height: 20.0)
-        ],
-      ),
+        ),
+        SizedBox(height: 20.0)
+      ],
     );
   }
 }

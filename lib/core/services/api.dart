@@ -18,6 +18,10 @@ class Api {
     return _db.collection(path).snapshots();
   }
 
+  Stream<QuerySnapshot> streamFilteredDataCollection(String path, String id) {
+    return _db.collection(path).where('specialistId', isEqualTo: id).snapshots();
+  }
+
   Future<DocumentSnapshot> getDocumentById(String path, String id) {
     return _db.collection(path).document(id).get();
   }
