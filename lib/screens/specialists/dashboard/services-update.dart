@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:vogu/core/contollers/service-crud.dart';
+import 'package:vogu/core/contollers/specialist-crud.dart';
 import 'package:vogu/core/models/service.dart';
+import 'package:vogu/core/models/specialist.dart';
 import 'package:vogu/screens/specialists/dashboard/add-service.dart';
 import 'package:vogu/screens/specialists/dashboard/tasks.dart';
 import 'package:vogu/util/default_colors.dart';
@@ -18,13 +20,14 @@ class ServicesUpdate extends StatefulWidget {
 
 class _ServicesUpdateState extends State<ServicesUpdate> {
   List<Servico> services;
+  List<Specialist> specialists;
 
   String uid;
 
   @override
   Widget build(BuildContext context) {
     // retrieve specialist services form firestore
-    final serviceProvider = Provider.of<ServiceCRUD>(context);
+    final specialistProvider = Provider.of<SpecialistCRUD>(context);
     // current user section
     final firebaseUser = Provider.of<FirebaseUser>(context);
 
@@ -47,19 +50,19 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
           Column(
             children: <Widget>[
               StreamBuilder(
-                stream: serviceProvider.fetchServicesAsStream(),
+                stream: specialistProvider.fetchSpecialistsAsStream(),
                 builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasData) {
-                    services = snapshot.data.documents
+                    specialists = snapshot.data.documents
                         .where((t) => t.documentID == uid)
                         .map(
-                          (doc) => Servico.fromMap(doc.data, doc.documentID),
+                          (doc) => Specialist.fromMap(doc.data, doc.documentID),
                         )
                         .toList();
 
                     // reduce servico data to get only its services array
                     final serviceList =
-                        services.expand((Servico s) => s.services).toList();
+                        specialists.expand((s) => s.services).toList();
                     // assign last selected services
                     servicoProvider.services = serviceList;
 
@@ -360,7 +363,7 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
       onPressed: () async {
         servicoProvider.services[index].price =
             double.parse(_priceController.text).toDouble();
-        await ServiceCRUD().setServices(servicoProvider.services, uid);
+        await SpecialistCRUD().setServices(servicoProvider.services, uid);
         Navigator.of(context).pop();
       },
     );

@@ -1,3 +1,5 @@
+import 'package:vogu/models/categories-services.dart';
+
 class Specialist {
   String id;
   String name;
@@ -6,6 +8,7 @@ class Specialist {
   String imgUrl;
   bool isAvailable;
   String email;
+  List<Service> services = List();
 
   Specialist({
     this.id,
@@ -17,14 +20,18 @@ class Specialist {
     this.email,
   });
 
-  Specialist.fromMap(Map snapshot, String id)
+  Specialist.fromMap(Map<String, dynamic> snapshot, String id)
       : id = id ?? '',
         name = snapshot['name'] ?? '',
         address = snapshot['address'] ?? '',
         rating = snapshot['rating'],
-        imgUrl = snapshot['imgUrl'] ?? 'https://image.shutterstock.com/image-vector/default-avatar-profile-icon-grey-600w-518740741.jpg',
+        imgUrl = snapshot['imgUrl'] ??
+            'https://image.shutterstock.com/image-vector/default-avatar-profile-icon-grey-600w-518740741.jpg',
         isAvailable = snapshot['isAvailable'],
-        email = snapshot['email'] ?? '';
+        email = snapshot['email'] ?? '',
+        services = (snapshot['services'] as List)
+            ?.map((e) => e == null ? null : Service.fromJson(e as Map<String, dynamic>))
+            ?.toList();
 
   toJson() {
     return {
@@ -34,6 +41,7 @@ class Specialist {
       "imgUrl": imgUrl,
       "isAvailable": isAvailable,
       "email": email,
+      'services': services?.map((e) => e?.toJson())?.toList(),
     };
   }
 }

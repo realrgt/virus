@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:vogu/core/contollers/specialist-crud.dart';
 import 'package:vogu/core/models/specialist.dart';
 import 'package:vogu/core/models/task.dart';
+import 'package:vogu/core/models/service.dart';
 import 'package:vogu/screens/specialists/details.dart';
 import 'package:vogu/util/default_colors.dart';
 import 'package:vogu/widgets/cross-icon.dart';
@@ -21,6 +22,8 @@ class _SpecialistListState extends State<SpecialistList> {
     ///try provider
     final specialistProvider = Provider.of<SpecialistCRUD>(context);
     var taskInfo = Provider.of<Task>(context);
+    final servicoProvider = Provider.of<Servico>(context, listen: false);
+
     ///try provider
 
     return Scaffold(
@@ -51,6 +54,7 @@ class _SpecialistListState extends State<SpecialistList> {
                         (doc) => Specialist.fromMap(doc.data, doc.documentID),
                       )
                       .toList();
+                  
                   return ListView.builder(
                     shrinkWrap: true,
                     physics: ClampingScrollPhysics(),
@@ -60,7 +64,6 @@ class _SpecialistListState extends State<SpecialistList> {
                       Specialist specialist = specialists[index];
                       return GestureDetector(
                         onTap: () {
-
                           /// set [specialistId] to task provider
                           taskInfo.specialistId = specialists[index].id;
 
