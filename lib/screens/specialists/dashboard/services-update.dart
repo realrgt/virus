@@ -363,7 +363,7 @@ class _ServicesUpdateState extends State<ServicesUpdate> {
       onPressed: () async {
         servicoProvider.services[index].price =
             double.parse(_priceController.text).toDouble();
-        await SpecialistCRUD().setServices(servicoProvider.services, uid);
+        await SpecialistCRUD().editServices(servicoProvider.services, uid);
         Navigator.of(context).pop();
       },
     );

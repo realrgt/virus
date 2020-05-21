@@ -5,6 +5,7 @@ import 'package:vogu/core/contollers/specialist-crud.dart';
 import 'package:vogu/core/models/specialist.dart';
 import 'package:vogu/core/models/task.dart';
 import 'package:vogu/core/models/service.dart';
+import 'package:vogu/models/categories-services.dart';
 import 'package:vogu/screens/specialists/details.dart';
 import 'package:vogu/util/default_colors.dart';
 import 'package:vogu/widgets/cross-icon.dart';
@@ -16,13 +17,27 @@ class SpecialistList extends StatefulWidget {
 
 class _SpecialistListState extends State<SpecialistList> {
   List<Specialist> specialists;
+  List<Specialist> fromServer;
+  List<Service> queryList;
+  int cont = 0;
+  String actualService;
+  List<Service> actualList;
+  dynamic actualSpecialist;
+
+  @override
+  void initState() {
+    specialists = List();
+    actualList = List();
+    actualSpecialist = null;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     ///try provider
     final specialistProvider = Provider.of<SpecialistCRUD>(context);
     var taskInfo = Provider.of<Task>(context);
-    final servicoProvider = Provider.of<Servico>(context, listen: false);
+    queryList = taskInfo.services;
 
     ///try provider
 
@@ -49,12 +64,32 @@ class _SpecialistListState extends State<SpecialistList> {
               stream: specialistProvider.fetchSpecialistsAsStream(),
               builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasData) {
-                  specialists = snapshot.data.documents
+                  fromServer = snapshot.data.documents
                       .map(
                         (doc) => Specialist.fromMap(doc.data, doc.documentID),
                       )
                       .toList();
-                  
+
+                  for (var i = 0; i < fromServer.length; i++) {
+                    actualSpecialist = fromServer[i];
+                    actualList = fromServer[i].services;
+                    cont = 0;
+                    for (var i = 0; i < actualList.length; i++) {
+                      actualService = actualList[i].name;
+                      for (var i = 0; i < queryList.length; i++) {
+                        if (actualService == queryList[i].name) {
+                          cont += 1;
+                        }
+                      }
+
+                      if (cont == queryList.length) {
+                        if (!specialists.contains(actualSpecialist)) {
+                          specialists.add(actualSpecialist);
+                        }
+                      }
+                    }
+                  }
+
                   return ListView.builder(
                     shrinkWrap: true,
                     physics: ClampingScrollPhysics(),

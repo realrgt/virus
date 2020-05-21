@@ -68,7 +68,7 @@ class _AddServiceState extends State<AddService> {
                 child: Text('Confirmar'),
               ),
               onPressed: () async {
-                  await SpecialistCRUD().setServices(
+                  await SpecialistCRUD().addServices(
                     servicoProvider.services,
                     firebaseUser.uid,
                   );

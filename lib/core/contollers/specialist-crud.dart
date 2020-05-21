@@ -12,8 +12,6 @@ class SpecialistCRUD extends ChangeNotifier {
   String path = 'specialist';
   List<Specialist> specialists;
 
-
-
   Future<List<Specialist>> fetchSpecialists() async {
     var result = await _api.getDataCollection(this.path);
     specialists = result.documents
@@ -26,42 +24,60 @@ class SpecialistCRUD extends ChangeNotifier {
     return _api.streamDataCollection(this.path);
   }
 
+  // custom
+  Stream<QuerySnapshot> fetchSpecialistsContainAsStream(List list) {
+    return _api.streamContainDataCollection(this.path, list);
+  }
+
   Future<Specialist> getSpecialistById(String id) async {
     var doc = await _api.getDocumentById(this.path, id);
-    return  Specialist.fromMap(doc.data, doc.documentID) ;
+    return Specialist.fromMap(doc.data, doc.documentID);
   }
 
-
-  Future removeSpecialist(String id) async{
-    await _api.removeDocument(this.path, id) ;
-    return ;
-  }
-  
-  Future updateSpecialist(Specialist data,String id) async{
-    await _api.updateDocument(this.path, data.toJson(), id) ;
-    return ;
+  Future removeSpecialist(String id) async {
+    await _api.removeDocument(this.path, id);
+    return;
   }
 
-  Future addSpecialist(Specialist data) async{
-    var result  = await _api.addDocument(this.path, data.toJson()) ;
+  Future updateSpecialist(Specialist data, String id) async {
+    await _api.updateDocument(this.path, data.toJson(), id);
+    return;
+  }
+
+  Future addSpecialist(Specialist data) async {
+    var result = await _api.addDocument(this.path, data.toJson());
 
     return result;
-
   }
 
-    // updates the list of services
-  Future setServices(List<Service> data , String id) async {
-
+  // updates the list of services
+  Future addServices(List<Service> data, String id) async {
     List<Map> list = new List();
 
-    if(data !=null && data.isNotEmpty){
-      data.forEach((s){
+    if (data != null && data.isNotEmpty) {
+      data.forEach((s) {
         list.add(s.toJson());
       });
     }
 
-    return await Firestore.instance.collection(path).document(id).setData({"services": FieldValue.arrayUnion(list)}) ;
+    return await Firestore.instance
+        .collection(path)
+        .document(id)
+        .updateData({"services": FieldValue.arrayUnion(list)});
   }
 
+  Future editServices(List<Service> data, String id) async {
+    List<Map> list = new List();
 
+    if (data != null && data.isNotEmpty) {
+      data.forEach((s) {
+        list.add(s.toJson());
+      });
+    }
+
+    return await Firestore.instance
+        .collection(path)
+        .document(id)
+        .setData({"services": FieldValue.arrayUnion(list)});
+  }
 }

@@ -67,7 +67,7 @@ class _MapScreenState extends State<MapScreen> {
         autocompleteLanguage: "pt",
 //          strictbounds: true,
 //          region: 'mz',
-//          selectInitialPosition: true,
+         selectInitialPosition: true,
         selectedPlaceWidgetBuilder:
             (_, selectedPlace, state, bool isSearchBarFocused) {
 //          print(
