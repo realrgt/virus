@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:vogu/core/contollers/service-crud.dart';
 import 'package:vogu/core/contollers/specialist-crud.dart';
 import 'package:vogu/core/models/service.dart';
 import 'package:vogu/core/models/specialist.dart';

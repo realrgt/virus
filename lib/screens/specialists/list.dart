@@ -267,12 +267,4 @@ class _SpecialistListState extends State<SpecialistList> {
     );
   }
 
-  Text _buildRatingStars(double rating) {
-    String stars = '';
-    for (int i = 0; i < rating; i++) {
-      stars += '⭐ ';
-    }
-    stars.trim();
-    return Text(stars);
-  }
 }

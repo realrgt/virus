@@ -4,14 +4,7 @@ import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 
 class PurpleWave extends StatelessWidget {
-  MaskFilter _blur;
-  final List<MaskFilter> _blurs = [
-    null,
-    MaskFilter.blur(BlurStyle.normal, 10),
-    MaskFilter.blur(BlurStyle.inner, 10),
-    MaskFilter.blur(BlurStyle.outer, 10),
-    MaskFilter.blur(BlurStyle.solid, 16.0)
-  ];
+  final MaskFilter _blur = null;
 
   @override
   Widget build(BuildContext context) {

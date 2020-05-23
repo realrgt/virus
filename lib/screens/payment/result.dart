@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:vogu/util/default_colors.dart';
+import 'package:vogu/widgets/cross-icon.dart';
 import 'package:vogu/widgets/purple-wave.dart';
 
 class PaymentResult extends StatefulWidget {
@@ -20,21 +21,11 @@ class _PaymentResultState extends State<PaymentResult> {
           Container(
             child: Column(
               children: <Widget>[
+                SizedBox(height: 16.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    IconButton(
-                      padding: EdgeInsets.only(
-                        top: 16.0,
-                        right: 16.0,
-                      ),
-                      icon: Icon(
-                        Icons.close,
-                        color: Colors.black26,
-                        size: 30.0,
-                      ),
-                      onPressed: () => Navigator.of(context).pop(),
-                    ),
+                    CrossIcon(paddingRight: 20, color: Colors.black38,),
                   ],
                 ),
                 SizedBox(height: 40.0),

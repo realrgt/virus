@@ -67,7 +67,6 @@ class _TaskLocationState extends State<TaskLocation> {
 
   @override
   Widget build(BuildContext context) {
-    //TODO: use locations from fireBase
     setState(() {
       _latitude = widget.latitude;
       _longitude = widget.longitude;

@@ -261,7 +261,6 @@ class _AvailabilityState extends State<Availability> {
     );
   }
 
-  //TODO: moveUp
   List<String> _selectedTimes = List(_times.length);
   List<bool> _isSelected = List.generate(_times.length, (i) => false);
 

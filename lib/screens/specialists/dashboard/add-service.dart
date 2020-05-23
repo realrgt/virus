@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vogu/core/contollers/service-crud.dart';
 import 'package:vogu/core/contollers/specialist-crud.dart';
 import 'package:vogu/core/models/service.dart';
 import 'package:vogu/util/default_colors.dart';

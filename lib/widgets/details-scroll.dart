@@ -13,14 +13,20 @@ class DetailsScroll extends StatefulWidget {
 
 class _DetailsScrollState extends State<DetailsScroll> {
   // List of categoryImages
-  Set<String> _imgUrls = {};
+  Set<String> _imgUrls;
 
   int _selectedIndex = 0;
 
   // Related to choiceChips
   List<Service> _servicesFromProvider;
   List<Service> _serviceList;
-  Set<String> _categorySet = {};
+  Set<String> _categorySet;
+  @override
+  void initState() {
+    _categorySet = Set();
+    _imgUrls = Set();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
