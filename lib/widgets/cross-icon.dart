@@ -22,13 +22,16 @@ class CrossIcon extends StatelessWidget {
       alignment: Alignment.topRight,
       child: Padding(
         padding: EdgeInsets.only(right: paddingRight, top: paddingTop),
-        child: GestureDetector(
-          onTap: () => Navigator.of(context).pop(),
-          child: SvgPicture.asset(
-            ICON_CLOSE,
-            fit: BoxFit.cover,
-            width: width,
-            color: color,
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () => Navigator.of(context).pop(),
+            child: SvgPicture.asset(
+              ICON_CLOSE,
+              fit: BoxFit.cover,
+              width: width,
+              color: color,
+            ),
           ),
         ),
       ),
