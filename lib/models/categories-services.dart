@@ -30,6 +30,22 @@ class Service with ChangeNotifier {
       _$ServiceFromJson(json);
   Map<String, dynamic> toJson() => _$ServiceToJson(this);
 
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is Service &&
+              runtimeType == other.runtimeType &&
+              name == other.name &&
+              price == other.price &&
+              category == other.category;
+
+  @override
+  int get hashCode =>
+      name.hashCode ^
+      price.hashCode ^
+      category.hashCode;
+
   @override
   String toString() {
     return 'category: $category, name: $name, price: $price';

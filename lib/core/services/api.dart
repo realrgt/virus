@@ -17,10 +17,6 @@ class Api {
   Stream<QuerySnapshot> streamDataCollection(String path) {
     return _db.collection(path).snapshots();
   }
-  // custom
-  Stream<QuerySnapshot> streamContainDataCollection(String path, List list) {
-    return _db.collection(path).where('services',  arrayContainsAny: list).snapshots();
-  }
 
 // custom
   Stream<QuerySnapshot> streamFilteredDataCollection(String path, String id) {

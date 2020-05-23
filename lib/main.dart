@@ -8,6 +8,7 @@ import 'package:vogu/core/models/service.dart';
 import 'package:vogu/core/models/task.dart';
 import 'package:vogu/core/services/auth.dart';
 import 'package:vogu/locator.dart';
+import 'package:vogu/models/categories-services.dart';
 import 'package:vogu/splash.dart';
 
 void main() {
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => locator<ServiceCRUD>()),
         ChangeNotifierProvider(create: (_) => Task()),
         ChangeNotifierProvider(create: (_) => Servico()),
+        ChangeNotifierProvider(create: (_) => Service()),
         StreamProvider<FirebaseUser>.value(value: AuthService().user),
       ],
       child: MaterialApp(

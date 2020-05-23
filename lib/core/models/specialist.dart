@@ -20,6 +20,37 @@ class Specialist {
     this.email,
   });
 
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is Specialist &&
+              runtimeType == other.runtimeType &&
+              id == other.id &&
+              name == other.name &&
+              address == other.address &&
+              rating == other.rating &&
+              imgUrl == other.imgUrl &&
+              isAvailable == other.isAvailable &&
+              email == other.email &&
+              services == other.services;
+
+  @override
+  int get hashCode =>
+      id.hashCode ^
+      name.hashCode ^
+      address.hashCode ^
+      rating.hashCode ^
+      imgUrl.hashCode ^
+      isAvailable.hashCode ^
+      email.hashCode ^
+      services.hashCode;
+
+  @override
+  String toString() {
+  return 'id: $id name: $name, address: $address email: $email';
+   }
+
   Specialist.fromMap(Map<String, dynamic> snapshot, String id)
       : id = id ?? '',
         name = snapshot['name'] ?? '',

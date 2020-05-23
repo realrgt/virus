@@ -24,11 +24,6 @@ class SpecialistCRUD extends ChangeNotifier {
     return _api.streamDataCollection(this.path);
   }
 
-  // custom
-  Stream<QuerySnapshot> fetchSpecialistsContainAsStream(List list) {
-    return _api.streamContainDataCollection(this.path, list);
-  }
-
   Future<Specialist> getSpecialistById(String id) async {
     var doc = await _api.getDocumentById(this.path, id);
     return Specialist.fromMap(doc.data, doc.documentID);

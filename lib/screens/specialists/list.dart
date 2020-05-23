@@ -1,10 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vogu/core/contollers/specialist-crud.dart';
 import 'package:vogu/core/models/specialist.dart';
 import 'package:vogu/core/models/task.dart';
-import 'package:vogu/core/models/service.dart';
 import 'package:vogu/models/categories-services.dart';
 import 'package:vogu/screens/specialists/details.dart';
 import 'package:vogu/util/default_colors.dart';
@@ -28,6 +26,7 @@ class _SpecialistListState extends State<SpecialistList> {
   void initState() {
     specialists = List();
     actualList = List();
+    fromServer = List();
     actualSpecialist = null;
     super.initState();
   }
@@ -38,6 +37,13 @@ class _SpecialistListState extends State<SpecialistList> {
     final specialistProvider = Provider.of<SpecialistCRUD>(context);
     var taskInfo = Provider.of<Task>(context);
     queryList = taskInfo.services;
+    setState(() {
+      fromServer.clear();
+      specialists.clear();
+      actualList.clear();
+      actualSpecialist = null;
+      cont = 0;
+    });
 
     ///try provider
 
@@ -54,41 +60,49 @@ class _SpecialistListState extends State<SpecialistList> {
                   style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
                 ),
               ),
-              CrossIcon(color: Colors.black26, paddingRight: 16.0)
+              CrossIcon(color: Colors.black26, paddingRight: 16.0),
             ],
           ),
           SizedBox(height: 20.0),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 5.0),
-            child: StreamBuilder(
-              stream: specialistProvider.fetchSpecialistsAsStream(),
-              builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            child: FutureBuilder(
+              future: specialistProvider.fetchSpecialists(),
+              builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  fromServer = snapshot.data.documents
-                      .map(
-                        (doc) => Specialist.fromMap(doc.data, doc.documentID),
-                      )
-                      .toList();
+                  // assign firestore documents
+                  fromServer = snapshot.data;
 
+                  //filter documents matching selected services
+                  // 1st - loop through every firestore documents
                   for (var i = 0; i < fromServer.length; i++) {
                     actualSpecialist = fromServer[i];
                     actualList = fromServer[i].services;
                     cont = 0;
+                    // 2nd - loop through each document services list
                     for (var i = 0; i < actualList.length; i++) {
                       actualService = actualList[i].name;
+                      // 3rd - loop through each selected service
                       for (var i = 0; i < queryList.length; i++) {
                         if (actualService == queryList[i].name) {
+                          
+                          // 4th - count same service names into both (selected services list and
+                          // current document's services list )
                           cont += 1;
                         }
                       }
-
-                      if (cont == queryList.length) {
-                        if (!specialists.contains(actualSpecialist)) {
-                          specialists.add(actualSpecialist);
-                        }
-                      }
+                    }
+                    // 5th - add current document if it has every selected services
+                    if (cont == queryList.length) {
+                      specialists.add(actualSpecialist);
+                      actualList = fromServer[i].services;
                     }
                   }
+
+                  print('DEBUG ============== ==>');
+                  specialists.forEach(print);
+                  print(specialists.length);
+                  print('DEBUG ============== ==>');
 
                   return ListView.builder(
                     shrinkWrap: true,
@@ -96,17 +110,17 @@ class _SpecialistListState extends State<SpecialistList> {
                     padding: EdgeInsets.symmetric(horizontal: 16.0),
                     itemCount: specialists.length,
                     itemBuilder: (context, index) {
-                      Specialist specialist = specialists[index];
+                      Specialist specialist = specialists.elementAt(index);
                       return GestureDetector(
                         onTap: () {
                           /// set [specialistId] to task provider
-                          taskInfo.specialistId = specialists[index].id;
+                          taskInfo.specialistId =
+                              specialists.elementAt(index).id;
 
-                          Navigator.push(
-                            context,
+                          Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (_) => SpecialistDetails(
-                                specialist: specialists[index],
+                                specialist: specialists.elementAt(index),
                               ),
                             ),
                           );
