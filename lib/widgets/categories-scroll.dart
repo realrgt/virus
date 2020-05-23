@@ -37,6 +37,7 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
         Container(
           height: 140.0,
           width: double.infinity,
+          color: Colors.white,
           child: ListView(
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.symmetric(horizontal: 10.0),
@@ -50,6 +51,7 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
         Container(
           padding: EdgeInsets.symmetric(horizontal: 32.0),
           height: 200.0,
+          color: Colors.white,
           width: MediaQuery.of(context).size.width,
           child: SingleChildScrollView(
             child: Wrap(
