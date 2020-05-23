@@ -7,6 +7,7 @@ import 'package:vogu/models/categories-services.dart';
 import 'package:vogu/screens/specialists/details.dart';
 import 'package:vogu/util/default_colors.dart';
 import 'package:vogu/widgets/cross-icon.dart';
+import 'package:vogu/widgets/rating-widget.dart';
 
 class SpecialistList extends StatefulWidget {
   @override
@@ -85,7 +86,6 @@ class _SpecialistListState extends State<SpecialistList> {
                       // 3rd - loop through each selected service
                       for (var i = 0; i < queryList.length; i++) {
                         if (actualService == queryList[i].name) {
-                          
                           // 4th - count same service names into both (selected services list and
                           // current document's services list )
                           cont += 1;
@@ -173,25 +173,15 @@ class _SpecialistListState extends State<SpecialistList> {
                                     ),
                                     Row(
                                       children: <Widget>[
-                                        Icon(
-                                          Icons.star,
-                                          color: Colors.white70,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: Colors.white70,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: Colors.white70,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: Colors.white70,
-                                        ),
-                                        Icon(
-                                          Icons.star_border,
-                                          color: Colors.white70,
+                                        RatingBarIndicator(
+                                          rating: specialist.rating,
+                                          itemBuilder: (context, index) => Icon(
+                                            Icons.star,
+                                            color: Colors.amber,
+                                          ),
+                                          itemCount: 5,
+                                          itemSize: 20.0,
+                                          direction: Axis.horizontal,
                                         ),
                                       ],
                                     ),
