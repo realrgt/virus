@@ -36,7 +36,7 @@ class _CategoriesScrollState extends State<CategoriesScroll> {
       children: <Widget>[
         Container(
           height: 140.0,
-          width: double.infinity,
+          width: MediaQuery.of(context).size.width,
           color: Colors.white,
           child: ListView(
             scrollDirection: Axis.horizontal,
