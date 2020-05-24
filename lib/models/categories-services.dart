@@ -76,7 +76,7 @@ var categories = <Category>[
   Category(id: 2, categoryName: 'Makeup', imgUrl: MAKEUP, services: <Service>[
     Service(name: 'Simples', price: 100.0, category: 'Makeup'),
     Service(name: 'Para casamento', price: 100.0, category: 'Makeup'),
-    Service(name: 'Causal', price: 100.0, category: 'Makeup'),
+    Service(name: 'Casual', price: 100.0, category: 'Makeup'),
     Service(name: 'Para espectáculos', price: 100.0, category: 'Makeup'),
     Service(name: 'artística', price: 100.0, category: 'Makeup'),
     Service(name: 'Para noivados', price: 100.0, category: 'Makeup'),
